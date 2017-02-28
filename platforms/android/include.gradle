@@ -1,0 +1,30 @@
+android {
+  productFlavors {
+    "nativescript-live-engage" {
+      dimension "nativescript-live-engage"
+    }
+  }
+}
+
+dependencies {
+
+	def suppotVer = "24.2.1";
+
+    if(project.hasProperty("supportVersion")) {
+       suppotVer = supportVersion
+	}
+
+    compile "com.android.support:appcompat-v7:$suppotVer"
+    compile "com.android.support:design:$suppotVer"
+    compile "com.android.support:recyclerview-v7:$suppotVer"
+    compile "com.android.support:percent:$suppotVer"
+
+    compile 'com.facebook.fresco:fresco:0.14.1'
+    compile 'com.neovisionaries:nv-websocket-client:1.30'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+
+    compile(name: 'infra', ext: 'aar')
+    compile(name: 'messaging', ext: 'aar')
+    compile(name: 'messaging_ui', ext: 'aar')
+    compile(name: 'ui', ext: 'aar')
+}
