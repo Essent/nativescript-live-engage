@@ -1,10 +1,11 @@
 # NativeScript plugin for LivePerson LiveEngage
 
 This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK), [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK)) v1.5.
-
 To use this plugin you need to have an account from [LivePerson](https://www.liveperson.com).
 
-The plugin now only supports Android, we're working on iOS support.
+The plugin now only supports Android correctly.
+
+To use it on iOS: copy the [LPMessagingSDKModels.bundle](./platforms/ios/LPMessagingSDKModels.bundle) file to the generated XCode project. We're working on creating a hook to solve this NativeScript issue.
 
 # Usage
 

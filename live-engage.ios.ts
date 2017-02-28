@@ -47,9 +47,17 @@ export class LiveEngage extends common.LiveEngage {
             return;
         }
 
+        const accountId = brandId;
+        LPMessagingSDK.instance.initializeError(accountId, null);
+
+        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountId);
+        LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, this._viewController);
+
         this.setUserProfile();
     }
 
     public setUserProfile() {
+        const user = LPUser.alloc().initWithFirstNameLastNameNickNameUidProfileImageURLPhoneNumberEmployeeID(this.firstName, this.lastName, "", "", "", this.phone, "");
+        LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
     }
 }
