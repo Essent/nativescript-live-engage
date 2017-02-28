@@ -46,11 +46,10 @@ export class LiveEngage extends common.LiveEngage {
         if (!brandId || !appId || !this.ios) {
             return;
         }
+        
+        LPMessagingSDK.instance.initializeError(brandId, null);
 
-        const accountId = brandId;
-        LPMessagingSDK.instance.initializeError(accountId, null);
-
-        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(accountId);
+        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(brandId);
         LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, this._viewController);
 
         this.setUserProfile();
