@@ -8,11 +8,11 @@ android {
 
 dependencies {
 
-	def suppotVer = "24.2.1";
+    def suppotVer = "24.2.1";
 
     if(project.hasProperty("supportVersion")) {
-       suppotVer = supportVersion
-	}
+        suppotVer = supportVersion
+    }
 
     compile "com.android.support:appcompat-v7:$suppotVer"
     compile "com.android.support:design:$suppotVer"
