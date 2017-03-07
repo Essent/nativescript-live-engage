@@ -2,6 +2,9 @@
 *.js.map
 *.log
 !scripts/*.js
+!postinstall.js
+!preuninstall.js
+!lib/after-prepare.js
 demo/app/*.js
 !demo/karma.conf.js
 !demo/app/tests/*.js
