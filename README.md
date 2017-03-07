@@ -22,11 +22,6 @@ To use this plugin you need to have an account from [LivePerson](https://www.liv
 - android 2.5.0
 - ios 2.5.0
 
-tns cli version 2.5.0
-tns-core-modules 2.5.0
-android 2.5.0
-ios 2.5.0
-
 # Usage
 
 ## Demo
@@ -35,8 +30,8 @@ Check out the [demo](./demo) folder for a sample usage.
 
 ## Angular 2
 
-If you're using the plugin with Angular 2, the plugin automatically registers
-`LiveEngage` as a valid tag for Angular templates. Usage is simple:
+If you're using the plugin with Angular 2 flavoured NativeScript application, the plugin automatically registers
+`LiveEngage` as a valid tag for Angular templates. Usage:
 
 1. Add the plugin to your project:
 
