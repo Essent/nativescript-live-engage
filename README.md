@@ -3,6 +3,30 @@
 This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK), [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK)) v1.5.
 To use this plugin you need to have an account from [LivePerson](https://www.liveperson.com).
 
+### Successfully Tested with the following configurations
+> test case
+- tns cli version 2.4.0
+- tns-core-modules 2.3.0
+- android 2.3.0
+- ios 2.3.0
+
+> test case
+- tns cli version 2.5.0
+- tns-core-modules 2.4.0
+- android 2.4.1
+- ios 2.4.0
+
+> test case
+- tns cli version 2.5.0
+- tns-core-modules 2.5.0
+- android 2.5.0
+- ios 2.5.0
+
+tns cli version 2.5.0
+tns-core-modules 2.5.0
+android 2.5.0
+ios 2.5.0
+
 # Usage
 
 ## Demo
