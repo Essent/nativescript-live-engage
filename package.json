@@ -11,7 +11,14 @@
     },
     "tns-ios": {
       "version": "2.4.0"
-    }
+    },
+    "hooks": [
+      {
+        "type": "after-prepare",
+        "script": "lib/after-prepare.js",
+        "inject": true
+      }
+    ]
   },
   "scripts": {
     "build": "tsc",
@@ -26,7 +33,9 @@
     "reset.ios": "cd demo && tns platform remove ios && tns platform add ios",
     "reset.android": "cd demo && tns platform remove android && tns platform add android",
     "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-live-engage && tns plugin add .. && tns install",
-    "setup": "npm i && cd demo && npm i && cd .. && npm run build && cd demo && tns plugin add .. && cd .."
+    "setup": "npm i && cd demo && npm i && cd .. && npm run build && cd demo && tns plugin add .. && cd ..",
+    "postinstall": "node postinstall.js",
+    "preuninstall": "node preuninstall.js"
   },
   "repository": {
     "type": "git",
@@ -45,6 +54,11 @@
   "license": "MIT",
   "homepage": "https://github.com/Essent/nativescript-live-engage",
   "readmeFilename": "README.md",
+  "dependencies": {
+    "nativescript-hook": "0.2.1",
+    "xcode": "0.9.1",
+    "fs-extra": "2.0.0"
+  },
   "devDependencies": {
     "tns-core-modules": "2.5.1",
     "tns-platform-declarations": "2.5.0",
