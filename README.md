@@ -55,7 +55,15 @@ If you're using the plugin with Angular 2 flavoured NativeScript application, th
   <LiveEngage brandId="12345678" appId="com.example.myapp"></LiveEngage>
   ```
 
-4. For Android: Make sure the main activity in your AndroidManifest extends `android.support.v7.app.AppCompatActivity`, check out our [main activity](./demo/app/activity.android.ts) as an example.
+4. For Android:
+Make sure the main activity in your AndroidManifest extends `android.support.v7.app.AppCompatActivity`, check out our [main activity](./demo/app/activity.android.ts) as an example.
+
+    Include the following dependencies in the include.gradle file of your app:
+```html
+  compile 'com.facebook.fresco:fresco:0.14.1'
+  compile 'com.neovisionaries:nv-websocket-client:1.30'
+  compile 'com.squareup.okhttp3:okhttp:3.4.1'
+  ```
 
 5. Optional: Add the first name, last name or phone number of a user.
 
