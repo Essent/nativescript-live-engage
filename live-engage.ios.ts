@@ -42,12 +42,21 @@ export class LiveEngage extends common.LiveEngage {
         this._ios = value;
     }
 
+    public static initializeChatIOS(brandId: string): void {
+        if (!brandId) {
+            return;
+        }
+        try {
+            LPMessagingSDK.instance.initializeError(brandId);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     public loadChat(brandId: string, appId: string) {
         if (!brandId || !appId || !this.ios) {
             return;
         }
-        
-        LPMessagingSDK.instance.initializeError(brandId, null);
 
         const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(brandId);
         LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, this._viewController);

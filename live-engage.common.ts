@@ -9,6 +9,8 @@ export abstract class LiveEngage extends view.View {
   private static lastNameProperty = new Property('lastName', 'LiveEngage', new proxy.PropertyMetadata(''));
   private static phoneProperty = new Property('phone', 'LiveEngage', new proxy.PropertyMetadata(''));
 
+  public static initializeChatIOS(brandId: string): void {};
+
   public get brandId(): string {
     return this._getValue(LiveEngage.brandIdProperty).toString();
   }
@@ -57,6 +59,7 @@ export abstract class LiveEngage extends view.View {
   public abstract loadChat(brandId: string, appId: string);
 
   public abstract setUserProfile();
+
 }
 
 try {

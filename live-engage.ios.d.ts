@@ -5,6 +5,7 @@ export declare class LiveEngage extends common.LiveEngage {
     constructor();
     private readonly mainScreen;
     ios: UIView;
+    static initializeChatIOS(brandId: string): void;
     loadChat(brandId: string, appId: string): void;
     setUserProfile(): void;
 }

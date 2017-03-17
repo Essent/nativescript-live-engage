@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import 'nativescript-live-engage';
+import  { LiveEngage } from 'nativescript-live-engage';
 
 @Component({
     selector: "ns-app",
@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-
+        LiveEngage.initializeChatIOS('12345678');
     }
 
 }
