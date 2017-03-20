@@ -65,7 +65,12 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
   compile 'com.squareup.okhttp3:okhttp:3.4.1'
   ```
 
-5. Optional: Add the first name, last name or phone number of a user.
+5. For iOS:
+Make sure to load the chat `LiveEngage.initializeChat('12345678')` as the first thing you do in your app, check out our [main file](./demo/app/main.ts) as an example.
+
+    Make sure to load the chat `loadChat('12345678', 'com.example.myapp')` after view init, check out our [app.component](./demo/app/app.component.ts) as an example.
+
+6. Optional: Add the first name, last name or phone number of a user.
 
   ```html
   <LiveEngage  ...  firstName="John" lastName="Doe" phone="0123456789"></LiveEngage>
