@@ -1,8 +1,7 @@
 import * as common from './live-engage.common';
-import { Page } from 'ui/page';
 const application = require("application");
 
-declare const com : any;
+declare const com: any;
 declare const android: any;
 
 export class LiveEngage extends common.LiveEngage {
@@ -43,25 +42,25 @@ export class LiveEngage extends common.LiveEngage {
             return;
         }
 
-        const fragmentManager = this._context.getSupportFragmentManager();
-        const fragmentTransaction = fragmentManager.beginTransaction();
-
         const that = new WeakRef<LiveEngage>(this);
-        const callBack = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
+        const Callback = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
             onInitSucceed: () => {
+                const fragmentManager = this._context.getSupportFragmentManager();
+                const fragmentTransaction = fragmentManager.beginTransaction();
                 const instance = that.get();
                 const fragment = com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().getConversationFragment(brandId, null);
-                fragmentTransaction.add(instance.android.getId(), fragment);
-                fragmentTransaction.commitAllowingStateLoss();
+                fragmentTransaction.replace(instance.android.getId(), fragment);
+                fragmentTransaction.addToBackStack(null).commitAllowingStateLoss();
                 instance.setUserProfile();
             },
             onInitFailed: (err: any) => {
+                console.error(err);
             }
         });
 
-        let properties = new com.liveperson.infra.InitLivePersonProperties(brandId, appId, new callBack());
-        if (!com.liveperson.infra.InitLivePersonProperties.isValid(properties)){
-            if (properties != null && properties.getInitCallBack() != null){
+        let properties = new com.liveperson.infra.InitLivePersonProperties(brandId, appId, new Callback());
+        if (!com.liveperson.infra.InitLivePersonProperties.isValid(properties)) {
+            if (properties != null && properties.getInitCallBack() != null) {
                 properties.getInitCallBack().onInitFailed("InitLivePersonProperties not valid or missing parameters.");
             }
             return;
