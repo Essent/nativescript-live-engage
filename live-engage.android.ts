@@ -28,8 +28,6 @@ export class LiveEngage extends common.LiveEngage {
         framelayout.setId(android.view.View.generateViewId());
 
         this._android = framelayout;
-
-        this.loadChat(this.brandId, this.appId)
     }
 
     private getSDKVersion(): string {

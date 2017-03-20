@@ -5,7 +5,7 @@ export declare abstract class LiveEngage extends view.View {
     private static firstNameProperty;
     private static lastNameProperty;
     private static phoneProperty;
-    static initializeChatIOS(brandId: string): void;
+    static initializeChat(brandId: string): void;
     brandId: string;
     appId: string;
     firstName: string;

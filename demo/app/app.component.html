@@ -1,5 +1,7 @@
-<StackLayout>
-    <ActionBar title="Chat">
-    </ActionBar>
-    <LiveEngage brandId="12345678" appId="com.example.myapp" firstName="John" lastName="Doe"></LiveEngage>
+<ActionBar title="Chat">
+</ActionBar>
+<TabView>
+<StackLayout *tabItem="{ title: 'Chat' }">
+    <LiveEngage #chat brandId="12345678" appId="com.example.myapp" firstName="John" lastName="Doe"></LiveEngage>
 </StackLayout>
+</TabView>

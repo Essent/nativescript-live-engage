@@ -12,20 +12,24 @@ export class LiveEngage extends common.LiveEngage {
     public constructor() {
         super();
 
-        this._ios = new UIView(this.mainScreen.bounds);
+        const screenFrame = this.mainScreen.bounds;
+
+        this._ios = new UIView();
+        this._ios.frame = screenFrame;
         this._ios.clipsToBounds = true;
         this.ios.autoresizingMask =
             UIViewAutoresizing.FlexibleWidth |
             UIViewAutoresizing.FlexibleHeight;
 
         this._viewController = UIViewController.new();
-        this._viewController.view.frame = this.mainScreen.bounds;
+        this._viewController.view.frame = screenFrame;
+        this._viewController.view.clipsToBounds = true;
+        this._viewController.view.userInteractionEnabled = true;
         this._viewController.view.autoresizingMask =
             UIViewAutoresizing.FlexibleWidth |
             UIViewAutoresizing.FlexibleHeight;
-        this._ios.insertSubviewAtIndex(this._viewController.view, 0);
 
-        this.loadChat(this.brandId, this.appId);
+        this._ios.addSubview(this._viewController.view);
     }
 
     private get mainScreen() {
@@ -42,7 +46,7 @@ export class LiveEngage extends common.LiveEngage {
         this._ios = value;
     }
 
-    public static initializeChatIOS(brandId: string): void {
+    public static initializeChat(brandId: string): void {
         if (!brandId) {
             return;
         }
