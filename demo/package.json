@@ -31,7 +31,7 @@
     "nativescript-dev-android-snapshot": "^0.*.*",
     "nativescript-dev-typescript": "~0.3.5",
     "tns-platform-declarations": "~2.5.0",
-    "typescript": "~2.1.0",
+    "typescript": "~2.0.10",
     "zone.js": "~0.7.2"
   }
 }
