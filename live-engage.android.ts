@@ -19,7 +19,7 @@ export class LiveEngage extends common.LiveEngage {
         this._android = value;
     }
 
-    private _createUI() {
+    private _createUI(): void {
         const framelayout = new android.widget.FrameLayout(this._context);
         framelayout.setLayoutParams(new android.widget.FrameLayout.LayoutParams(
             android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
@@ -43,16 +43,21 @@ export class LiveEngage extends common.LiveEngage {
             return;
         }
 
+        const fragmentManager = this._context.getSupportFragmentManager();
         const that = new WeakRef<LiveEngage>(this);
+        const instance = that.get();
         const Callback = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
             onInitSucceed: () => {
-                const fragmentManager = this._context.getSupportFragmentManager();
-                const fragmentTransaction = fragmentManager.beginTransaction();
-                const instance = that.get();
-                const fragment = com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().getConversationFragment(brandId, null);
-                fragmentTransaction.replace(instance.android.getId(), fragment);
-                fragmentTransaction.addToBackStack(null).commitAllowingStateLoss();
-                instance.setUserProfile();
+                if (instance.android) {
+                    const fragmentTransaction = fragmentManager.beginTransaction();
+                    const fragment = com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().getConversationFragment(brandId, null);
+                    fragmentTransaction.replace(instance.android.getId(), fragment);
+                    fragmentTransaction.addToBackStack(null).commitAllowingStateLoss();
+                    instance.setUserProfile();
+                } else {
+                    // should initialize again
+                    return;
+                }
             },
             onInitFailed: (err: any) => {
                 console.error(err);
