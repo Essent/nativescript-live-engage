@@ -32,9 +32,11 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public showChat(brandId: string, appId: string): void {
+        console.log('LiveEngage showChat');
         if (!brandId || !appId) {
             return;
         }
+        console.log('LiveEngage showChat');
 
         const that = new WeakRef<LiveEngage>(this);
         const Callback = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
@@ -60,9 +62,14 @@ export class LiveEngage implements CommonLiveEngage {
         }
         // check if initialized
         if (!this.isValidState()) {
-            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().init(application.android.context, new com.liveperson.infra.messaging_ui.MessagingUiInitData(properties, this.getSDKVersion()));
+            console.log('LiveEngage start init');
+            com.liveperson.infra.messaging_ui.configuration.UIConfigurationKeys.setDefaultConfiguration(application.android.context);
+            const messagingUiInitData = new com.liveperson.infra.messaging_ui.MessagingUiInitData(properties, this.getSDKVersion());
+            const initData = new com.liveperson.infra.messaging_ui.MessagingUiConfiguration(null);
+            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().init(application.android.context, messagingUiInitData, initData);
         } else {
             properties.getInitCallBack().onInitSucceed();
+            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().setConfiguration(new com.liveperson.infra.messaging_ui.MessagingUiConfiguration(null));
         }
     }
 

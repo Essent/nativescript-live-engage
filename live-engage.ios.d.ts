@@ -1,7 +1,6 @@
 import { CommonLiveEngage } from './live-engage.common';
 export declare class LiveEngage implements CommonLiveEngage {
     private _ios;
-    private _viewController;
     private static instance;
     constructor();
     static getInstance(): LiveEngage;

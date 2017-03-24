@@ -1,8 +1,5 @@
 import { CommonLiveEngage } from './live-engage.common';
 export declare class LiveEngage implements CommonLiveEngage {
-    private _android;
-    private fragmentId;
-    private fragment;
     private static instance;
     constructor();
     static getInstance(): LiveEngage;

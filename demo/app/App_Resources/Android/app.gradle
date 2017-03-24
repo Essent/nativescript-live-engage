@@ -27,8 +27,9 @@ dependencies {
     compile "com.android.support:design:$suppotVer"
     compile "com.android.support:recyclerview-v7:$suppotVer"
     compile "com.android.support:percent:$suppotVer"
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
-    compile 'com.facebook.fresco:fresco:0.14.1'
-    compile 'com.neovisionaries:nv-websocket-client:1.30'
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.neovisionaries:nv-websocket-client:1.31'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
 }
