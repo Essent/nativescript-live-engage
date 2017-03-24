@@ -1,11 +1,14 @@
-import * as common from './live-engage.common';
-export declare class LiveEngage extends common.LiveEngage {
+import { CommonLiveEngage } from './live-engage.common';
+export declare class LiveEngage implements CommonLiveEngage {
     private _android;
+    private fragmentId;
+    private fragment;
+    private static instance;
     constructor();
-    android: android.widget.FrameLayout;
-    private _createUI();
+    static getInstance(): LiveEngage;
+    initializeChat(brandId: string): void;
     private getSDKVersion();
     private isValidState();
-    loadChat(brandId: string, appId: string): void;
+    showChat(brandId: string, appId: string): void;
     setUserProfile(): void;
 }

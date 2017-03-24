@@ -1,32 +1,26 @@
-import * as common from './live-engage.common';
+import { CommonLiveEngage } from './live-engage.common';
 const application = require("application");
 
 declare const com: any;
 declare const android: any;
 
-export class LiveEngage extends common.LiveEngage {
-    private _android: android.widget.FrameLayout;
+export class LiveEngage implements CommonLiveEngage {
 
-    public constructor() {
-        super();
+    private static instance: LiveEngage = new LiveEngage();
+
+    constructor() {
+        if (LiveEngage.instance) {
+            throw new Error("Error: Instance failed: Use LiveEngage.getInstance() instead of new.");
+        }
+        LiveEngage.instance = this;
     }
 
-    public get android(): android.widget.FrameLayout {
-        return this._android;
+    static getInstance() {
+        return LiveEngage.instance;
     }
 
-    public set android(value) {
-        this._android = value;
-    }
+    public initializeChat(brandId: string): void {
 
-    private _createUI() {
-        const framelayout = new android.widget.FrameLayout(this._context);
-        framelayout.setLayoutParams(new android.widget.FrameLayout.LayoutParams(
-            android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
-            android.widget.FrameLayout.LayoutParams.MATCH_PARENT));
-        framelayout.setId(android.view.View.generateViewId());
-
-        this._android = framelayout;
     }
 
     private getSDKVersion(): string {
@@ -37,21 +31,20 @@ export class LiveEngage extends common.LiveEngage {
         return com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().isInitialized();
     }
 
-    public loadChat(brandId: string, appId: string): void {
-        if (!brandId || !appId || !this.android) {
+    public showChat(brandId: string, appId: string): void {
+        if (!brandId || !appId) {
             return;
         }
 
         const that = new WeakRef<LiveEngage>(this);
         const Callback = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
             onInitSucceed: () => {
-                const fragmentManager = this._context.getSupportFragmentManager();
-                const fragmentTransaction = fragmentManager.beginTransaction();
+                console.log('LiveEngage onInitSucceed');
                 const instance = that.get();
-                const fragment = com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().getConversationFragment(brandId, null);
-                fragmentTransaction.replace(instance.android.getId(), fragment);
-                fragmentTransaction.addToBackStack(null).commitAllowingStateLoss();
-                instance.setUserProfile();
+
+                com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, brandId, null);
+
+                // instance.setUserProfile();
             },
             onInitFailed: (err: any) => {
                 console.error(err);
@@ -67,7 +60,7 @@ export class LiveEngage extends common.LiveEngage {
         }
         // check if initialized
         if (!this.isValidState()) {
-            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().init(this._context, new com.liveperson.infra.messaging_ui.MessagingUiInitData(properties, this.getSDKVersion()));
+            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().init(application.android.context, new com.liveperson.infra.messaging_ui.MessagingUiInitData(properties, this.getSDKVersion()));
         } else {
             properties.getInitCallBack().onInitSucceed();
         }
@@ -75,8 +68,45 @@ export class LiveEngage extends common.LiveEngage {
 
     public setUserProfile(): void {
         if (this.isValidState()) {
-            const userProfileBundle = new com.liveperson.messaging.model.UserProfileBundle(this.firstName, this.lastName, this.phone);
-            com.liveperson.messaging.MessagingFactory.getInstance().getController().sendUserProfile(this.brandId, this.appId, userProfileBundle);
+            // const userProfileBundle = new com.liveperson.messaging.model.UserProfileBundle(this.firstName, this.lastName, this.phone);
+            // com.liveperson.messaging.MessagingFactory.getInstance().getController().sendUserProfile(this.brandId, this.appId, userProfileBundle);
         }
     }
+
+    // public killChat(brandId: string, appId: string): void {
+    //     console.log('LiveEngage start killChat');
+    //     if (!brandId || !appId) {
+    //         return;
+    //     }
+    //
+    //     if (!this.isValidState()) {
+    //         return;
+    //     }
+    //     console.log('LiveEngage killChat second step');
+    //
+    //     /*
+    //     Remove fragment, before logging out
+    //      */
+    //     const fragmentManager = this._context.getSupportFragmentManager();
+    //     const fragmentTransaction = fragmentManager.beginTransaction();
+    //     fragmentTransaction.remove(this.fragment);
+    //     fragmentTransaction.detach(this.fragment).commitAllowingStateLoss();
+    //     console.log('LiveEngage fragment removed');
+    //
+    //     com.liveperson.messaging.MessagingFactory.getInstance().getController().resolveConversation(brandId, brandId);
+    //     console.log('LiveEngage resolveConversation done');
+    //
+    //     const LogoutCallback = com.liveperson.infra.callbacks.LogoutLivePersonCallBack.extend({
+    //         onLogoutSucceed: () => {
+    //             console.log('LiveEngage onLogoutSucceed');
+    //         },
+    //         onLogoutFailed: (err: any) => {
+    //             console.error(err);
+    //         }
+    //     });
+    //     const initProperties = new com.liveperson.infra.InitLivePersonProperties(brandId, appId, null);
+    //     const ui = new com.liveperson.infra.messaging_ui.MessagingUiInitData(initProperties, this.getSDKVersion());
+    //     com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().logout(this._context, ui, new LogoutCallback());
+    //     console.log('LiveEngage logout');
+    // }
 }

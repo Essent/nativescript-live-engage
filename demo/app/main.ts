@@ -8,7 +8,7 @@ import * as application from "application";
 application.on(application.launchEvent, function (args: application.ApplicationEventData) {
     if (args.ios !== undefined) {
         // For iOS applications, call initializeChat, you can also use a custom AppDelegate for this
-        LiveEngage.initializeChat('12345678');
+        LiveEngage.getInstance().initializeChat('12345678');
     }
 });
 

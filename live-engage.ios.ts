@@ -1,35 +1,22 @@
-import * as common from './live-engage.common';
+import { CommonLiveEngage } from './live-engage.common';
 import frameModule = require("ui/frame");
 
 declare const LPMessagingSDK : any;
-declare const LPUser : any;
-declare const UIView : any;
 
-export class LiveEngage extends common.LiveEngage {
+export class LiveEngage implements CommonLiveEngage {
     private _ios: UIView;
-    private _viewController: UIViewController;
 
-    public constructor() {
-        super();
+    private static instance: LiveEngage = new LiveEngage();
 
-        const screenFrame = this.mainScreen.bounds;
+    constructor() {
+        if (LiveEngage.instance) {
+            throw new Error("Error: Instance failed: Use LiveEngage.getInstance() instead of new.");
+        }
+        LiveEngage.instance = this;
+    }
 
-        this._ios = new UIView();
-        this._ios.frame = screenFrame;
-        this._ios.clipsToBounds = true;
-        this.ios.autoresizingMask =
-            UIViewAutoresizing.FlexibleWidth |
-            UIViewAutoresizing.FlexibleHeight;
-
-        this._viewController = UIViewController.new();
-        this._viewController.view.frame = screenFrame;
-        this._viewController.view.clipsToBounds = true;
-        this._viewController.view.userInteractionEnabled = true;
-        this._viewController.view.autoresizingMask =
-            UIViewAutoresizing.FlexibleWidth |
-            UIViewAutoresizing.FlexibleHeight;
-
-        this._ios.addSubview(this._viewController.view);
+    static getInstance() {
+        return LiveEngage.instance;
     }
 
     private get mainScreen() {
@@ -46,7 +33,7 @@ export class LiveEngage extends common.LiveEngage {
         this._ios = value;
     }
 
-    public static initializeChat(brandId: string): void {
+    public initializeChat(brandId: string): void {
         if (!brandId) {
             return;
         }
@@ -57,19 +44,19 @@ export class LiveEngage extends common.LiveEngage {
         }
     }
 
-    public loadChat(brandId: string, appId: string) {
-        if (!brandId || !appId || !this.ios) {
+    public showChat(brandId: string, appId: string) {
+        if (!brandId || !appId) {
             return;
         }
 
         const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(brandId);
-        LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, this._viewController);
+        LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, null);
 
         this.setUserProfile();
     }
 
     public setUserProfile() {
-        const user = LPUser.alloc().initWithFirstNameLastNameNickNameUidProfileImageURLPhoneNumberEmployeeID(this.firstName, this.lastName, "", "", "", this.phone, "");
-        LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
+        // const user = LPUser.alloc().initWithFirstNameLastNameNickNameUidProfileImageURLPhoneNumberEmployeeID(this.firstName, this.lastName, "", "", "", this.phone, "");
+        // LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
     }
 }
