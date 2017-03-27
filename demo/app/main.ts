@@ -6,10 +6,12 @@ import { LiveEngage } from 'nativescript-live-engage';
 import * as application from "application";
 
 application.on(application.launchEvent, function (args: application.ApplicationEventData) {
-    if (args.ios !== undefined) {
-        // For iOS applications, call initializeChat, you can also use a custom AppDelegate for this
-        LiveEngage.getInstance().initializeChat('12345678');
-    }
+
+    /*
+     For iOS applications you can also subclass AppDelegate for this
+     For Android applications you can also subclass Application for this
+     */
+    LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp');
 });
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);

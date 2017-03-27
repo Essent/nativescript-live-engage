@@ -1,12 +1,18 @@
 import { CommonLiveEngage } from './live-engage.common';
-import frameModule = require("ui/frame");
 
 declare const LPMessagingSDK : any;
+declare const LPUser : any;
 
 export class LiveEngage implements CommonLiveEngage {
-    private _ios: UIView;
 
     private static instance: LiveEngage = new LiveEngage();
+    private brandId: string;
+    private appId: string;
+    private firstName: string = '';
+    private lastName: string = '';
+    private nickName: string = '';
+    private phone: string = '';
+    private avatarUrl: string = '';
 
     constructor() {
         if (LiveEngage.instance) {
@@ -19,44 +25,52 @@ export class LiveEngage implements CommonLiveEngage {
         return LiveEngage.instance;
     }
 
-    private get mainScreen() {
-        return typeof UIScreen.mainScreen === 'function' ?
-            UIScreen.mainScreen() :  // xCode 7 and below
-            UIScreen.mainScreen;     // xCode 8+
-    }
-
-    public get ios(): UIView {
-        return this._ios;
-    }
-
-    public set ios(value) {
-        this._ios = value;
-    }
-
-    public initializeChat(brandId: string): void {
+    public initializeChat(brandId: string, appId: string): void {
         if (!brandId) {
             return;
         }
+
         try {
             LPMessagingSDK.instance.initializeError(brandId);
+            LiveEngage.instance.brandId = brandId;
+            LiveEngage.instance.appId = appId;
         } catch (e) {
             console.error(e);
         }
     }
 
-    public showChat(brandId: string, appId: string) {
-        if (!brandId || !appId) {
+    public showChat(): void {
+        if (!LiveEngage.instance.brandId) {
             return;
         }
 
-        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(brandId);
+        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(LiveEngage.instance.brandId);
         LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, null);
-
-        this.setUserProfile();
+        this.setUserProfile()
     }
 
-    public setUserProfile() {
-        // const user = LPUser.alloc().initWithFirstNameLastNameNickNameUidProfileImageURLPhoneNumberEmployeeID(this.firstName, this.lastName, "", "", "", this.phone, "");
-        // LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
+    public setUserProfile(): void {
+        this.setUserProfileValues(
+            LiveEngage.instance.firstName,
+            LiveEngage.instance.lastName,
+            LiveEngage.instance.nickName,
+            LiveEngage.instance.phone,
+            LiveEngage.instance.avatarUrl
+        );
+    }
+
+    public setUserProfileValues(firstName: string, lastName: string, nickName: string, phone: string, avatarUrl: string): void {
+        LiveEngage.instance.firstName = firstName;
+        LiveEngage.instance.lastName = lastName;
+        LiveEngage.instance.nickName = nickName;
+        LiveEngage.instance.phone = phone;
+        LiveEngage.instance.avatarUrl = avatarUrl;
+
+        if (!LiveEngage.instance.brandId) {
+            return;
+        }
+
+        const user = LPUser.alloc().initWithFirstNameLastNameNickNameUidProfileImageURLPhoneNumberEmployeeID(firstName, lastName, nickName, "", avatarUrl, phone, "");
+        LPMessagingSDK.instance.setUserProfileBrandID(user, LiveEngage.instance.brandId);
     }
 }

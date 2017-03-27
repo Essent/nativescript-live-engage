@@ -1,5 +1,5 @@
 export interface CommonLiveEngage {
-    initializeChat(brandId: string): void;
-    showChat(brandId: string, appId: string): void;
-    setUserProfile(): void;
+    initializeChat(brandId: string, appId: string): void;
+    showChat(): void;
+    setUserProfileValues(firstName: string, lastName: string, nickName: string, phone: string, avatarUrl: string): void;
 }

@@ -7,6 +7,13 @@ declare const android: any;
 export class LiveEngage implements CommonLiveEngage {
 
     private static instance: LiveEngage = new LiveEngage();
+    private brandId: string;
+    private appId: string;
+    private firstName: string = '';
+    private lastName: string = '';
+    private nickName: string = '';
+    private phone: string = '';
+    private avatarUrl: string = '';
 
     constructor() {
         if (LiveEngage.instance) {
@@ -19,8 +26,9 @@ export class LiveEngage implements CommonLiveEngage {
         return LiveEngage.instance;
     }
 
-    public initializeChat(brandId: string): void {
-
+    public initializeChat(brandId: string, appId: string): void {
+        LiveEngage.instance.brandId = brandId;
+        LiveEngage.instance.appId = appId;
     }
 
     private getSDKVersion(): string {
@@ -31,9 +39,9 @@ export class LiveEngage implements CommonLiveEngage {
         return com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().isInitialized();
     }
 
-    public showChat(brandId: string, appId: string): void {
+    public showChat(): void {
         console.log('LiveEngage showChat');
-        if (!brandId || !appId) {
+        if (!LiveEngage.instance.brandId || !LiveEngage.instance.appId) {
             return;
         }
         console.log('LiveEngage showChat');
@@ -42,18 +50,16 @@ export class LiveEngage implements CommonLiveEngage {
         const Callback = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
             onInitSucceed: () => {
                 console.log('LiveEngage onInitSucceed');
+                com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, LiveEngage.instance.brandId, null);
                 const instance = that.get();
-
-                com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, brandId, null);
-
-                // instance.setUserProfile();
+                instance.setUserProfile()
             },
             onInitFailed: (err: any) => {
                 console.error(err);
             }
         });
 
-        let properties = new com.liveperson.infra.InitLivePersonProperties(brandId, appId, new Callback());
+        let properties = new com.liveperson.infra.InitLivePersonProperties(LiveEngage.instance.brandId, LiveEngage.instance.appId, new Callback());
         if (!com.liveperson.infra.InitLivePersonProperties.isValid(properties)) {
             if (properties != null && properties.getInitCallBack() != null) {
                 properties.getInitCallBack().onInitFailed("InitLivePersonProperties not valid or missing parameters.");
@@ -74,9 +80,35 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public setUserProfile(): void {
+        this.setUserProfileValues(
+            LiveEngage.instance.firstName,
+            LiveEngage.instance.lastName,
+            LiveEngage.instance.nickName,
+            LiveEngage.instance.phone,
+            LiveEngage.instance.avatarUrl
+        );
+    }
+
+    public setUserProfileValues(firstName: string, lastName: string, nickName: string, phone: string, avatarUrl: string): void {
+        LiveEngage.instance.firstName = firstName;
+        LiveEngage.instance.lastName = lastName;
+        LiveEngage.instance.nickName = nickName;
+        LiveEngage.instance.phone = phone;
+        LiveEngage.instance.avatarUrl = avatarUrl;
+
+        if (!LiveEngage.instance.brandId) {
+            return;
+        }
+
         if (this.isValidState()) {
-            // const userProfileBundle = new com.liveperson.messaging.model.UserProfileBundle(this.firstName, this.lastName, this.phone);
-            // com.liveperson.messaging.MessagingFactory.getInstance().getController().sendUserProfile(this.brandId, this.appId, userProfileBundle);
+            const userProfile = new com.liveperson.messaging.model.UserProfileBundle.Builder()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setPhoneNumber(phone)
+                .setNickname(nickName)
+                .setAvatarUrl(avatarUrl)
+                .build();
+            com.liveperson.messaging.MessagingFactory.getInstance().getController().sendUserProfile(LiveEngage.instance.brandId, userProfile);
         }
     }
 

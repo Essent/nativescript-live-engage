@@ -1,12 +1,17 @@
 import { CommonLiveEngage } from './live-engage.common';
 export declare class LiveEngage implements CommonLiveEngage {
-    private _ios;
     private static instance;
+    private brandId;
+    private appId;
+    private firstName;
+    private lastName;
+    private nickName;
+    private phone;
+    private avatarUrl;
     constructor();
     static getInstance(): LiveEngage;
-    private readonly mainScreen;
-    ios: UIView;
-    initializeChat(brandId: string): void;
-    showChat(brandId: string, appId: string): void;
+    initializeChat(brandId: string, appId: string): void;
+    showChat(): void;
     setUserProfile(): void;
+    setUserProfileValues(firstName: string, lastName: string, nickName: string, phone: string, avatarUrl: string): void;
 }

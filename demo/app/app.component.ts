@@ -1,15 +1,16 @@
-import { Component, AfterViewInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { LiveEngage } from 'nativescript-live-engage';
 
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html",
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
 
     public constructor() { }
 
     public showChat(): void {
-        LiveEngage.getInstance().showChat('12345678', 'com.example.myapp');
+        LiveEngage.getInstance().showChat();
+        LiveEngage.getInstance().setUserProfileValues('Jane', 'Doe', '', '0132100000', '');
     }
 }
