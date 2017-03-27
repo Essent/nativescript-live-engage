@@ -1,17 +1,16 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
-import frameModule = require('ui/frame');
+import { Component } from "@angular/core";
+import { LiveEngage } from 'nativescript-live-engage';
 
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html",
 })
-export class AppComponent implements AfterViewInit {
-    @ViewChild('chat') public chatRef: ElementRef;
+export class AppComponent {
 
     public constructor() { }
 
-    public ngAfterViewInit(): void {
-        this.chatRef.nativeElement.loadChat('12345678', 'com.example.myapp');
+    public showChat(): void {
+        LiveEngage.getInstance().showChat();
+        LiveEngage.getInstance().setUserProfileValues('Jane', 'Doe', '', '0132100000', '');
     }
-
 }

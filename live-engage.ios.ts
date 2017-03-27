@@ -1,75 +1,76 @@
-import * as common from './live-engage.common';
-import frameModule = require("ui/frame");
+import { CommonLiveEngage } from './live-engage.common';
 
-declare const LPMessagingSDK : any;
-declare const LPUser : any;
-declare const UIView : any;
+declare const LPMessagingSDK: any;
+declare const LPUser: any;
 
-export class LiveEngage extends common.LiveEngage {
-    private _ios: UIView;
-    private _viewController: UIViewController;
+export class LiveEngage implements CommonLiveEngage {
 
-    public constructor() {
-        super();
+    private static instance: LiveEngage = new LiveEngage();
+    private brandId: string;
+    private appId: string;
+    private firstName: string = '';
+    private lastName: string = '';
+    private nickName: string = '';
+    private phone: string = '';
+    private avatarUrl: string = '';
 
-        const screenFrame = this.mainScreen.bounds;
-
-        this._ios = new UIView();
-        this._ios.frame = screenFrame;
-        this._ios.clipsToBounds = true;
-        this.ios.autoresizingMask =
-            UIViewAutoresizing.FlexibleWidth |
-            UIViewAutoresizing.FlexibleHeight;
-
-        this._viewController = UIViewController.new();
-        this._viewController.view.frame = screenFrame;
-        this._viewController.view.clipsToBounds = true;
-        this._viewController.view.userInteractionEnabled = true;
-        this._viewController.view.autoresizingMask =
-            UIViewAutoresizing.FlexibleWidth |
-            UIViewAutoresizing.FlexibleHeight;
-
-        this._ios.addSubview(this._viewController.view);
+    constructor() {
+        if (LiveEngage.instance) {
+            throw new Error("Error: Instance failed: Use LiveEngage.getInstance() instead of new.");
+        }
+        LiveEngage.instance = this;
     }
 
-    private get mainScreen() {
-        return typeof UIScreen.mainScreen === 'function' ?
-            UIScreen.mainScreen() :  // xCode 7 and below
-            UIScreen.mainScreen;     // xCode 8+
+    static getInstance() {
+        return LiveEngage.instance;
     }
 
-    public get ios(): UIView {
-        return this._ios;
-    }
-
-    public set ios(value) {
-        this._ios = value;
-    }
-
-    public static initializeChat(brandId: string): void {
+    public initializeChat(brandId: string, appId: string): void {
         if (!brandId) {
             return;
         }
+
         try {
             LPMessagingSDK.instance.initializeError(brandId);
+            LiveEngage.instance.brandId = brandId;
+            LiveEngage.instance.appId = appId;
         } catch (e) {
             console.error(e);
         }
     }
 
-    public loadChat(brandId: string, appId: string) {
-        if (!brandId || !appId || !this.ios) {
+    public showChat(): void {
+        if (!LiveEngage.instance.brandId) {
             return;
         }
 
-        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(brandId);
-        LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, this._viewController);
-
-        this.setUserProfile();
+        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(LiveEngage.instance.brandId);
+        LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, null);
+        this.setUserProfile()
     }
 
-    public setUserProfile() {
-        const user = LPUser.alloc().initWithFirstNameLastNameNickNameUidProfileImageURLPhoneNumberEmployeeID(this.firstName, this.lastName, "", "", "", this.phone, "");
-        LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
+    public setUserProfile(): void {
+        this.setUserProfileValues(
+            LiveEngage.instance.firstName,
+            LiveEngage.instance.lastName,
+            LiveEngage.instance.nickName,
+            LiveEngage.instance.phone,
+            LiveEngage.instance.avatarUrl
+        );
+    }
+
+    public setUserProfileValues(firstName: string, lastName: string, nickName: string, phone: string, avatarUrl: string): void {
+        LiveEngage.instance.firstName = firstName;
+        LiveEngage.instance.lastName = lastName;
+        LiveEngage.instance.nickName = nickName;
+        LiveEngage.instance.phone = phone;
+        LiveEngage.instance.avatarUrl = avatarUrl;
+
+        if (!LiveEngage.instance.brandId) {
+            return;
+        }
+
+        const user = LPUser.alloc().initWithFirstNameLastNameNickNameUidProfileImageURLPhoneNumberEmployeeID(firstName, lastName, nickName, "", avatarUrl, phone, "");
+        LPMessagingSDK.instance.setUserProfileBrandID(user, LiveEngage.instance.brandId);
     }
 }
