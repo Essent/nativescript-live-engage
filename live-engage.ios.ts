@@ -1,7 +1,7 @@
 import { CommonLiveEngage } from './live-engage.common';
 
-declare const LPMessagingSDK : any;
-declare const LPUser : any;
+declare const LPMessagingSDK: any;
+declare const LPUser: any;
 
 export class LiveEngage implements CommonLiveEngage {
 
