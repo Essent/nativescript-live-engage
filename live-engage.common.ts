@@ -4,5 +4,13 @@ export interface CommonLiveEngage {
 
   showChat(): void;
 
-  setUserProfileValues(firstName: string, lastName: string, nickName: string, phone: string, avatarUrl: string): void;
+  setUserProfileValues(chatProfile: ChatProfile): void;
+}
+
+export interface ChatProfile {
+  firstName: string;
+  lastName: string;
+  nickName: string;
+  phone: string;
+  avatarUrl: string;
 }

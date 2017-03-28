@@ -1,4 +1,4 @@
-import { CommonLiveEngage } from './live-engage.common';
+import { CommonLiveEngage, ChatProfile } from './live-engage.common';
 
 declare const LPMessagingSDK: any;
 declare const LPUser: any;
@@ -8,11 +8,7 @@ export class LiveEngage implements CommonLiveEngage {
     private static instance: LiveEngage = new LiveEngage();
     private brandId: string;
     private appId: string;
-    private firstName: string = '';
-    private lastName: string = '';
-    private nickName: string = '';
-    private phone: string = '';
-    private avatarUrl: string = '';
+    private chatProfile: ChatProfile;
 
     constructor() {
         if (LiveEngage.instance) {
@@ -32,45 +28,38 @@ export class LiveEngage implements CommonLiveEngage {
 
         try {
             LPMessagingSDK.instance.initializeError(brandId);
-            LiveEngage.instance.brandId = brandId;
-            LiveEngage.instance.appId = appId;
+            this.brandId = brandId;
+            this.appId = appId;
         } catch (e) {
             console.error(e);
         }
     }
 
     public showChat(): void {
-        if (!LiveEngage.instance.brandId) {
+        if (!this.brandId) {
             return;
         }
 
-        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(LiveEngage.instance.brandId);
+        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(this.brandId);
         LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, null);
-        this.setUserProfile()
+        this.setUserProfileValues(this.chatProfile);
     }
 
-    public setUserProfile(): void {
-        this.setUserProfileValues(
-            LiveEngage.instance.firstName,
-            LiveEngage.instance.lastName,
-            LiveEngage.instance.nickName,
-            LiveEngage.instance.phone,
-            LiveEngage.instance.avatarUrl
-        );
-    }
+    public setUserProfileValues(chatProfile: ChatProfile): void {
+        this.chatProfile = chatProfile;
 
-    public setUserProfileValues(firstName: string, lastName: string, nickName: string, phone: string, avatarUrl: string): void {
-        LiveEngage.instance.firstName = firstName;
-        LiveEngage.instance.lastName = lastName;
-        LiveEngage.instance.nickName = nickName;
-        LiveEngage.instance.phone = phone;
-        LiveEngage.instance.avatarUrl = avatarUrl;
-
-        if (!LiveEngage.instance.brandId) {
+        if (!this.brandId || !chatProfile) {
             return;
         }
 
-        const user = LPUser.alloc().initWithFirstNameLastNameNickNameUidProfileImageURLPhoneNumberEmployeeID(firstName, lastName, nickName, "", avatarUrl, phone, "");
-        LPMessagingSDK.instance.setUserProfileBrandID(user, LiveEngage.instance.brandId);
+        const user = LPUser.alloc().initWithFirstNameLastNameNickNameUidProfileImageURLPhoneNumberEmployeeID(
+            chatProfile.firstName,
+            chatProfile.lastName,
+            chatProfile.nickName,
+            "",
+            chatProfile.avatarUrl,
+            chatProfile.phone,
+            "");
+        LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
     }
 }

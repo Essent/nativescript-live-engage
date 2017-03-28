@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { LiveEngage } from 'nativescript-live-engage';
+import { LiveEngage, ChatProfile } from 'nativescript-live-engage';
 
 @Component({
     selector: "ns-app",
@@ -10,7 +10,15 @@ export class AppComponent {
     public constructor() { }
 
     public showChat(): void {
+        const chatProfile: ChatProfile = {
+            firstName: 'Jane',
+            lastName: 'Doe',
+            nickName: '',
+            phone: '0132100000',
+            avatarUrl: ''
+        };
+
         LiveEngage.getInstance().showChat();
-        LiveEngage.getInstance().setUserProfileValues('Jane', 'Doe', '', '0132100000', '');
+        LiveEngage.getInstance().setUserProfileValues(chatProfile);
     }
 }
