@@ -4,6 +4,7 @@
 !scripts/*.js
 !postinstall.js
 !preuninstall.js
+!lib/before-prepare.js
 !lib/after-prepare.js
 demo/app/*.js
 !demo/karma.conf.js
