@@ -9,6 +9,7 @@
 demo/app/*.js
 !demo/karma.conf.js
 !demo/app/tests/*.js
+demo/app/App_Resources/iOS/LPMessagingSDKModels.bundle
 demo/**/*.d.ts
 !demo/references.d.ts
 demo/lib
