@@ -4,7 +4,7 @@
 [![Dependency Status](https://img.shields.io/david/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage)
 [![devDependency Status](https://img.shields.io/david/dev/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage#info=devDependencies)
 
-This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v2.1.0, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v2.1.2).
+This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v2.1.4, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v2.1.2).
 To use this plugin you need to have an account from [LivePerson](https://www.liveperson.com).
 
 ### Successfully Tested with the following configurations
@@ -61,7 +61,6 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
   compile "com.android.support:appcompat-v7:24.2.1"
   compile "com.android.support:design:24.2.1"
   compile "com.android.support:recyclerview-v7:24.2.1"
-  compile "com.android.support:percent:24.2.1"
   compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
   compile 'com.squareup.picasso:picasso:2.5.2'
