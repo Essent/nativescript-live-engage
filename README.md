@@ -60,7 +60,7 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
 ```html
   compile "com.android.support:appcompat-v7:24.2.1"
   compile "com.android.support:design:24.2.1"
-  compile "com.android.support:recyclerview-v7:24.2.1"
+  compile "com.android.support:percent:24.2.1"
   compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
   compile 'com.squareup.picasso:picasso:2.5.2'
