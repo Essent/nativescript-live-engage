@@ -89,4 +89,25 @@ export class LiveEngage implements CommonLiveEngage {
             com.liveperson.messaging.MessagingFactory.getInstance().getController().sendUserProfile(this.brandId, userProfile);
         }
     }
+
+    public registerPushToken(token: any): void {
+        if (!this.isValidState()) {
+            return;
+        }
+        com.liveperson.messaging.MessagingFactory.getInstance().getController().registerPusher(this.brandId, this.appId, token);
+    }
+
+    public unregisterPushToken(): void {
+        if (!this.isValidState()) {
+            return;
+        }
+        com.liveperson.messaging.MessagingFactory.getInstance().getController().unregisterPusher(this.brandId, this.appId, null, false);
+    }
+
+    public handlePushMessage(data: any): void {
+        if (!this.isValidState()) {
+            return;
+        }
+        com.liveperson.messaging.MessagingFactory.getInstance().getController().unregisterPusher(this.brandId, this.appId, null, false);
+    }
 }

@@ -5,6 +5,10 @@ export interface CommonLiveEngage {
   showChat(): void;
 
   setUserProfileValues(chatProfile: ChatProfile): void;
+
+  registerPushToken(token: any): void;
+
+  unregisterPushToken(): void;
 }
 
 export interface ChatProfile {

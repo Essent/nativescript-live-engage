@@ -62,4 +62,16 @@ export class LiveEngage implements CommonLiveEngage {
             "");
         LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
     }
+
+    public registerPushToken(token: any): void {
+        LPMessagingSDK.instance.registerPushNotificationsWithTokenNotificationDelegateAlternateBundleID(token, null, null);
+    }
+
+    public unregisterPushToken(): void {
+        // not available on iOS
+    }
+
+    public handlePushMessage(data: any): void {
+        LPMessagingSDK.instance.handlePush(data);
+    }
 }
