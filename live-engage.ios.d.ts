@@ -11,5 +11,5 @@ export declare class LiveEngage implements CommonLiveEngage {
     setUserProfileValues(chatProfile: ChatProfile): void;
     registerPushToken(token: any): void;
     unregisterPushToken(): void;
-    handlePushMessage(data: any): void;
+    handlePushMessage(data: any, image: any, showNotification: boolean): void;
 }

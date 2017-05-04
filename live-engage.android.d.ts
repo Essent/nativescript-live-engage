@@ -4,6 +4,7 @@ export declare class LiveEngage implements CommonLiveEngage {
     private brandId;
     private appId;
     private chatProfile;
+    private gcmToken;
     constructor();
     static getInstance(): LiveEngage;
     initializeChat(brandId: string, appId: string): void;
@@ -13,5 +14,5 @@ export declare class LiveEngage implements CommonLiveEngage {
     setUserProfileValues(chatProfile: ChatProfile): void;
     registerPushToken(token: any): void;
     unregisterPushToken(): void;
-    handlePushMessage(data: any): void;
+    handlePushMessage(data: any, image: any, showNotification: boolean): void;
 }
