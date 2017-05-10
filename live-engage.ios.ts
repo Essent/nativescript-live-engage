@@ -77,6 +77,6 @@ export class LiveEngage implements CommonLiveEngage {
 
     public parsePushMessage(data: any): any {
         // not available on iOS
-        return null;
+        return;
     }
 }
