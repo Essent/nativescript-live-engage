@@ -1,5 +1,5 @@
 import { CommonLiveEngage, ChatProfile } from './live-engage.common';
-const application = require("application");
+import * as application from 'application';
 
 declare const com: any;
 declare const android: any;
@@ -10,6 +10,7 @@ export class LiveEngage implements CommonLiveEngage {
     private brandId: string;
     private appId: string;
     private chatProfile: ChatProfile;
+    private gcmToken: string;
 
     constructor() {
         if (LiveEngage.instance) {
@@ -41,11 +42,12 @@ export class LiveEngage implements CommonLiveEngage {
         }
 
         const that = new WeakRef<LiveEngage>(this);
-        const Callback = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
+        const Callback: any = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
             onInitSucceed: () => {
                 com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, this.brandId, null);
                 const instance = that.get();
                 instance.setUserProfileValues(instance.chatProfile);
+                instance.registerPushToken(instance.gcmToken)
             },
             onInitFailed: (err: any) => {
                 console.error(err);
@@ -88,5 +90,33 @@ export class LiveEngage implements CommonLiveEngage {
                 .build();
             com.liveperson.messaging.MessagingFactory.getInstance().getController().sendUserProfile(this.brandId, userProfile);
         }
+    }
+
+    public registerPushToken(token: any): void {
+        this.gcmToken = token;
+        if (!this.isValidState()) {
+            return;
+        }
+        com.liveperson.messaging.MessagingFactory.getInstance().getController().registerPusher(this.brandId, this.appId, token);
+    }
+
+    public unregisterPushToken(): void {
+        if (!this.isValidState()) {
+            return;
+        }
+        com.liveperson.messaging.MessagingFactory.getInstance().getController().unregisterPusher(this.brandId, this.appId, null, false);
+    }
+
+    public handlePushMessage(data: any, image: any, showNotification: boolean): void {
+        if (!this.isValidState()) {
+            return;
+        }
+
+        const message = data.getString("message");
+        com.liveperson.infra.messaging_ui.notification.NotificationController.instance.addMessageAndDisplayNotification(application.android.context, this.brandId, message, showNotification, image);
+    }
+
+    public parsePushMessage(data: any): any {
+        return new com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser(data);
     }
 }
