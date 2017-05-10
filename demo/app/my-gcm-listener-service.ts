@@ -1,12 +1,36 @@
 import { LiveEngage } from 'nativescript-live-engage';
 import * as utils from 'utils/utils';
 
-declare const com: any;
+/* tslint:disable */
+declare module com {
+    export module google {
+        export module android {
+            export module gms {
+                export module gcm {
+                    export class GcmListenerService {
+                        protected onMessageReceived(from: string, data: any): void
+                    }
+                }
+            }
+        }
+    }
+    export module liveperson {
+        export module infra {
+            export module messaging_ui {
+                export module uicomponents {
+                    export class PushMessageParser {
+                        constructor(data: any)
+                    }
+                }
+            }
+        }
+    }
+}
 
 @JavaProxy("org.nativescript.demo.MyGcmListenerService")
 class MyGcmListenerService extends com.google.android.gms.gcm.GcmListenerService {
 
-    protected onMessageReceived(from: string, data: any): void {
+    protected onMessageReceived(_from: string, data: any): void {
         try {
             const message = new com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser(data);
             const resImg = utils.ad.resources.getDrawableId('icon');
@@ -49,3 +73,6 @@ class MyGcmListenerService extends com.google.android.gms.gcm.GcmListenerService
         return android.app.PendingIntent.getActivity(context, 0, resultIntent, android.app.PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }
+
+/* tslint:disable */
+MyGcmListenerService;
