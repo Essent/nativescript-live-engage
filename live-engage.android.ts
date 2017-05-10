@@ -115,4 +115,8 @@ export class LiveEngage implements CommonLiveEngage {
         const message = data.getString("message");
         com.liveperson.infra.messaging_ui.notification.NotificationController.instance.addMessageAndDisplayNotification(application.android.context, this.brandId, message, showNotification, image);
     }
+
+    public parsePushMessage(data: any): any {
+        return new com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser(data);
+    }
 }

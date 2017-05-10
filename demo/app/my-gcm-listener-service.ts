@@ -14,17 +14,6 @@ declare module com {
             }
         }
     }
-    export module liveperson {
-        export module infra {
-            export module messaging_ui {
-                export module uicomponents {
-                    export class PushMessageParser {
-                        constructor(data: any)
-                    }
-                }
-            }
-        }
-    }
 }
 
 @JavaProxy("org.nativescript.demo.MyGcmListenerService")
@@ -32,7 +21,7 @@ class MyGcmListenerService extends com.google.android.gms.gcm.GcmListenerService
 
     protected onMessageReceived(_from: string, data: any): void {
         try {
-            const message = new com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser(data);
+            const message = LiveEngage.getInstance().parsePushMessage(data);
             const resImg = utils.ad.resources.getDrawableId('icon');
             this.postNotification(message, resImg);
 

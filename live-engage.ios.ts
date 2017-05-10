@@ -74,4 +74,9 @@ export class LiveEngage implements CommonLiveEngage {
     public handlePushMessage(data: any, image: any, showNotification: boolean): void {
         LPMessagingSDK.instance.handlePush(data);
     }
+
+    public parsePushMessage(data: any): any {
+        // not available on iOS
+        return null;
+    }
 }

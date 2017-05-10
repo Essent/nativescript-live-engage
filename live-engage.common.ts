@@ -11,6 +11,8 @@ export interface CommonLiveEngage {
   unregisterPushToken(): void;
 
   handlePushMessage(data: any, image: any, showNotification: boolean): void;
+
+  parsePushMessage(data: any): any;
 }
 
 export interface ChatProfile {
