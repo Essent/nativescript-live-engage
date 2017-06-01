@@ -66,7 +66,7 @@ export class LiveEngage implements CommonLiveEngage {
         LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
     }
 
-    public registerPushToken(token: any, delegate: any): void {
+    public registerPushToken(token: any, delegate?: any): void {
         this.apnsToken = token;
         this.apnsDelegate = delegate;
         if (!this.appId || !token) {
@@ -80,7 +80,7 @@ export class LiveEngage implements CommonLiveEngage {
         // not available on iOS
     }
 
-    public handlePushMessage(data: any, image: any, showNotification: boolean): void {
+    public handlePushMessage(data: any, image?: any, showNotification?: boolean): void {
         LPMessagingSDK.instance.handlePush(data);
     }
 

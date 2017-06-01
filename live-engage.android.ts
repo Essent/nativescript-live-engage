@@ -92,7 +92,7 @@ export class LiveEngage implements CommonLiveEngage {
         }
     }
 
-    public registerPushToken(token: any, delegate: any): void {
+    public registerPushToken(token: any, delegate?: any): void {
         this.gcmToken = token;
         if (!this.isValidState()) {
             return;
@@ -107,7 +107,7 @@ export class LiveEngage implements CommonLiveEngage {
         com.liveperson.messaging.MessagingFactory.getInstance().getController().unregisterPusher(this.brandId, this.appId, null, false);
     }
 
-    public handlePushMessage(data: any, image: any, showNotification: boolean): void {
+    public handlePushMessage(data: any, image?: any, showNotification?: boolean): void {
         if (!this.isValidState()) {
             return;
         }
