@@ -6,7 +6,7 @@ export interface CommonLiveEngage {
 
   setUserProfileValues(chatProfile: ChatProfile): void;
 
-  registerPushToken(token: any): void;
+  registerPushToken(token: any, delegate: any): void;
 
   unregisterPushToken(): void;
 
