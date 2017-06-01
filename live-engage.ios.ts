@@ -45,7 +45,7 @@ export class LiveEngage implements CommonLiveEngage {
         const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(this.brandId);
         LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, null);
         this.setUserProfileValues(this.chatProfile);
-        this.registerPushToken(this.apnsToken, this.apnsDelegate)
+        this.registerPushToken(this.apnsToken, this.apnsDelegate);
     }
 
     public setUserProfileValues(chatProfile: ChatProfile): void {
