@@ -47,7 +47,7 @@ export class LiveEngage implements CommonLiveEngage {
                 com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, this.brandId, null);
                 const instance = that.get();
                 instance.setUserProfileValues(instance.chatProfile);
-                instance.registerPushToken(instance.gcmToken)
+                instance.registerPushToken(instance.gcmToken);
             },
             onInitFailed: (err: any) => {
                 console.error(err);
@@ -92,7 +92,7 @@ export class LiveEngage implements CommonLiveEngage {
         }
     }
 
-    public registerPushToken(token: any): void {
+    public registerPushToken(token: any, delegate?: any): void {
         this.gcmToken = token;
         if (!this.isValidState()) {
             return;
@@ -107,7 +107,7 @@ export class LiveEngage implements CommonLiveEngage {
         com.liveperson.messaging.MessagingFactory.getInstance().getController().unregisterPusher(this.brandId, this.appId, null, false);
     }
 
-    public handlePushMessage(data: any, image: any, showNotification: boolean): void {
+    public handlePushMessage(data: any, image?: any, showNotification?: boolean): void {
         if (!this.isValidState()) {
             return;
         }

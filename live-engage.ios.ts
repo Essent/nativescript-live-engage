@@ -9,6 +9,8 @@ export class LiveEngage implements CommonLiveEngage {
     private brandId: string;
     private appId: string;
     private chatProfile: ChatProfile;
+    private apnsToken: any;
+    private apnsDelegate: any;
 
     constructor() {
         if (LiveEngage.instance) {
@@ -43,6 +45,7 @@ export class LiveEngage implements CommonLiveEngage {
         const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(this.brandId);
         LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, null);
         this.setUserProfileValues(this.chatProfile);
+        this.registerPushToken(this.apnsToken, this.apnsDelegate);
     }
 
     public setUserProfileValues(chatProfile: ChatProfile): void {
@@ -63,15 +66,21 @@ export class LiveEngage implements CommonLiveEngage {
         LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
     }
 
-    public registerPushToken(token: any): void {
-        LPMessagingSDK.instance.registerPushNotificationsWithTokenNotificationDelegateAlternateBundleID(token, null, null);
+    public registerPushToken(token: any, delegate?: any): void {
+        this.apnsToken = token;
+        this.apnsDelegate = delegate;
+        if (!this.appId || !token) {
+            return;
+        }
+
+        LPMessagingSDK.instance.registerPushNotificationsWithTokenNotificationDelegateAlternateBundleID(token, this.apnsDelegate, this.appId);
     }
 
     public unregisterPushToken(): void {
         // not available on iOS
     }
 
-    public handlePushMessage(data: any, image: any, showNotification: boolean): void {
+    public handlePushMessage(data: any, image?: any, showNotification?: boolean): void {
         LPMessagingSDK.instance.handlePush(data);
     }
 
