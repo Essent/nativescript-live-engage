@@ -4,8 +4,8 @@ import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 import { AppModule } from "./app.module";
 import { LiveEngage } from 'nativescript-live-engage';
 import * as application from "application";
-import { NsUrbanairship } from 'nativescript-urban-airship';
-import { urbanAirshipSettings } from './urbanAirshipSettings';
+// import { NsUrbanairship } from 'nativescript-urban-airship';
+// import { urbanAirshipSettings } from './urbanAirshipSettings';
 import { ios } from 'application';
 
 application.on(application.launchEvent, function (args: application.ApplicationEventData) {
@@ -16,14 +16,12 @@ application.on(application.launchEvent, function (args: application.ApplicationE
      */
     LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp');
 
-    if (ios) {
-        NsUrbanairship.getInstance().startUp(urbanAirshipSettings);
-    }
+    // NsUrbanairship.getInstance().startUp(urbanAirshipSettings);
 });
 
 application.on(application.resumeEvent, function (args: application.ApplicationEventData) {
     if (ios) {
-        NsUrbanairship.getInstance().resetBadgeCount();
+        // NsUrbanairship.getInstance().resetBadgeCount();
     }
 });
 
