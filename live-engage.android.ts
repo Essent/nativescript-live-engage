@@ -121,7 +121,6 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public killChat(): void {
-        console.log('LiveEngage start killChat');
         if (!this.brandId || !this.appId) {
             return;
         }
@@ -129,23 +128,16 @@ export class LiveEngage implements CommonLiveEngage {
         if (!this.isValidState()) {
             return;
         }
-        console.log('LiveEngage killChat second step');
 
         com.liveperson.messaging.MessagingFactory.getInstance().getController().resolveConversation(this.brandId, this.brandId);
-        console.log('LiveEngage resolveConversation done');
-
         const LogoutCallback: any = com.liveperson.infra.callbacks.LogoutLivePersonCallBack.extend({
-            onLogoutSucceed: () => {
-                console.log('LiveEngage onLogoutSucceed');
-            },
+            onLogoutSucceed: () => { },
             onLogoutFailed: (err: any) => {
-                console.log('LiveEngage onLogoutFailed');
                 console.error(err);
             }
         });
         const initProperties = new com.liveperson.infra.InitLivePersonProperties(this.brandId, this.appId, null);
         const ui = new com.liveperson.infra.messaging_ui.MessagingUiInitData(initProperties, this.getSDKVersion());
         com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().logout(application.android.context, ui, new LogoutCallback());
-        console.log('LiveEngage logout');
     }
 }
