@@ -1,7 +1,5 @@
 import { Component } from "@angular/core";
 import { LiveEngage, ChatProfile } from 'nativescript-live-engage';
-// import { NsUrbanairship } from 'nativescript-urban-airship';
-import { android } from 'application';
 
 @Component({
     selector: "ns-app",
@@ -11,8 +9,6 @@ import { android } from 'application';
 export class AppComponent {
 
     public constructor() {
-
-        // NsUrbanairship.getInstance().notificationOptIn();
     }
 
     public showChat(): void {
@@ -23,11 +19,6 @@ export class AppComponent {
             phone: '0132100000',
             avatarUrl: ''
         };
-
-        if (android) {
-            // const token = NsUrbanairship.getInstance().getRegistrationToken();
-            // LiveEngage.getInstance().registerPushToken(token);
-        }
 
         LiveEngage.getInstance().showChat();
         LiveEngage.getInstance().setUserProfileValues(chatProfile);
