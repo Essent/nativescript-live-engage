@@ -120,24 +120,29 @@ export class LiveEngage implements CommonLiveEngage {
         return new com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser(data);
     }
 
-    public killChat(): void {
-        if (!this.brandId || !this.appId) {
-            return;
-        }
-
-        if (!this.isValidState()) {
-            return;
-        }
-
-        com.liveperson.messaging.MessagingFactory.getInstance().getController().resolveConversation(this.brandId, this.brandId);
-        const LogoutCallback: any = com.liveperson.infra.callbacks.LogoutLivePersonCallBack.extend({
-            onLogoutSucceed: () => { },
-            onLogoutFailed: (err: any) => {
-                console.error(err);
+    public killChat(): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            if (!this.brandId || !this.appId) {
+                reject(new Error('brandId or appId missing'));
             }
+
+            if (!this.isValidState()) {
+                reject(new Error('isValidState false'));
+            }
+
+            com.liveperson.messaging.MessagingFactory.getInstance().getController().resolveConversation(this.brandId, this.brandId);
+            const LogoutCallback: any = com.liveperson.infra.callbacks.LogoutLivePersonCallBack.extend({
+                onLogoutSucceed: () => {
+                    resolve(true);
+                },
+                onLogoutFailed: (err: any) => {
+                    console.error(err);
+                    reject(err);
+                }
+            });
+            const initProperties = new com.liveperson.infra.InitLivePersonProperties(this.brandId, this.appId, null);
+            const ui = new com.liveperson.infra.messaging_ui.MessagingUiInitData(initProperties, this.getSDKVersion());
+            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().logout(application.android.context, ui, new LogoutCallback());
         });
-        const initProperties = new com.liveperson.infra.InitLivePersonProperties(this.brandId, this.appId, null);
-        const ui = new com.liveperson.infra.messaging_ui.MessagingUiInitData(initProperties, this.getSDKVersion());
-        com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().logout(application.android.context, ui, new LogoutCallback());
     }
 }

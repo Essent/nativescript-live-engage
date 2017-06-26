@@ -6,7 +6,7 @@ export interface CommonLiveEngage {
     unregisterPushToken(): void;
     handlePushMessage(data: any, image?: any, showNotification?: boolean): void;
     parsePushMessage(data: any): any;
-    killChat(): void;
+    killChat(): Promise<boolean>;
 }
 export interface ChatProfile {
     firstName: string;
