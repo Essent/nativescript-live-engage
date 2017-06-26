@@ -88,4 +88,11 @@ export class LiveEngage implements CommonLiveEngage {
         // not available on iOS
         return;
     }
+
+    public killChat(): Promise<boolean> {
+        return new Promise((resolve) => {
+            LPMessagingSDK.instance.logout();
+            resolve(true);
+        });
+    }
 }

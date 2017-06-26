@@ -4,6 +4,11 @@
                 ios.position="right"
                 android.position="actionBar">
     </ActionItem>
+    <ActionItem (tap)="killChat()"
+                text="Stop"
+                ios.position="right"
+                android.position="actionBar">
+    </ActionItem>
 </ActionBar>
 <TabView>
     <StackLayout *tabItem="{ title: 'Chat' }">

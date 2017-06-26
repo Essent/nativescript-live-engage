@@ -88,6 +88,6 @@ To try the demo run the following commands:
 
 ```sh
 npm run setup
-npm run demo.ios
-npm run demo.android
+npm run dev.ios
+npm run dev.android
 ```

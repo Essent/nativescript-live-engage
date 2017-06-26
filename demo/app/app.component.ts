@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { LiveEngage, ChatProfile } from 'nativescript-live-engage';
-import { NsUrbanairship } from 'nativescript-urban-airship';
+// import { NsUrbanairship } from 'nativescript-urban-airship';
 import { android } from 'application';
 
 @Component({
@@ -12,7 +12,7 @@ export class AppComponent {
 
     public constructor() {
 
-        NsUrbanairship.getInstance().notificationOptIn();
+        // NsUrbanairship.getInstance().notificationOptIn();
     }
 
     public showChat(): void {
@@ -25,11 +25,20 @@ export class AppComponent {
         };
 
         if (android) {
-            const token = NsUrbanairship.getInstance().getRegistrationToken();
-            LiveEngage.getInstance().registerPushToken(token);
+            // const token = NsUrbanairship.getInstance().getRegistrationToken();
+            // LiveEngage.getInstance().registerPushToken(token);
         }
 
         LiveEngage.getInstance().showChat();
         LiveEngage.getInstance().setUserProfileValues(chatProfile);
+    }
+
+    public killChat(): void {
+        LiveEngage.getInstance().killChat()
+            .then(() => {
+                console.log('killChat success');
+            }).catch((error: any) => {
+                console.log('killChat error: ', error);
+        });
     }
 }

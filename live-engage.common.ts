@@ -13,6 +13,8 @@ export interface CommonLiveEngage {
   handlePushMessage(data: any, image?: any, showNotification?: boolean): void;
 
   parsePushMessage(data: any): any;
+
+  killChat(): Promise<boolean>;
 }
 
 export interface ChatProfile {
