@@ -1,6 +1,4 @@
 import {setActivityCallbacks, AndroidActivityCallbacks} from "ui/frame";
-// import { urbanAirshipSettings } from './urbanAirshipSettings';
-import * as application from 'application';
 
 declare const com: any;
 
@@ -14,17 +12,6 @@ class Activity extends android.support.v7.app.AppCompatActivity {
         }
 
         this._callbacks.onCreate(this, savedInstanceState, super.onCreate);
-
-        // const options = new com.urbanairship.AirshipConfigOptions.Builder()
-        //     .setDevelopmentAppKey(urbanAirshipSettings.developmentAppKey)
-        //     .setDevelopmentAppSecret(urbanAirshipSettings.developmentAppSecret)
-        //     .setProductionAppKey(urbanAirshipSettings.productionAppKey)
-        //     .setProductionAppSecret(urbanAirshipSettings.productionAppSecret)
-        //     .setInProduction(urbanAirshipSettings.inProduction)
-        //     .setGcmSender(urbanAirshipSettings.gcmSender)
-        //     .build();
-        //
-        // com.urbanairship.UAirship.takeOff(application.android.context, options);
     }
 
     protected onSaveInstanceState(outState: android.os.Bundle): void {
