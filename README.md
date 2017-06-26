@@ -81,6 +81,24 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
   LiveEngage.getInstance().setUserProfileValues(chatProfile);
   ```
 
+#### Logging Out
+When you want to remove all user data and unregister for push notifications call `killChat()`.
+
+```ts
+LiveEngage.getInstance().killChat()
+            .then(() => {
+                console.log('killChat success');
+            }).catch((error: any) => {
+                console.log('killChat error', error);
+        });
+```
+
+#### Push Notifications
+To recieve push notifications when the agent sends a new message you need to send the push token to LivePerson.
+When you have a push token (GCM for Android and APNS for iOS) you can send it to LivePerson using `registerPushToken`
+```ts
+LiveEngage.getInstance().registerPushToken('your-token');
+```
 
 # Try the Demo
 
