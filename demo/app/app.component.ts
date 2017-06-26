@@ -34,6 +34,11 @@ export class AppComponent {
     }
 
     public killChat(): void {
-        LiveEngage.getInstance().killChat();
+        LiveEngage.getInstance().killChat()
+            .then(() => {
+                console.log('killChat success');
+            }).catch((error: any) => {
+                console.log('killChat error: ', error);
+        });
     }
 }
