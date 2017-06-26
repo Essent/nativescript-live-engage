@@ -81,6 +81,36 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
   LiveEngage.getInstance().setUserProfileValues(chatProfile);
   ```
 
+### Logging Out
+When you want to remove all user data and unregister for push notifications call `killChat()`.
+
+```ts
+LiveEngage.getInstance().killChat()
+            .then(() => {
+                console.log('killChat success');
+            }).catch((error: any) => {
+                console.log('killChat error', error);
+        });
+```
+
+### Push Notifications
+To recieve push notifications when the agent sends a new message you need to send the push token to LivePerson.
+When you have a push token (GCM for Android and APNS for iOS) you can send it to LivePerson using `registerPushToken`
+```ts
+LiveEngage.getInstance().registerPushToken('your-token');
+```
+
+#### Parsing message on Android
+To parse the push notification message on android in `onMessageReceived()` in your GcmListenerService, use `parsePushMessage()`.
+This will return a `PushMessageParser` object which has the method `getMessage()` to return the title of the push message.
+```ts
+try {
+    const message = LiveEngage.getInstance().parsePushMessage(data);
+    console.log(message.getMessage());
+} catch (e) {
+    console.error("Failed to parse message:", e);
+}
+```
 
 # Try the Demo
 
