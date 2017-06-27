@@ -6,6 +6,7 @@ declare const LPUser: any;
 export class LiveEngage implements CommonLiveEngage {
 
     private static instance: LiveEngage = new LiveEngage();
+    private authCode: string;
     private brandId: string;
     private appId: string;
     private chatProfile: ChatProfile;
@@ -43,7 +44,7 @@ export class LiveEngage implements CommonLiveEngage {
         }
 
         const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(this.brandId);
-        LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, null, null);
+        LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, this.authCode, null);
         this.setUserProfileValues(this.chatProfile);
         this.registerPushToken(this.apnsToken, this.apnsDelegate);
     }
@@ -68,6 +69,10 @@ export class LiveEngage implements CommonLiveEngage {
             chatProfile.phone,
             "");
         LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
+    }
+
+    public setAuthenticationCode(authCode){
+        this.authCode = authCode;
     }
 
     public registerPushToken(token: any, delegate?: any): void {

@@ -80,6 +80,11 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
           };
   LiveEngage.getInstance().setUserProfileValues(chatProfile);
   ```
+7. Optional: Add a JWT token for oAuth support when starting a conversation. Make sure you configure the Live Person data source to support the oAuth 2 authentication in terms of Live person public keys, Signing identities and possible (custom) claims definitions. Make sure to call this method before you start the conversation.
+
+  ```
+  setAuthenticationCode('<JWT encoded token string>');
+  ```
 
 ### Hiding chat
 When you want to hide the chat window programmatically call `closeChat()`.

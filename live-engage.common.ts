@@ -8,6 +8,8 @@ export interface CommonLiveEngage {
 
   setUserProfileValues(chatProfile: ChatProfile): void;
 
+  setAuthenticationCode(authCode: string): void;
+
   registerPushToken(token: any, delegate?: any): void;
 
   unregisterPushToken(): void;

@@ -7,6 +7,7 @@ declare const android: any;
 export class LiveEngage implements CommonLiveEngage {
 
     private static instance: LiveEngage = new LiveEngage();
+    private authCode: string;
     private brandId: string;
     private appId: string;
     private chatProfile: ChatProfile;
@@ -44,7 +45,7 @@ export class LiveEngage implements CommonLiveEngage {
         const that = new WeakRef<LiveEngage>(this);
         const Callback: any = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
             onInitSucceed: () => {
-                com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, this.brandId, null);
+                com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, this.brandId, this.authCode);
                 const instance = that.get();
                 instance.setUserProfileValues(instance.chatProfile);
                 instance.registerPushToken(instance.gcmToken);
@@ -97,6 +98,10 @@ export class LiveEngage implements CommonLiveEngage {
                 .build();
             com.liveperson.messaging.MessagingFactory.getInstance().getController().sendUserProfile(this.brandId, userProfile);
         }
+    }
+
+    public setAuthenticationCode(authCode: string){
+        this.authCode = authCode;
     }
 
     public registerPushToken(token: any, delegate?: any): void {
