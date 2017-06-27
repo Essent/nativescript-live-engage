@@ -130,6 +130,7 @@ To try the demo run the following commands:
 
 ```sh
 npm run setup
+npm run build.demo
 npm run dev.ios
 npm run dev.android
 ```
