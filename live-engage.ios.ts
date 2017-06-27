@@ -48,6 +48,10 @@ export class LiveEngage implements CommonLiveEngage {
         this.registerPushToken(this.apnsToken, this.apnsDelegate);
     }
 
+    public closeChat(): void {
+        LPMessagingSDK.instance.removeConversation(null);
+    }
+
     public setUserProfileValues(chatProfile: ChatProfile): void {
         this.chatProfile = chatProfile;
 

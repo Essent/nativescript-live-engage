@@ -11,6 +11,7 @@ export declare class LiveEngage implements CommonLiveEngage {
     private getSDKVersion();
     private isValidState();
     showChat(): void;
+    closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
     registerPushToken(token: any, delegate?: any): void;
     unregisterPushToken(): void;

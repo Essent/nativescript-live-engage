@@ -4,6 +4,8 @@ export interface CommonLiveEngage {
 
   showChat(): void;
 
+  closeChat(): void;
+
   setUserProfileValues(chatProfile: ChatProfile): void;
 
   registerPushToken(token: any, delegate?: any): void;
