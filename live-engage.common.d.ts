@@ -1,6 +1,7 @@
 export interface CommonLiveEngage {
     initializeChat(brandId: string, appId: string): void;
     showChat(): void;
+    closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
     setAuthenticationCode(authCode: string): void;
     registerPushToken(token: any, delegate?: any): void;

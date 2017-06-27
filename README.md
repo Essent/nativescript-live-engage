@@ -85,6 +85,14 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
   ```
   setAuthenticationCode('<JWT encoded token string>');
   ```
+
+### Hiding chat
+When you want to hide the chat window programmatically call `closeChat()`.
+
+```ts
+LiveEngage.getInstance().closeChat();
+```
+
 ### Logging Out
 When you want to remove all user data and unregister for push notifications call `killChat()`.
 

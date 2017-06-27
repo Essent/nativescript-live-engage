@@ -74,6 +74,13 @@ export class LiveEngage implements CommonLiveEngage {
         }
     }
 
+    public closeChat(): void {
+        if (!this.isValidState()) {
+            return;
+        }
+        com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().hideConversation(application.android.foregroundActivity);
+    }
+
     public setUserProfileValues(chatProfile: ChatProfile): void {
         this.chatProfile = chatProfile;
 
