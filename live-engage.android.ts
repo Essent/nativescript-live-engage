@@ -78,7 +78,11 @@ export class LiveEngage implements CommonLiveEngage {
         if (!this.isValidState()) {
             return;
         }
-        com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().hideConversation(application.android.foregroundActivity);
+
+        // only try hideConversation() if foregroundActivity is a ConversationActivity or it will crash
+        if(application.android.foregroundActivity instanceof com.liveperson.infra.messaging_ui.ConversationActivity) {
+            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().hideConversation(application.android.foregroundActivity);
+        }
     }
 
     public setUserProfileValues(chatProfile: ChatProfile): void {
