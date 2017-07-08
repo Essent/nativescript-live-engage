@@ -101,6 +101,11 @@ Take a look at these existing plugins for how that can be done very simply:
 * [nativescript-cardview](https://github.com/bradmartin/nativescript-cardview/tree/master/platforms)
 * [nativescript-floatingactionbutton](https://github.com/bradmartin/nativescript-floatingactionbutton/tree/master/platforms)
 
+### Clean plugin and demo files
+
+Sometimes you may need to wipe away the `node_modules` and `demo/platforms` folders to reinstall them fresh.
+
+1. Run `npm run clean` to wipe those clean then you can can run `npm i` to install fresh dependencies.
 
 ### <a name='Unittesting'></a>Unittesting
 The plugin seed automatically adds Jasmine-based unittest support to your plugin.
