@@ -156,14 +156,7 @@ describe('postclone', function () {
         var testsCommand = "cd " + constants.SEED_COPY_LOCATION + "/src && npm run test";
         testsCommand += testUtils.isAndroid() ? ".android" : ".ios";
         exec(testsCommand, function (error, stdout, stderr) {
-            if (testUtils.isAndroid()) {
-                // currently npm link does not work with tns test on android
-                // it this test fail we should assert that the tests are passing
-                expect(stderr).toContain("java.io.IOException: File already exists.");
-            } else {
                 expect(error).toBeNull();
-            }
-
             done();
         });
     });
