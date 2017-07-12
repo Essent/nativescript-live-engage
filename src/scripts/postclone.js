@@ -15,18 +15,25 @@ var class_name,
     seed_github_username = "YourName",
     demo_folder = "../demo",
     screenshots_dir = "../screenshots",
-    seed_tests_dir = "../seed-tests"
+    seed_tests_dir = "../seed-tests",
+    scripts_dir = "scripts",
     filesToReplace = {
-        readmeFile: { source: "README.md", destination: "../README.md"},
-        travisFile: { source: ".travis.yml", destination: "../.travis.yml"}
+        readmeFile: {
+            source: "README.md",
+            destination: "../README.md"
+        },
+        travisFile: {
+            source: ".travis.yml",
+            destination: "../.travis.yml"
+        }
     };
 
 console.log('NativeScript Plugin Seed Configuration');
 
-var parseArgv = function() {
+var parseArgv = function () {
     var argv = Array.prototype.slice.call(process.argv, 2);
     var result = {};
-    argv.forEach(function(pairString) {
+    argv.forEach(function (pairString) {
         var pair = pairString.split('=');
         result[pair[0]] = pair[1];
     });
@@ -50,7 +57,7 @@ function askGithubUsername() {
         prompt.get({
             name: 'github_username',
             description: 'What is your GitHub username (used for updating package.json)? Example: NathanWalker / EddyVerbruggen'
-        }, function(err, result) {
+        }, function (err, result) {
             if (err) {
                 return console.log(err);
             }
@@ -70,7 +77,7 @@ function askPluginName() {
         prompt.get({
             name: 'plugin_name',
             description: 'What will be the name of your plugin? Use lowercase characters and dashes only. Example: yourplugin / google-maps / bluetooth'
-        }, function(err, result) {
+        }, function (err, result) {
             if (err) {
                 return console.log(err);
             }
@@ -80,8 +87,8 @@ function askPluginName() {
 
             inputParams.plugin_name = result.plugin_name;
 
-            if(inputParams.plugin_name.startsWith("nativescript-")){
-               inputParams.plugin_name = inputParams.plugin_name.replace("nativescript-", "");
+            if (inputParams.plugin_name.startsWith("nativescript-")) {
+                inputParams.plugin_name = inputParams.plugin_name.replace("nativescript-", "");
             }
 
             generateClassName();
@@ -159,18 +166,21 @@ function adjustScripts() {
 }
 
 function replaceFiles() {
-
-    for(key in filesToReplace){
+    for (key in filesToReplace) {
         var file = filesToReplace[key];
         var contents = fs.readFileSync(file.source);
         fs.writeFileSync(file.destination, contents);
         fs.unlinkSync(file.source);
     }
 
-    rimraf(screenshots_dir, function() {
+    rimraf(screenshots_dir, function () {
         console.log('Screenshots removed.');
-        rimraf(seed_tests_dir, function() {
+        rimraf(seed_tests_dir, function () {
             console.log('Seed tests removed.');
+
+            // delete scripts folder
+            rimraf.sync(scripts_dir);
+
             askInitGit();
         });
     });
@@ -184,7 +194,7 @@ function askInitGit() {
             name: 'init_git',
             description: 'Do you want to init a fresh local git project? If you previously \'git clone\'d this repo that would be wise (y/n)',
             default: 'y'
-        }, function(err, result) {
+        }, function (err, result) {
             if (err) {
                 return console.log(err);
             }
@@ -198,12 +208,12 @@ function askInitGit() {
 function initGit() {
     if (inputParams.init_git && inputParams.init_git.toLowerCase() === 'y') {
         rimraf.sync('../.git');
-        exec('git init -q ..', function(err, stdout, stderr) {
+        exec('git init -q ..', function (err, stdout, stderr) {
             if (err) {
                 console.log(err);
                 finishSetup();
             } else {
-                exec("git add '../*' '../.*'", function(err, stdout, stderr) {
+                exec("git add '../*' '../.*'", function (err, stdout, stderr) {
                     if (err) {
                         console.log(err);
                     }
