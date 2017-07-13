@@ -105,7 +105,16 @@ Take a look at these existing plugins for how that can be done very simply:
 
 Sometimes you may need to wipe away the `node_modules` and `demo/platforms` folders to reinstall them fresh.
 
-1. Run `npm run clean` to wipe those clean then you can can run `npm i` to install fresh dependencies.
+* Run `npm run clean` to wipe those clean then you can can run `npm i` to install fresh dependencies.
+
+Sometimes you just need to wipe out the demo's `platforms` directory only:
+
+* Run `npm run demo.reset` to delete the demo's `platforms` directory only.
+
+Sometimes you may need to ensure plugin files are updated in the demo:
+
+* Run `npm run plugin.prepare` will do a fresh build of the plugin then remove itself from the demo and add it back for assurance.
+
 
 ### <a name='Unittesting'></a>Unittesting
 The plugin seed automatically adds Jasmine-based unittest support to your plugin.
