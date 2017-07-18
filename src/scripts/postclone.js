@@ -213,7 +213,7 @@ function initGit() {
                 console.log(err);
                 finishSetup();
             } else {
-                exec("git add '../*' '../.*'", function (err, stdout, stderr) {
+                exec("git add \"../*\" \"../.*\"", function (err, stdout, stderr) {
                     if (err) {
                         console.log(err);
                     }
