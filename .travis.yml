@@ -27,6 +27,6 @@ android:
     - sys-img-armeabi-v7a-android-21
 
 install:
-    - npm install -g nativescript
+    - echo no | npm install -g nativescript
     - cd seed-tests
     - npm i
