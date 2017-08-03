@@ -20,7 +20,7 @@
         "plugin.tscwatch": "npm run tsc -- -w",
         "demo.ios": "npm i && npm run tsc && cd ../demo && tns run ios --syncAllFiles",
         "demo.android": "npm i && npm run tsc && cd ../demo && tns run android --syncAllFiles",
-        "clean": "rm -rf node_modules && cd ../demo && rm -rf hooks node_modules platforms && cd ../src && npm run plugin.link"
+        "clean": "rimraf node_modules && cd ../demo && rimraf hooks node_modules platforms && cd ../src && npm run plugin.link"
     },
     "keywords": [
         "NativeScript",
