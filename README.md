@@ -13,6 +13,7 @@
 	* [Unittesting](#Unittesting)
 	* [Publish to NPM](#PublishtoNPM)
 	* [TravisCI](#TravisCI)
+	* [Referring tns-core-modules in the Plugin](#ReferringtnscoremodulesinthePlugin)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -136,3 +137,36 @@ If you just want to create a package, go to `publish` folder and execute `pack.s
 The plugin structure comes with fully functional .travis.yml file that deploys the testing app on Android emulator and iOS simulator and as a subsequent step runs the tests from [UnitTesting section](#Unittesting). All you have to do, after cloning the repo and implementing your plugin and tests, is to sign up at [https://travis-ci.org/](https://travis-ci.org/). Then enable your plugin's repo on "https://travis-ci.org/profile/<your github user\>" and that's it. Next time a PR is opened or change is commited to a branch TravisCI will trigger a build testing the code.
 
 To properly show current build status you will have to edit the badge at the start of the README.md file so it matches your repo, user and branch. 
+
+### <a name='ReferringtnscoremodulesinthePlugin'></a>Referring tns-core-modules in the Plugin
+We recommend to use full imports of `tns-core-modules` due to [an issue in Angular CLI](https://github.com/angular/angular-cli/issues/5618#issuecomment-306479219). Read more detailed explanation in [this discussion](https://github.com/NativeScript/nativescript-plugin-seed/pull/32#discussion_r131147787).
+
+Ultimately after the issue in Angular CLI is fixed this would not be a restriction, but till then the recommended approach is to import from `tns-core-modules` using full path. Here is an example:
+
+**WRONG**
+
+*tsconfig.json*
+````
+...
+
+"paths": {
+  "*": [
+    "./node_modules/*",
+    "./node_modules/tns-core-modules/*"
+  ]
+}
+...
+````
+
+*yourplugin.common.ts*
+````
+import * as app from 'application';
+````
+
+**RIGHT**
+
+*yourplugin.common.ts*
+````
+import * as app from 'tns-core-modules/application';
+````
+
