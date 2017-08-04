@@ -10,11 +10,56 @@ matrix:
       before_install:
         - nvm install stable
       script: npm run test.android
+      dist: precise
     - os: osx
       language: node_js
       node_js: "6"
       jdk: oraclejdk8
       osx_image: xcode8.3
+      script: npm run test.ios
+    - os: linux
+      language: android
+      env:
+        - Version="next"
+      jdk: oraclejdk8
+      before_install:
+        - nvm install 6.10.3
+        - npm install npm@latest -g
+      install:
+        - echo no | npm install -g nativescript@next
+        - tns usage-reporting disable
+        - tns error-reporting disable
+        - cd src
+        - npm uninstall tns-core-modules -D && npm install tns-core-modules@next -D
+        - cd ../demo
+        - npm uninstall tns-core-modules -S && npm install tns-core-modules@next -S
+        - tns platform add android@next
+      before_script:
+        - echo no | android create avd --force -n test -t android-21 -b armeabi-v7a
+        - emulator -avd test -no-audio -no-window &
+        - android-wait-for-emulator
+        - cd ../seed-tests && npm i
+      script: npm run test.android
+      dist: precise
+    - os: osx
+      env:
+        - Version="next"
+      language: node_js
+      node_js: "6"
+      jdk: oraclejdk8
+      osx_image: xcode8.3
+      install:
+        - npm install npm@latest -g
+        - echo no | npm install -g nativescript@next
+        - tns usage-reporting disable
+        - tns error-reporting disable
+        - cd src
+        - npm uninstall tns-core-modules -D && npm install tns-core-modules@next -D
+        - cd ../demo
+        - npm uninstall tns-core-modules -S && npm install tns-core-modules@next -S
+        - tns platform add ios@next
+      before_script:
+        - cd ../seed-tests && npm i
       script: npm run test.ios
 
 android:
@@ -27,6 +72,8 @@ android:
     - sys-img-armeabi-v7a-android-21
 
 install:
-    - npm install -g nativescript
+    - echo no | npm install -g nativescript
+    - tns usage-reporting disable
+    - tns error-reporting disable
     - cd seed-tests
     - npm i
