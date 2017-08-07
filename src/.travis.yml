@@ -26,6 +26,8 @@ matrix:
         - cd src && npm i && npm run tsc && cd ../demo && tns build ios
     - os: linux
       language: android
+      dist: precise
+      sudo: required
       jdk: oraclejdk8
       before_script:
         - echo no | android create avd --force -n test -t android-21 -b armeabi-v7a
@@ -54,4 +56,3 @@ install:
     - npm install -g nativescript
     - tns usage-reporting disable
     - tns error-reporting disable
-    - cd src
