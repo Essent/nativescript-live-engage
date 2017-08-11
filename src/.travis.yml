@@ -14,6 +14,7 @@ matrix:
       node_js: "6"
       jdk: oraclejdk8
       script: cd demo && npm run build.plugin && npm i && npm run build-ios-bundle
+    - language: android
       os: linux
       env:
         - Platform="Android"
