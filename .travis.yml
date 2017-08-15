@@ -89,7 +89,7 @@ matrix:
         - npm uninstall tns-platform-declarations -D && npm install tns-platform-declarations@next -D
         - cd ../demo
         - npm uninstall tns-core-modules -S && npm install tns-core-modules@next -S
-        - npm uninstall tns-platform-declarations -D && npm install tns-platform-declarations@next -D -save-dev
+        - npm uninstall tns-platform-declarations -D && npm install tns-platform-declarations@next -D
         - tns platform add ios@next
       before_script:
         - cd ../seed-tests && npm i
