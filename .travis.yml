@@ -86,8 +86,10 @@ matrix:
         - tns error-reporting disable
         - cd src
         - npm uninstall tns-core-modules -D && npm install tns-core-modules@next -D
+        - npm uninstall tns-platform-declarations -D && npm install tns-platform-declarations@next -D
         - cd ../demo
         - npm uninstall tns-core-modules -S && npm install tns-core-modules@next -S
+        - npm uninstall tns-platform-declarations -D && npm install tns-platform-declarations@next -D
         - tns platform add ios@next
       before_script:
         - cd ../seed-tests && npm i
