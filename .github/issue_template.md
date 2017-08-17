@@ -1,13 +1,14 @@
-### Make sure to check the demo apps in this repository for sample usage
+### Make sure to check the demo app(s) for sample usage 
 
-### If the demo apps cannot help, tell us about the problem
+### Make sure to check the existing issues in this repository 
+
+### If the demo apps cannot help and there is no issue for your problem, tell us about the problem
 Please, ensure your title is less than 63 characters long and starts with a capital
 letter.
 
 ### Which platform(s) does your issue occur on?
 - iOS/Android/Both 
-- IOS version 
-- Android version
+- iOS/Android versions 
 - emulator or device. What type of device?
 
 ### Please, provide the following version numbers that your issue occurs with:
@@ -24,4 +25,4 @@ Describe the steps to reproduce it.
 
 ### Is there any code involved? 
  - provide a code example to recreate the problem 
- - (OR BETTER) provide a .zip with application or refer to a repo with application where the problem is reproducable.
+ - (EVEN BETTER) provide a .zip with application or refer to a repository with application where the problem is reproducable.
