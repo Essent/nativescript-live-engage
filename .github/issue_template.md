@@ -2,7 +2,7 @@
 
 ### Make sure to check the existing issues in this repository 
 
-### If the demo apps cannot help and there is no issue for your problem, tell us about the problem
+### If the demo apps cannot help and there is no issue for your problem, tell us about it
 Please, ensure your title is less than 63 characters long and starts with a capital
 letter.
 
