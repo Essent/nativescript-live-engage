@@ -25,4 +25,4 @@ Describe the steps to reproduce it.
 
 ### Is there any code involved? 
  - provide a code example to recreate the problem 
- - (EVEN BETTER) provide a .zip with application or refer to a repository with application where the problem is reproducable.
+ - (EVEN BETTER) provide a .zip with application or refer to a repository with application where the problem is reproducible.
