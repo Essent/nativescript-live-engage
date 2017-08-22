@@ -1,6 +1,3 @@
-branches:
-  only: 
-    - master
 matrix:
   include:
     - stage: "Lint"
@@ -8,6 +5,22 @@ matrix:
       os: linux
       node_js: "6"
       script: cd src && npm run ci.tslint && cd ../demo && npm run ci.tslint
+    - stage: "WebPack"
+      os: osx
+      env:
+        - Platform="iOS"
+      osx_image: xcode8.3
+      language: node_js 
+      node_js: "6"
+      jdk: oraclejdk8
+      script: cd demo && npm run build.plugin && npm i && npm run build-ios-bundle
+    - language: android
+      os: linux
+      env:
+        - Platform="Android"
+      jdk: oraclejdk8
+      before_install: nvm install 6.10.3
+      script: cd demo && npm run build.plugin && npm i && npm run build-android-bundle
     - stage: "Build and Test"
       env: 
         - BuildAndroid="25"
@@ -29,74 +42,22 @@ matrix:
         - cd src && npm i && npm run tsc && cd ../demo && tns build ios
     - os: linux
       language: android
-      env:
-        - TestVersion="latest"
-      jdk: oraclejdk8
-      before_install:
-        - nvm install stable
-      before_script:
-        - cd seed-tests && npm i
-        - echo no | android create avd --force -n test -t android-21 -b armeabi-v7a
-        - emulator -avd test -no-audio -no-window &
-        - android-wait-for-emulator
-      script: npm run test.android
       dist: precise
-    - os: osx
-      env:
-        - TestVersion="latest"
-      language: node_js
-      node_js: "6"
+      sudo: required
       jdk: oraclejdk8
-      osx_image: xcode8.3
-      before_script:
-        - cd seed-tests && npm i
-      script: npm run test.ios
-    - os: linux
-      language: android
-      env:
-        - TestVersion="next"
-      jdk: oraclejdk8
-      before_install:
-        - nvm install 6.10.3
-        - npm install npm@latest -g
-      install:
-        - echo no | npm install -g nativescript@next
-        - tns usage-reporting disable
-        - tns error-reporting disable
-        - cd src
-        - npm uninstall tns-core-modules -D && npm install tns-core-modules@next -D
-        - cd ../demo
-        - npm uninstall tns-core-modules -S && npm install tns-core-modules@next -S
-        - tns platform add android@next
       before_script:
         - echo no | android create avd --force -n test -t android-21 -b armeabi-v7a
         - emulator -avd test -no-audio -no-window &
         - android-wait-for-emulator
-        - cd ../seed-tests && npm i
-      script: npm run test.android
-      dist: precise
+      before_install:
+        - nvm install 6
+      script: cd src && npm run test.android
     - os: osx
-      env:
-        - TestVersion="next"
       language: node_js
       node_js: "6"
       jdk: oraclejdk8
       osx_image: xcode8.3
-      install:
-        - npm install npm@latest -g
-        - echo no | npm install -g nativescript@next
-        - tns usage-reporting disable
-        - tns error-reporting disable
-        - cd src
-        - npm uninstall tns-core-modules -D && npm install tns-core-modules@next -D
-        - npm uninstall tns-platform-declarations -D && npm install tns-platform-declarations@next -D
-        - cd ../demo
-        - npm uninstall tns-core-modules -S && npm install tns-core-modules@next -S
-        - npm uninstall tns-platform-declarations -D && npm install tns-platform-declarations@next -D
-        - tns platform add ios@next
-      before_script:
-        - cd ../seed-tests && npm i
-      script: npm run test.ios
+      script: cd src && npm run test.ios
 
 android:
   components:
@@ -111,4 +72,3 @@ install:
     - echo no | npm install -g nativescript
     - tns usage-reporting disable
     - tns error-reporting disable
-    

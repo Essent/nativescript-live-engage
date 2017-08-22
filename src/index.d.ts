@@ -1,6 +1,8 @@
-import { Common } from './yourplugin.common';
-export declare class YourPlugin extends Common {
-  // define your typings manually
-  // or..
-  // take the ios or android .d.ts files and copy/paste them here
-}
+/**
+ * iOS and Android apis should match.
+ * It doesn't matter if you export `.ios` or `.android`, either one but only one.
+ */
+export * from './live-engage.ios';
+
+// Export any shared classes, constants, etc.
+export * from './live-engage.common';

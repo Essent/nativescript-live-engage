@@ -2,8 +2,8 @@
 
 android {
 	productFlavors {
-		"nativescript-yourplugin" {
-			dimension "nativescript-yourplugin"
+		"nativescript-live-engage" {
+			dimension "nativescript-live-engage"
 		}
 	}
 }

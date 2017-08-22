@@ -1,179 +1,136 @@
-# Develop a NativeScript plugin [![Build Status](https://travis-ci.org/NativeScript/nativescript-plugin-seed.svg?branch=master)](https://travis-ci.org/NativeScript/nativescript-plugin-seed)
+# NativeScript plugin for LivePerson LiveEngage
 
-> This repo is heavily based on [@NathanWalker](https://github.com/NathanWalker)'s [Plugin Seed](https://github.com/NathanWalker/nativescript-plugin-seed). Thanks, Nathan!
+[![npm version](https://img.shields.io/npm/v/nativescript-live-engage.svg?style=flat-square)](https://www.npmjs.com/package/nativescript-live-engage)
+[![Dependency Status](https://img.shields.io/david/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage)
+[![devDependency Status](https://img.shields.io/david/dev/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage#info=devDependencies)
 
-<!-- vscode-markdown-toc -->
-* [TL;DR](#TLDR)
-* [Long Description](#LongDescription)
-	* [What is NativeScript plugin seed?](#WhatisNativeScriptpluginseed)
-	* [Plugin folder structure](#Pluginfolderstructure)
-	* [Getting started](#Gettingstarted)
-		* [Development setup](#Developmentsetup)
-	* [Linking to CocoaPod or Android Arsenal plugins](#LinkingtoCocoaPodorAndroidArsenalplugins)
-	* [Unittesting](#Unittesting)
-	* [Publish to NPM](#PublishtoNPM)
-	* [TravisCI](#TravisCI)
-	* [Referring tns-core-modules in the Plugin](#ReferringtnscoremodulesinthePlugin)
+This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v2.1.4, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v2.1.2).
+To use this plugin you need to have an account from [LivePerson](https://www.liveperson.com).
 
-<!-- vscode-markdown-toc-config
-	numbering=false
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->
+### Successfully Tested with the following configurations
+> test case
+- tns cli version 2.4.0
+- tns-core-modules 2.3.0
+- android 2.3.0
+- ios 2.3.0
 
-## <a name='TLDR'></a>TL;DR
-The NativeScript plugin seed is built to be used as a starting point by NativeScript plugin developers. To bootstrap your plugin development execute the following:
+> test case
+- tns cli version 2.5.0
+- tns-core-modules 2.4.0
+- android 2.4.1
+- ios 2.4.0
 
-1. `git clone https://github.com/NativeScript/nativescript-plugin-seed nativescript-yourplugin` where `nativescript--yourplugin` is the name of your plugin.
-2. `cd nativescript-yourplugin/src`
-3. `npm run postclone`
-4. `npm run demo.ios` or `npm run demo.android` to run the demo.
-5. In another command prompt/terminal `npm run plugin.tscwatch` to watch typescript changes in the plugin and to automatically apply them in the demo.
+> test case
+- tns cli version 2.5.0
+- tns-core-modules 2.5.0
+- android 2.5.0
+- ios 2.5.0
 
-## <a name='LongDescription'></a>Long Description
+# Usage
 
-### <a name='WhatisNativeScriptpluginseed'></a>What is NativeScript plugin seed?
+## Demo
 
-The NativeScript plugin seed is built to be used as a starting point by NativeScript plugin developers. It expands on several things [presented here](http://developer.telerik.com/featured/creating-nativescript-plugins-in-typescript/).
-What does the seed give you out of the box?
-* the plugin structure with option for easy development and debugging (see [Development setup section](#Developmentsetup) below)
-* a simple working plugin
-* a demo project working with the plugin. It is useful during development and for running tests via Travis CI
-* plugin tests
-* a guideline how to structure your plugin README file that will be published to NPM
-* a shell script to create your plugin package
-* a proper `.gitignore` to keep GitHub tidy 
-* a proper `.npmignore` to ensure everyone is happy when you publish your plugin to NPM.
+Check out the [demo](./demo) folder for a sample usage.
 
-![Plugin seed demo](https://github.com/NativeScript/nativescript-plugin-seed/blob/master/screenshots/demo.png?raw=true)
+## Angular 2
 
-### <a name='Pluginfolderstructure'></a>Plugin folder structure 
+Usage:
 
-|Folder/File name| Description
-|---|---|
-|demo| The plugin demo source code|
-|demo/tests| The tests for your plugin|
-|src| The plugin source code|
-|src/platform/android| Plugin Android specific configuration|
-|src/platform/ios|Plugin ios specific configuration|
-|src/README|Your plugin README stub explaining how other developers can use your plugin in their applications. Used when you publish your plugin to NPM. On postclone step, the README in the root is replaced with this one.|
-|src/scripts|The postclone script run when you execute `npm run postclone`. Feel free to delete it after you have executed the postclone step from the [Getting started](#Gettingstarted) section|
-|publish|Contains a shell script to create and publish your package. Read more on creating a package and publishing in the [Publish to NPM](#Publishtonpm) section|
+1. Add the plugin to your project:
 
-### <a name='Gettingstarted'></a>Getting started
+  ```ts
+  tns plugin add nativescript-live-engage
+  ```
 
-1. Open a command prompt/terminal and execute `git clone https://github.com/NativeScript/nativescript-plugin-seed nativescript-yourplugin` to clone the plugin seed repository into the `nativescript-yourplugin` folder  where `nativescript--yourplugin` is the name of your plugin..
-2. Open a command prompt/terminal and navigate to `nativescript-yourplugin/src` folder using `cd nativescript-yourplugin/src`
-3. Execute `npm run postclone` to:
-    * configure your github username - it will be changed in the package.json for you
-    * configure your plugin name - all files and classes in the seed will be renamed for you
-    * stub your plugin README.md file
-    * create a new repository for your plugin
-    * npm link your plugin the demo app - this will install the plugin dependencies and will add a symbolic link to the plugin code in the demo project allowing you to do changes and review them in the demo without adding/removing the plugin every time you make a change. [Read more about npm link](https://docs.npmjs.com/cli/link). If you encounter an "EACCES" permission denied error, please fix you global npm permissions, which is perfectly explained [here](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+2. At the launch of your app call `initializeChat` with your credentials (our example [main.ts](./demo/app/main.ts)):
 
-Now you can continue with the development of your plugin by using the [Development setup](#Developmentsetup) described below.
+  ```ts
+  LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp');
+  ```
 
-#### <a name='Developmentsetup'></a>Development setup
-For easier development and debugging purposes continue with the following steps:
+4. To open the chat window call `showChat`:
+```ts
+  LiveEngage.getInstance().showChat();
+  ```
 
-1. Open a command prompt/terminal, navigate to `src` folder and run `npm run demo.ios` or `npm run demo.android` to run the demo.
-2. Open another command prompt/terminal, navigate to `src` folder and run `npm run plugin.tscwatch` to watch for file changes in your plugin.
+5. For Android:
+Make sure the main activity in your AndroidManifest extends `android.support.v7.app.AppCompatActivity`, check out our [main activity](./demo/app/activity.android.ts) as an example.
 
-Now go and make a change to your plugin. It will be automatically applied to the demo project.
+    Include the following dependencies in the include.gradle file of your app:
+```html
+  compile "com.android.support:appcompat-v7:24.2.1"
+  compile "com.android.support:design:24.2.1"
+  compile "com.android.support:percent:24.2.1"
+  compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
-NOTE: If you need to use a native library in your plugin or do some changes in Info.plist/AndroidManifest.xml, these cannot be applied to the demo project only by npm link. In such scenario, you need to use `tns plugin add ../src` from the `demo` so that the native libraries and changes in the above-mentioned files are applied in the demo. Then you can link again the code of your plugin in the demo by using `npm run plugin.link` from the `src`.
+  compile 'com.squareup.picasso:picasso:2.5.2'
+  compile 'com.neovisionaries:nv-websocket-client:1.31'
+  compile 'com.squareup.okhttp3:okhttp:3.6.0'
+  ```
 
-### <a name='LinkingtoCocoaPodorAndroidArsenalplugins'></a>Linking to CocoaPod or Android Arsenal plugins
+6. Optional: Add the first name, last name, nick name, avatar url or phone number of a user.
 
-You will want to create these folders and files in the `src` folder in order to use native APIs:
+  ```html
+  const chatProfile: ChatProfile = {
+              firstName: 'Jane',
+              lastName: 'Doe',
+              nickName: 'JD',
+              phone: '0132100000',
+              avatarUrl: ''
+          };
+  LiveEngage.getInstance().setUserProfileValues(chatProfile);
+  ```
+7. Optional: Add a JWT token for oAuth support when starting a conversation. Make sure you configure the Live Person data source to support the oAuth 2 authentication in terms of Live person public keys, Signing identities and possible (custom) claims definitions. Make sure to call this method before you start the conversation.
 
-```
-platforms --
-  ios --
-    Podfile
-  android --
-    include.gradle
+  ```
+  setAuthenticationCode('<JWT encoded token string>');
+  ```
+
+### Hiding chat
+When you want to hide the chat window programmatically call `closeChat()`.
+
+```ts
+LiveEngage.getInstance().closeChat();
 ```
 
-Doing so will open up those native apis to your plugin :)
+### Logging Out
+When you want to remove all user data and unregister for push notifications call `killChat()`.
 
-Take a look at these existing plugins for how that can be done very simply:
-
-* [nativescript-cardview](https://github.com/bradmartin/nativescript-cardview/tree/master/platforms)
-* [nativescript-floatingactionbutton](https://github.com/bradmartin/nativescript-floatingactionbutton/tree/master/platforms)
-
-### Clean plugin and demo files
-
-Sometimes you may need to wipe away the `node_modules` and `demo/platforms` folders to reinstall them fresh.
-
-* Run `npm run clean` to wipe those clean then you can can run `npm i` to install fresh dependencies.
-
-Sometimes you just need to wipe out the demo's `platforms` directory only:
-
-* Run `npm run demo.reset` to delete the demo's `platforms` directory only.
-
-Sometimes you may need to ensure plugin files are updated in the demo:
-
-* Run `npm run plugin.prepare` will do a fresh build of the plugin then remove itself from the demo and add it back for assurance.
-
-### <a name='Unittesting'></a>Unittesting
-The plugin seed automatically adds Jasmine-based unittest support to your plugin.
-Open `demo/app/tests/tests.js` and adjust its contents so the tests become meaningful in the context of your plugin and its features.
-
-You can read more about this topic [here](https://docs.nativescript.org/tooling/testing).
-
-Once you're ready to test your plugin's API go to `src` folder and execute one of these commands:
-
-```
-npm run test.ios
-npm run test.android
+```ts
+LiveEngage.getInstance().killChat()
+            .then(() => {
+                console.log('killChat success');
+            }).catch((error: any) => {
+                console.log('killChat error', error);
+        });
 ```
 
-### <a name='PublishtoNPM'></a>Publish to NPM
+### Push Notifications
+To recieve push notifications when the agent sends a new message you need to send the push token to LivePerson.
+When you have a push token (GCM for Android and APNS for iOS) you can send it to LivePerson using `registerPushToken`
+```ts
+LiveEngage.getInstance().registerPushToken('your-token');
+```
 
-When you have everything ready to publish:
-
-* Bump the version number in `src/package.json`
-* Go to `publish` and execute `publish.sh` (run `chmod +x *.sh` if the file isn't executable)
-
-If you just want to create a package, go to `publish` folder and execute `pack.sh`. The package will be created in `publish/package` folder.
-
-**NOTE**: To run bash script on Windows you can install [GIT SCM](https://git-for-windows.github.io/) and use Git Bash.
-
-### <a name='TravisCI'></a>TravisCI
-
-The plugin structure comes with a fully functional .travis.yml file that deploys the testing app on Android emulator and iOS simulator and as a subsequent step runs the tests from [UnitTesting section](#Unittesting). All you have to do, after cloning the repo and implementing your plugin and tests, is to sign up at [https://travis-ci.org/](https://travis-ci.org/). Then enable your plugin's repo on "https://travis-ci.org/profile/<your github user\>" and that's it. Next time a PR is opened or change is committed to a branch TravisCI will trigger a build testing the code.
-
-To properly show current build status you will have to edit the badge at the start of the README.md file so it matches your repo, user and branch. 
-
-### <a name='ReferringtnscoremodulesinthePlugin'></a>Referring tns-core-modules in the Plugin
-We recommend to use full imports of `tns-core-modules` due to [an issue in Angular CLI](https://github.com/angular/angular-cli/issues/5618#issuecomment-306479219). Read more detailed explanation in [this discussion](https://github.com/NativeScript/nativescript-plugin-seed/pull/32#discussion_r131147787).
-
-Ultimately after the issue in Angular CLI is fixed this would not be a restriction, but till then the recommended approach is to import from `tns-core-modules` using full path. Here is an example:
-
-**WRONG**
-
-*tsconfig.json*
-````
-...
-
-"paths": {
-  "*": [
-    "./node_modules/*",
-    "./node_modules/tns-core-modules/*"
-  ]
+#### Parsing message on Android
+To parse the push notification message on android in `onMessageReceived()` in your GcmListenerService, use `parsePushMessage()`.
+This will return a `PushMessageParser` object which has the method `getMessage()` to return the title of the push message.
+```ts
+try {
+    const message = LiveEngage.getInstance().parsePushMessage(data);
+    console.log(message.getMessage());
+} catch (e) {
+    console.error("Failed to parse message:", e);
 }
-...
-````
+```
 
-*yourplugin.common.ts*
-````
-import * as app from 'application';
-````
+# Try the Demo
 
-**RIGHT**
+To try the demo run the following commands:
 
-*yourplugin.common.ts*
-````
-import * as app from 'tns-core-modules/application';
-````
+```sh
+npm run setup
+npm run build.demo
+npm run dev.ios
+npm run dev.android
+```
