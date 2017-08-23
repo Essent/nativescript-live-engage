@@ -8,6 +8,8 @@ src/*.d.ts
 !src/index.d.ts
 !src/references.d.ts
 !src/scripts/*.js
+!src/postinstall.js
+!src/preuninstall.js
 !seed-tests/*.js
 seed-tests/seed-copy/**/*.*
 seed-tests/seed-copy-new-git-repo/**/*.*
