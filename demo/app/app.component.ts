@@ -5,7 +5,6 @@ import { LiveEngage, ChatProfile } from 'nativescript-live-engage';
     selector: "ns-app",
     templateUrl: "app.component.html",
 })
-
 export class AppComponent {
 
     public constructor() {
