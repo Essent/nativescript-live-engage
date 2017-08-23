@@ -18,14 +18,13 @@
     "@angular/platform-browser-dynamic": "4.1.3",
     "@angular/router": "4.1.3",
     "nativescript-angular": "3.1.3",
-    "nativescript-live-engage": "file:///Users/cornedebruin/GIT/nativescript-live-engage/src",
+    "nativescript-live-engage": "../src",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "^0.3.4",
     "rxjs": "~5.0.1",
     "tns-core-modules": "^3.1.1"
   },
   "devDependencies": {
-    "awesome-typescript-loader": "~3.1.3",
     "babel-traverse": "6.12.0",
     "babel-types": "6.11.1",
     "babylon": "6.8.4",
