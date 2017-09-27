@@ -4,27 +4,16 @@
 [![Dependency Status](https://img.shields.io/david/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage)
 [![devDependency Status](https://img.shields.io/david/dev/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage#info=devDependencies)
 
-This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v2.1.4, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v2.1.2).
+This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v2.5.1, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v2.5.3).
 To use this plugin you need to have an account from [LivePerson](https://www.liveperson.com).
 
 ### Successfully Tested with the following configurations
-> test case
-- tns cli version 2.4.0
-- tns-core-modules 2.3.0
-- android 2.3.0
-- ios 2.3.0
 
 > test case
-- tns cli version 2.5.0
-- tns-core-modules 2.4.0
-- android 2.4.1
-- ios 2.4.0
-
-> test case
-- tns cli version 2.5.0
-- tns-core-modules 2.5.0
-- android 2.5.0
-- ios 2.5.0
+- tns cli version 3.1.0
+- tns-core-modules 3.1.0
+- android 3.1.0
+- ios 3.1.0
 
 # Usage
 
