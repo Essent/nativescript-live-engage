@@ -1,0 +1,16 @@
+/* Include.gradle configuration: http://docs.nativescript.org/plugins/plugins#includegradle-specification */
+
+android {
+	productFlavors {
+		"nativescript-live-engage" {
+			dimension "nativescript-live-engage"
+		}
+	}
+}
+
+dependencies {
+    compile(name: 'infra', ext: 'aar')
+    compile(name: 'messaging', ext: 'aar')
+    compile(name: 'messaging_ui', ext: 'aar')
+    compile(name: 'ui', ext: 'aar')
+}

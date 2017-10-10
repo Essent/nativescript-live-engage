@@ -4,27 +4,16 @@
 [![Dependency Status](https://img.shields.io/david/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage)
 [![devDependency Status](https://img.shields.io/david/dev/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage#info=devDependencies)
 
-This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v2.1.4, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v2.1.2).
+This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v2.1.4, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v2.5.3).
 To use this plugin you need to have an account from [LivePerson](https://www.liveperson.com).
 
 ### Successfully Tested with the following configurations
-> test case
-- tns cli version 2.4.0
-- tns-core-modules 2.3.0
-- android 2.3.0
-- ios 2.3.0
 
 > test case
-- tns cli version 2.5.0
-- tns-core-modules 2.4.0
-- android 2.4.1
-- ios 2.4.0
-
-> test case
-- tns cli version 2.5.0
-- tns-core-modules 2.5.0
-- android 2.5.0
-- ios 2.5.0
+- tns cli version 3.1.0
+- tns-core-modules 3.1.0
+- android 3.1.0
+- ios 3.1.0
 
 # Usage
 
@@ -124,13 +113,24 @@ try {
 }
 ```
 
-# Try the Demo
+### Development setup
 
-To try the demo run the following commands:
+For easier development and debugging purposes continue with the following steps:
 
-```sh
-npm run setup
-npm run build.demo
-npm run dev.ios
-npm run dev.android
-```
+Open a command prompt/terminal, navigate to src folder and run ```npm run demo.ios``` or ```npm run demo.android``` to run the demo.
+
+Open another command prompt/terminal, navigate to src folder and run ```npm run plugin.tscwatch``` to watch for file changes in your plugin.
+
+Now go and make a change to your plugin. It will be automatically applied to the demo project.
+
+### Clean plugin and demo files
+
+Sometimes you may need to wipe away the node_modules and demo/platforms folders to reinstall them fresh.
+
+Run ```npm run clean``` to wipe those clean then you can can run ```npm i``` to install fresh dependencies.
+Sometimes you just need to wipe out the demo's platforms directory only:
+
+Run ```npm run demo.reset``` to delete the demo's platforms directory only.
+Sometimes you may need to ensure plugin files are updated in the demo:
+
+Run ```npm run plugin.prepare``` will do a fresh build of the plugin then remove itself from the demo and add it back for assurance.
