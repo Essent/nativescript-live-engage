@@ -25,6 +25,8 @@
     "tns-core-modules": "^3.2.0"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "4.2.5",
+    "@ngtools/webpack": "~1.5.0",
     "babel-traverse": "6.12.0",
     "babel-types": "6.11.1",
     "babylon": "6.8.4",
@@ -37,6 +39,7 @@
     "karma-nativescript-launcher": "^0.4.0",
     "lazy": "1.0.11",
     "nativescript-css-loader": "~0.26.0",
+    "nativescript-custom-entitlements": "^0.2.0",
     "nativescript-dev-typescript": "libs",
     "nativescript-dev-webpack": "^0.7.3",
     "raw-loader": "~0.5.1",
@@ -47,9 +50,7 @@
     "webpack": "~3.2.0",
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-sources": "~1.0.1",
-    "zone.js": "~0.8.4",
-    "@angular/compiler-cli": "4.2.5",
-    "@ngtools/webpack": "~1.5.0"
+    "zone.js": "~0.8.4"
   },
   "scripts": {
     "build.plugin": "cd ../src && npm run build",
