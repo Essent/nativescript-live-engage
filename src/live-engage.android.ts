@@ -29,6 +29,11 @@ export class LiveEngage implements CommonLiveEngage {
         this.appId = appId;
     }
 
+    public enableLogging(logLevel: number): void {
+        // not yet available on Android
+        return;
+    }
+
     private getSDKVersion(): string {
         return com.liveperson.infra.BuildConfig.VERSION_NAME;
     };

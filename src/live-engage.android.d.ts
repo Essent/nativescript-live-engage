@@ -9,6 +9,7 @@ export declare class LiveEngage implements CommonLiveEngage {
     constructor();
     static getInstance(): LiveEngage;
     initializeChat(brandId: string, appId: string): void;
+    enableLogging(logLevel: number): void;
     private getSDKVersion();
     private isValidState();
     showChat(): void;

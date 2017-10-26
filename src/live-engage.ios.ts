@@ -38,6 +38,12 @@ export class LiveEngage implements CommonLiveEngage {
         }
     }
 
+    public enableLogging(logLevel: number): void {
+        LPMessagingSDK.instance.subscribeLogEventsLogEvent(logLevel, ((log: any) => {
+            console.log('LPMessagingSDK log:', log);
+        }));
+    }
+
     public showChat(): void {
         if (!this.brandId) {
             return;
