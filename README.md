@@ -42,7 +42,12 @@ Usage:
   LiveEngage.getInstance().showChat();
   ```
 
-5. For Android:
+5. For iOS:
+You need to enable keychain sharing, to do this we need a custom entitlements file with a keychain-access-groups key.
+
+    Add [nativescript-custom-entitlements](https://github.com/Essent/nativescript-custom-entitlements) to your devDependencies and create a new entitlements file like our example [app.entitlements](./demo/app/App_Resources/iOS/app.entitlements):
+
+6. For Android:
 Make sure the main activity in your AndroidManifest extends `android.support.v7.app.AppCompatActivity`, check out our [main activity](./demo/app/activity.android.ts) as an example.
 
     Include the following dependencies in the include.gradle file of your app:
@@ -57,7 +62,7 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
   compile 'com.squareup.okhttp3:okhttp:3.6.0'
   ```
 
-6. Optional: Add the first name, last name, nick name, avatar url or phone number of a user.
+7. Optional: Add the first name, last name, nick name, avatar url or phone number of a user.
 
   ```html
   const chatProfile: ChatProfile = {
@@ -69,7 +74,7 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
           };
   LiveEngage.getInstance().setUserProfileValues(chatProfile);
   ```
-7. Optional: Add a JWT token for oAuth support when starting a conversation. Make sure you configure the Live Person data source to support the oAuth 2 authentication in terms of Live person public keys, Signing identities and possible (custom) claims definitions. Make sure to call this method before you start the conversation.
+8. Optional: Add a JWT token for oAuth support when starting a conversation. Make sure you configure the Live Person data source to support the oAuth 2 authentication in terms of Live person public keys, Signing identities and possible (custom) claims definitions. Make sure to call this method before you start the conversation.
 
   ```
   setAuthenticationCode('<JWT encoded token string>');
