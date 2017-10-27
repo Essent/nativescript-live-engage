@@ -50,12 +50,15 @@ You need to enable keychain sharing, to do this we need a custom entitlements fi
 6. For Android:
 Make sure the main activity in your AndroidManifest extends `android.support.v7.app.AppCompatActivity`, check out our [main activity](./demo/app/activity.android.ts) as an example.
 
+    Set the minSdkVersion to at least 19, in your [AndroidManifest.xml](./demo/app/App_Resources/Android/AndroidManifest.xml) and [app.gradle](./demo/app/App_Resources/Android/app.gradle).
+
     Include the following dependencies in the include.gradle file of your app:
 ```html
   compile "com.android.support:appcompat-v7:24.2.1"
   compile "com.android.support:design:24.2.1"
   compile "com.android.support:percent:24.2.1"
-  compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+  compile 'com.google.android.gms:play-services-maps:9.8.0'
+  compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.neovisionaries:nv-websocket-client:1.31'
