@@ -50,7 +50,8 @@ export class LiveEngage implements CommonLiveEngage {
         const that = new WeakRef<LiveEngage>(this);
         const Callback: any = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
             onInitSucceed: () => {
-                com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, this.brandId, this.authCode);
+                const lpAuthenticationParams = new com.liveperson.infra.LPAuthenticationParams().setAuthKey(this.authCode);
+                com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, this.brandId, lpAuthenticationParams, new com.liveperson.infra.ConversationViewParams(false));
                 const instance = that.get();
                 instance.setUserProfileValues(instance.chatProfile);
                 instance.registerPushToken(instance.gcmToken);
