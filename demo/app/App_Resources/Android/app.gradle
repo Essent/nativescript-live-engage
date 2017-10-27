@@ -7,6 +7,7 @@
 
 android {
   defaultConfig {
+    minSdkVersion 19
     generatedDensities = []
     applicationId = "org.nativescript.demo"
   }
@@ -27,7 +28,8 @@ dependencies {
     compile "com.android.support:design:$suppotVer"
     compile "com.android.support:recyclerview-v7:$suppotVer"
     compile "com.android.support:percent:$suppotVer"
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    compile 'com.google.android.gms:play-services-maps:9.8.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.neovisionaries:nv-websocket-client:1.31'
