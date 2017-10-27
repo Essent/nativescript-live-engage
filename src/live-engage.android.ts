@@ -30,8 +30,7 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public enableLogging(logLevel: number): void {
-        // not yet available on Android
-        return;
+        com.liveperson.infra.log.LPMobileLog.setDebugMode(true);
     }
 
     private getSDKVersion(): string {
