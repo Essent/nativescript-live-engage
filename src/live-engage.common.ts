@@ -12,6 +12,8 @@ export interface CommonLiveEngage {
 
   setAuthenticationCode(authCode: string): void;
 
+  getUnreadMessagesCount(): Promise<any>;
+
   registerPushToken(token: any, delegate?: any): void;
 
   unregisterPushToken(): void;

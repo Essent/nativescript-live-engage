@@ -31,4 +31,13 @@ export class AppComponent {
                 console.log('killChat error: ', error);
         });
     }
+
+    public getUnreadCount(): void {
+        LiveEngage.getInstance().getUnreadMessagesCount()
+            .then((count: number) => {
+                console.log('getUnreadMessagesCount', count);
+            }).catch((error: any) => {
+                console.log('getUnreadMessagesCount error: ', error);
+            });
+    }
 }

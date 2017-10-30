@@ -113,6 +113,29 @@ export class LiveEngage implements CommonLiveEngage {
         this.authCode = authCode;
     }
 
+    // getting unread message count will only work with enabled push notifications
+    public getUnreadMessagesCount(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if (!this.isValidState()) {
+                reject(new Error('isValidState false'));
+            }
+
+            const iCallback: any = com.liveperson.infra.ICallback.extend({
+                onSuccess: (value: number) => {
+                    resolve(value);
+                },
+                onError: (exception: any) => {
+                    reject(exception);
+                }
+            });
+            com.liveperson.messaging.MessagingFactory.getInstance().getController().getUnreadMessagesCount(
+                this.brandId,
+                this.appId,
+                new iCallback()
+            );
+        });
+    }
+
     public registerPushToken(token: any, delegate?: any): void {
         this.gcmToken = token;
         if (!this.isValidState()) {
