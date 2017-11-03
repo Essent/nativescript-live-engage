@@ -85,7 +85,7 @@ export class LiveEngage implements CommonLiveEngage {
         }
 
         // only try hideConversation() if foregroundActivity is a ConversationActivity or it will crash
-        if(application.android.foregroundActivity instanceof com.liveperson.infra.messaging_ui.ConversationActivity) {
+        if (application.android.foregroundActivity instanceof com.liveperson.infra.messaging_ui.ConversationActivity) {
             com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().hideConversation(application.android.foregroundActivity);
         }
     }
@@ -109,12 +109,12 @@ export class LiveEngage implements CommonLiveEngage {
         }
     }
 
-    public setAuthenticationCode(authCode: string){
+    public setAuthenticationCode(authCode: string) {
         this.authCode = authCode;
     }
 
     // getting unread message count will only work with enabled push notifications
-    public getUnreadMessagesCount(): Promise<any> {
+    public getUnreadMessagesCount(): Promise<number> {
         return new Promise((resolve, reject) => {
             if (!this.isValidState()) {
                 reject(new Error('isValidState false'));

@@ -12,7 +12,7 @@ export interface CommonLiveEngage {
 
   setAuthenticationCode(authCode: string): void;
 
-  getUnreadMessagesCount(): Promise<any>;
+  getUnreadMessagesCount(): Promise<number>;
 
   registerPushToken(token: any, delegate?: any): void;
 
