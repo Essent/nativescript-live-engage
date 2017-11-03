@@ -1,0 +1,2 @@
+source 'https://github.com/LivePersonInc/iOSPodSpecs.git'
+pod 'LPMessagingSDK', '~> 2.8.4'

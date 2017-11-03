@@ -4,27 +4,16 @@
 [![Dependency Status](https://img.shields.io/david/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage)
 [![devDependency Status](https://img.shields.io/david/dev/essent/nativescript-live-engage.svg?style=flat-square)](https://david-dm.org/essent/nativescript-live-engage#info=devDependencies)
 
-This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v2.1.4, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v2.1.2).
+This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v2.8, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v2.8.4).
 To use this plugin you need to have an account from [LivePerson](https://www.liveperson.com).
 
 ### Successfully Tested with the following configurations
-> test case
-- tns cli version 2.4.0
-- tns-core-modules 2.3.0
-- android 2.3.0
-- ios 2.3.0
 
 > test case
-- tns cli version 2.5.0
-- tns-core-modules 2.4.0
-- android 2.4.1
-- ios 2.4.0
-
-> test case
-- tns cli version 2.5.0
-- tns-core-modules 2.5.0
-- android 2.5.0
-- ios 2.5.0
+- tns cli version 3.1.0
+- tns-core-modules 3.1.0
+- android 3.1.0
+- ios 3.1.0
 
 # Usage
 
@@ -53,22 +42,30 @@ Usage:
   LiveEngage.getInstance().showChat();
   ```
 
-5. For Android:
+5. For iOS:
+You need to enable keychain sharing, to do this we need a custom entitlements file with a keychain-access-groups key.
+
+    Add [nativescript-custom-entitlements](https://github.com/Essent/nativescript-custom-entitlements) to your devDependencies and create a new entitlements file like our example [app.entitlements](./demo/app/App_Resources/iOS/app.entitlements).
+
+6. For Android:
 Make sure the main activity in your AndroidManifest extends `android.support.v7.app.AppCompatActivity`, check out our [main activity](./demo/app/activity.android.ts) as an example.
+
+    Set the minSdkVersion to at least 19, in your [AndroidManifest.xml](./demo/app/App_Resources/Android/AndroidManifest.xml) and [app.gradle](./demo/app/App_Resources/Android/app.gradle).
 
     Include the following dependencies in the include.gradle file of your app:
 ```html
   compile "com.android.support:appcompat-v7:24.2.1"
   compile "com.android.support:design:24.2.1"
   compile "com.android.support:percent:24.2.1"
-  compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+  compile 'com.google.android.gms:play-services-maps:9.8.0'
+  compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.neovisionaries:nv-websocket-client:1.31'
   compile 'com.squareup.okhttp3:okhttp:3.6.0'
   ```
 
-6. Optional: Add the first name, last name, nick name, avatar url or phone number of a user.
+7. Optional: Add the first name, last name, nick name, avatar url or phone number of a user.
 
   ```html
   const chatProfile: ChatProfile = {
@@ -80,7 +77,7 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
           };
   LiveEngage.getInstance().setUserProfileValues(chatProfile);
   ```
-7. Optional: Add a JWT token for oAuth support when starting a conversation. Make sure you configure the Live Person data source to support the oAuth 2 authentication in terms of Live person public keys, Signing identities and possible (custom) claims definitions. Make sure to call this method before you start the conversation.
+8. Optional: Add a JWT token for oAuth support when starting a conversation. Make sure you configure the Live Person data source to support the oAuth 2 authentication in terms of Live person public keys, Signing identities and possible (custom) claims definitions. Make sure to call this method before you start the conversation.
 
   ```
   setAuthenticationCode('<JWT encoded token string>');
@@ -124,13 +121,24 @@ try {
 }
 ```
 
-# Try the Demo
+### Development setup
 
-To try the demo run the following commands:
+For easier development and debugging purposes continue with the following steps:
 
-```sh
-npm run setup
-npm run build.demo
-npm run dev.ios
-npm run dev.android
-```
+Open a command prompt/terminal, navigate to src folder and run ```npm run demo.ios``` or ```npm run demo.android``` to run the demo.
+
+Open another command prompt/terminal, navigate to src folder and run ```npm run plugin.tscwatch``` to watch for file changes in your plugin.
+
+Now go and make a change to your plugin. It will be automatically applied to the demo project.
+
+### Clean plugin and demo files
+
+Sometimes you may need to wipe away the node_modules and demo/platforms folders to reinstall them fresh.
+
+Run ```npm run clean``` to wipe those clean then you can can run ```npm i``` to install fresh dependencies.
+Sometimes you just need to wipe out the demo's platforms directory only:
+
+Run ```npm run demo.reset``` to delete the demo's platforms directory only.
+Sometimes you may need to ensure plugin files are updated in the demo:
+
+Run ```npm run plugin.prepare``` will do a fresh build of the plugin then remove itself from the demo and add it back for assurance.

@@ -5,7 +5,6 @@ import { LiveEngage, ChatProfile } from 'nativescript-live-engage';
     selector: "ns-app",
     templateUrl: "app.component.html",
 })
-
 export class AppComponent {
 
     public constructor() {
@@ -31,5 +30,14 @@ export class AppComponent {
             }).catch((error: any) => {
                 console.log('killChat error: ', error);
         });
+    }
+
+    public getUnreadCount(): void {
+        LiveEngage.getInstance().getUnreadMessagesCount()
+            .then((count: number) => {
+                console.log('getUnreadMessagesCount', count);
+            }).catch((error: any) => {
+                console.log('getUnreadMessagesCount error: ', error);
+            });
     }
 }
