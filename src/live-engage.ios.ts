@@ -83,10 +83,10 @@ export class LiveEngage implements CommonLiveEngage {
         LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
     }
 
-    public setAuthenticationCode(authCode) {
+    public setAuthenticationCode(jwt) {
         const authenticationParams = LPAuthenticationParams.alloc().initWithAuthenticationCodeJwtRedirectURI(
             null,
-            authCode,
+            jwt,
             null
         );
         this.authenticationParams = authenticationParams;

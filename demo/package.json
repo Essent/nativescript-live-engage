@@ -18,7 +18,7 @@
     "@angular/platform-browser-dynamic": "4.2.5",
     "@angular/router": "4.2.5",
     "nativescript-angular": "3.1.3",
-    "nativescript-live-engage": "file:../src",
+    "nativescript-live-engage": "file:///Users/dennis/Documents/Essent/nativescript-live-engage/src",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "^0.3.4",
     "rxjs": "~5.0.1",
