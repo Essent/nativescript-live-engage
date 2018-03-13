@@ -10,7 +10,7 @@ export interface CommonLiveEngage {
 
   setUserProfileValues(chatProfile: ChatProfile): void;
 
-  setAuthenticationCode(authCode: string): void;
+  setAuthenticationCode(jwt: string): void;
 
   getUnreadMessagesCount(): Promise<number>;
 

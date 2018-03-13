@@ -1,7 +1,7 @@
 import { CommonLiveEngage, ChatProfile } from './live-engage.common';
 export declare class LiveEngage implements CommonLiveEngage {
     private static instance;
-    private authCode;
+    private authenticationParams;
     private brandId;
     private appId;
     private chatProfile;
@@ -14,7 +14,7 @@ export declare class LiveEngage implements CommonLiveEngage {
     showChat(): void;
     closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
-    setAuthenticationCode(authCode: any): void;
+    setAuthenticationCode(jwt: any): void;
     getUnreadMessagesCount(): Promise<number>;
     registerPushToken(token: any, delegate?: any): void;
     unregisterPushToken(): void;

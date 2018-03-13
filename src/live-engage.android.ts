@@ -109,8 +109,8 @@ export class LiveEngage implements CommonLiveEngage {
         }
     }
 
-    public setAuthenticationCode(authCode: string) {
-        this.authCode = authCode;
+    public setAuthenticationCode(jwt: string) {
+        this.authCode = jwt;
     }
 
     // getting unread message count will only work with enabled push notifications

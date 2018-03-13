@@ -2,11 +2,13 @@ import { CommonLiveEngage, ChatProfile } from './live-engage.common';
 
 declare const LPMessagingSDK: any;
 declare const LPUser: any;
+declare const LPAuthenticationParams: any;
+declare const LPConversationViewParams: any;
 
 export class LiveEngage implements CommonLiveEngage {
 
     private static instance: LiveEngage = new LiveEngage();
-    private authCode: string;
+    private authenticationParams: any;
     private brandId: string;
     private appId: string;
     private chatProfile: ChatProfile;
@@ -48,9 +50,13 @@ export class LiveEngage implements CommonLiveEngage {
         if (!this.brandId) {
             return;
         }
-
         const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(this.brandId);
-        LPMessagingSDK.instance.showConversationAuthenticationCodeContainerViewController(conversationQuery, this.authCode, null);
+        const conversationViewParams = LPConversationViewParams.alloc().initWithConversationQueryContainerViewControllerIsViewOnly(
+            conversationQuery,
+            null,
+            false
+        );
+        LPMessagingSDK.instance.showConversationAuthenticationParams(conversationViewParams, this.authenticationParams);
         this.setUserProfileValues(this.chatProfile);
         this.registerPushToken(this.apnsToken, this.apnsDelegate);
     }
@@ -77,8 +83,13 @@ export class LiveEngage implements CommonLiveEngage {
         LPMessagingSDK.instance.setUserProfileBrandID(user, this.brandId);
     }
 
-    public setAuthenticationCode(authCode) {
-        this.authCode = authCode;
+    public setAuthenticationCode(jwt) {
+        const authenticationParams = LPAuthenticationParams.alloc().initWithAuthenticationCodeJwtRedirectURI(
+            null,
+            jwt,
+            null
+        );
+        this.authenticationParams = authenticationParams;
     }
 
     // getting unread message count will only work with enabled push notifications
