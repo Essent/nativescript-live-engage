@@ -5,6 +5,15 @@
 //	compile 'com.android.support:recyclerview-v7:+'
 //}
 
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+    }
+}
+
 android {
   defaultConfig {
     minSdkVersion 19
