@@ -161,7 +161,7 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public parsePushMessage(data: any): any {
-        return new com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser(data);
+        return new com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser.parseBundle(this.brandId, data);
     }
 
     public killChat(): Promise<boolean> {
