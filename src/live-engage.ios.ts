@@ -4,6 +4,7 @@ declare const LPMessagingSDK: any;
 declare const LPUser: any;
 declare const LPAuthenticationParams: any;
 declare const LPConversationViewParams: any;
+declare const LPMonitoringInitParams: any;
 
 export class LiveEngage implements CommonLiveEngage {
 
@@ -32,7 +33,9 @@ export class LiveEngage implements CommonLiveEngage {
         }
 
         try {
-            LPMessagingSDK.instance.initializeError(brandId);
+            let param = LPMonitoringInitParams.alloc().initWithAppInstallID(appId);
+            let error;
+            LPMessagingSDK.instance.initializeMonitoringInitParamsError(brandId, param, error);
             this.brandId = brandId;
             this.appId = appId;
         } catch (e) {
@@ -50,11 +53,12 @@ export class LiveEngage implements CommonLiveEngage {
         if (!this.brandId) {
             return;
         }
-        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(this.brandId);
-        const conversationViewParams = LPConversationViewParams.alloc().initWithConversationQueryContainerViewControllerIsViewOnly(
+        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQueryCampaignInfo(this.brandId, null);
+        const conversationViewParams = LPConversationViewParams.alloc().initWithConversationQueryContainerViewControllerIsViewOnlyConversationHistoryControlParam(
             conversationQuery,
             null,
-            false
+            false,
+            null
         );
         LPMessagingSDK.instance.showConversationAuthenticationParams(conversationViewParams, this.authenticationParams);
         this.setUserProfileValues(this.chatProfile);
