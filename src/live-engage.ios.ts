@@ -88,9 +88,10 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public setAuthenticationCode(jwt) {
-        const authenticationParams = LPAuthenticationParams.alloc().initWithAuthenticationCodeJwtRedirectURI(
+        const authenticationParams = LPAuthenticationParams.alloc().initWithAuthenticationCodeJwtRedirectURICertPinningPublicKeys(
             null,
             jwt,
+            null,
             null
         );
         this.authenticationParams = authenticationParams;
