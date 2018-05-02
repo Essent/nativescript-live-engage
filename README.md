@@ -26,7 +26,7 @@ Usage:
 
 1. Add the plugin to your project:
 
-  ```ts
+  ```console
   tns plugin add nativescript-live-engage
   ```
 
@@ -52,7 +52,7 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
     Set the minSdkVersion to at least 19, in your [AndroidManifest.xml](./demo/app/App_Resources/Android/AndroidManifest.xml) and [app.gradle](./demo/app/App_Resources/Android/app.gradle).
 
     Include the following dependencies in the include.gradle file of your app:
-```html
+```gradle
   compile "com.android.support:appcompat-v7:24.2.1"
   compile "com.android.support:design:24.2.1"
   compile "com.android.support:percent:24.2.1"
@@ -66,7 +66,7 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
 
 7. Optional: Add the first name, last name, nick name, avatar url or phone number of a user.
 
-  ```html
+  ```ts
   const chatProfile: ChatProfile = {
               firstName: 'Jane',
               lastName: 'Doe',
@@ -78,8 +78,8 @@ Make sure the main activity in your AndroidManifest extends `android.support.v7.
   ```
 8. Optional: Add a JWT token for oAuth support when starting a conversation. Make sure you configure the Live Person data source to support the oAuth 2 authentication in terms of Live person public keys, Signing identities and possible (custom) claims definitions. Make sure to call this method before you start the conversation.
 
-  ```
-  setAuthenticationCode('<JWT encoded token string>');
+  ```ts
+  LiveEngage.getInstance().setAuthenticationCode('<JWT encoded token string>');
   ```
 
 ### Hiding chat
