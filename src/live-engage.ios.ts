@@ -88,9 +88,10 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public setAuthenticationCode(jwt) {
-        const authenticationParams = LPAuthenticationParams.alloc().initWithAuthenticationCodeJwtRedirectURICertPinningPublicKeys(
+        const authenticationParams = LPAuthenticationParams.alloc().initWithAuthenticationCodeJwtRedirectURICertPinningPublicKeysAuthenticationType(
             null,
             jwt,
+            null,
             null,
             null
         );
@@ -99,7 +100,7 @@ export class LiveEngage implements CommonLiveEngage {
 
     // getting unread message count will only work with enabled push notifications
     public getUnreadMessagesCount(): Promise<number> {
-        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQuery(this.brandId);
+        const conversationQuery = LPMessagingSDK.instance.getConversationBrandQueryCampaignInfo(this.brandId, null);
         return new Promise((resolve, reject) => {
             LPMessagingSDK.getUnreadMessagesCountCompletionFailure(
                 conversationQuery,
