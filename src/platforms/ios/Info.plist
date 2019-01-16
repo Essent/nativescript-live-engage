@@ -3,8 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>Photo Library Privacy Setting for LiveEngage iOS SDK</string>
+    <string>To send a photo we need your permission.</string>
 	<key>NSCameraUsageDescription</key>
-    <string>Camera Privacy Setting for LiveEngage iOS SDK</string>
+    <string>To send a photo we need your permission.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>To send an audio message we need your permission.</string>
 </dict>
 </plist>
