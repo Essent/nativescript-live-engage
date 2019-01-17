@@ -22,7 +22,7 @@ export class LiveEngage implements CommonLiveEngage {
     private brandId: string;
     private appId: string;
     private chatProfile: ChatProfile;
-    private gcmToken: string;
+    private fcmToken: string;
 
     constructor() {
         if (LiveEngage.instance) {
@@ -84,7 +84,7 @@ export class LiveEngage implements CommonLiveEngage {
         );
 
         instance.setUserProfileValues(instance.chatProfile);
-        instance.registerPushToken(instance.gcmToken);
+        instance.registerPushToken(instance.fcmToken);
     }
 
     public showChat(): void {
@@ -163,7 +163,7 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public registerPushToken(token: any, delegate?: any): void {
-        this.gcmToken = token;
+        this.fcmToken = token;
         LivePerson.registerLPPusher(this.brandId, this.appId, token);
     }
 
