@@ -33,11 +33,10 @@ export class AppComponent {
     }
 
     public getUnreadCount(): void {
-        LiveEngage.getInstance().getUnreadMessagesCount()
-            .then((count: number) => {
-                console.log('getUnreadMessagesCount', count);
-            }).catch((error: any) => {
-                console.log('getUnreadMessagesCount error: ', error);
-            });
+        LiveEngage.getInstance().getUnreadMessagesCount((count: number) => {
+            console.log('getUnreadMessagesCount', count);
+        }, (error: any) => {
+            console.log('getUnreadMessagesCount error: ', error);
+        });
     }
 }

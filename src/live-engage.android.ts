@@ -44,15 +44,15 @@ export class LiveEngage implements CommonLiveEngage {
         LPMobileLog.setDebugMode(true);
     }
 
-    private getSDKVersion(): string {
+    public getSDKVersion(): string {
         return LivePerson.getSDKVersion();
-    };
+    }
 
     private isValidState(): boolean {
         return MessagingUIFactory.getInstance().isInitialized();
     }
 
-    public showChat(): void {
+    private initialize(successCallback: () => void): void {
         if (!this.brandId || !this.appId) {
             return;
         }
@@ -60,17 +60,7 @@ export class LiveEngage implements CommonLiveEngage {
         const that = new WeakRef<LiveEngage>(this);
         const callback: any = new InitLivePersonCallBack({
             onInitSucceed: () => {
-                const lpAuthenticationParams = new LPAuthenticationParams().setHostAppJWT(this.authCode);
-                const conversationViewParams = new ConversationViewParams(false);
-                LivePerson.showConversation(
-                    application.android.foregroundActivity,
-                    lpAuthenticationParams,
-                    conversationViewParams
-                );
-
-                const instance = that.get();
-                instance.setUserProfileValues(instance.chatProfile);
-                instance.registerPushToken(instance.gcmToken);
+                successCallback();
             },
             onInitFailed: (err: any) => {
                 console.error(err);
@@ -82,6 +72,30 @@ export class LiveEngage implements CommonLiveEngage {
             callback
         );
         LivePerson.initialize(application.android.context, properties);
+    }
+
+    private showConversation(instance) {
+        const lpAuthenticationParams = new LPAuthenticationParams().setHostAppJWT(this.authCode);
+        const conversationViewParams = new ConversationViewParams(false);
+        LivePerson.showConversation(
+            application.android.foregroundActivity,
+            lpAuthenticationParams,
+            conversationViewParams
+        );
+
+        instance.setUserProfileValues(instance.chatProfile);
+        instance.registerPushToken(instance.gcmToken);
+    }
+
+    public showChat(): void {
+        if (!this.isValidState()) {
+            const weakRefThis = new WeakRef<LiveEngage>(this);
+            this.initialize(() => {
+                this.showConversation(weakRefThis.get());
+            });
+        } else {
+            this.showConversation(this);
+        }
     }
 
     public closeChat(): void {
@@ -118,33 +132,38 @@ export class LiveEngage implements CommonLiveEngage {
         this.authCode = jwt;
     }
 
-    // getting unread message count will only work with enabled push notifications
-    public getUnreadMessagesCount(): Promise<number> {
-        return new Promise((resolve, reject) => {
-            if (!this.isValidState()) {
-                reject(new Error('isValidState false'));
-            }
+    private getNumUnreadMessages(onSuccess: (value: number) => void, onError: (err: any) => void): void {
+        if (!this.appId) {
+            onError('appId missing');
+        }
 
-            const callback: any = new ICallback({
-                onSuccess: (value: any) => {
-                    resolve(value);
-                },
-                onError: (exception: any) => {
-                    reject(exception);
-                }
-            });
-            LivePerson.getNumUnreadMessages(
-                this.appId,
-                callback
-            );
+        const callback: any = new ICallback({
+            onSuccess: (value: any) => {
+                onSuccess(value);
+            },
+            onError: (exception: any) => {
+                onError(exception);
+            }
         });
+        LivePerson.getNumUnreadMessages(
+            this.appId,
+            callback
+        );
+    }
+
+    // getting unread message count will only work with enabled push notifications
+    public getUnreadMessagesCount(onSuccess: (value: number) => void, onError: (err: any) => void): void {
+        if (!this.isValidState()) {
+            this.initialize(() => {
+                this.getNumUnreadMessages(onSuccess, onError);
+            });
+        } else {
+            this.getNumUnreadMessages(onSuccess, onError);
+        }
     }
 
     public registerPushToken(token: any, delegate?: any): void {
         this.gcmToken = token;
-        if (!this.isValidState()) {
-            return;
-        }
         LivePerson.registerLPPusher(this.brandId, this.appId, token);
     }
 

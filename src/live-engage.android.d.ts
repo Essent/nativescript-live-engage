@@ -10,13 +10,16 @@ export declare class LiveEngage implements CommonLiveEngage {
     static getInstance(): LiveEngage;
     initializeChat(brandId: string, appId: string): void;
     enableLogging(logLevel: number): void;
-    private getSDKVersion();
+    getSDKVersion(): string;
     private isValidState();
+    private initialize(successCallback);
+    private showConversation(instance);
     showChat(): void;
     closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
     setAuthenticationCode(jwt: string): void;
-    getUnreadMessagesCount(): Promise<number>;
+    private getNumUnreadMessages(onSuccess, onError);
+    getUnreadMessagesCount(onSuccess: (value: number) => void, onError: (err: any) => void): void;
     registerPushToken(token: any, delegate?: any): void;
     unregisterPushToken(): void;
     handlePushMessage(data: any, image?: any, showNotification?: boolean): void;

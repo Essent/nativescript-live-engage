@@ -12,7 +12,7 @@ export interface CommonLiveEngage {
 
   setAuthenticationCode(jwt: string): void;
 
-  getUnreadMessagesCount(): Promise<number>;
+  getUnreadMessagesCount(onSuccess: (value: number) => void, onError: (err: any) => void): void;
 
   registerPushToken(token: any, delegate?: any): void;
 
