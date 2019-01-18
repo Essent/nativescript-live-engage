@@ -108,6 +108,17 @@ try {
 }
 ```
 
+#### Getting unread message count
+To get the total amount of unread messages, use `getUnreadMessagesCount()`.
+This will only work when push notifications are enabled.
+```ts
+LiveEngage.getInstance().getUnreadMessagesCount((count: number) => {
+    console.log('Unread messages:', count);
+}, (error: any) => {
+    console.log('Failed to get count: ', error);
+});
+```
+
 ### Development setup
 
 For easier development and debugging purposes continue with the following steps:
