@@ -24,7 +24,7 @@ LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp');
 ```
 
 #### Android
-1. Set the minSdkVersion to at least 19, in your [AndroidManifest.xml](./demo/app/App_Resources/Android/AndroidManifest.xml) and [app.gradle](./demo/app/App_Resources/Android/app.gradle).
+1. Set the minSdkVersion to at least 19, in your [AndroidManifest.xml](./demo/app/App_Resources/Android/src/main/AndroidManifest.xml) and [app.gradle](./demo/app/App_Resources/Android/app.gradle).
    
 2. Include the following dependencies in the include.gradle file of your app:
    ```gradle
