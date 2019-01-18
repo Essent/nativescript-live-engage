@@ -1,6 +1,6 @@
 # NativeScript plugin for LivePerson LiveEngage
 
-[![npm version](https://img.shields.io/npm/v/nativescript-live-engage.svg?style=flat-square)](https://www.npmjs.com/package/nativescript-live-engage)
+[![npm version](https://badge.fury.io/js/nativescript-live-engage.svg)](https://www.npmjs.com/package/nativescript-live-engage)
 
 This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v3.5.0, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v3.5.0).
 
