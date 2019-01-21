@@ -5,7 +5,7 @@ export declare class LiveEngage implements CommonLiveEngage {
     private brandId;
     private appId;
     private chatProfile;
-    private gcmToken;
+    private fcmToken;
     constructor();
     static getInstance(): LiveEngage;
     initializeChat(brandId: string, appId: string): void;
