@@ -5,7 +5,7 @@ export interface CommonLiveEngage {
     closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
     setAuthenticationCode(jwt: string): void;
-    getUnreadMessagesCount(): Promise<number>;
+    getUnreadMessagesCount(onSuccess: (value: number) => void, onError: (err: any) => void): void;
     registerPushToken(token: any, delegate?: any): void;
     unregisterPushToken(): void;
     handlePushMessage(data: any, image?: any, showNotification?: boolean): void;

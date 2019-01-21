@@ -14,4 +14,4 @@ application.on(application.launchEvent, function (args: application.ApplicationE
     LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp');
 });
 
-platformNativeScriptDynamic().bootstrapModule(AppModule);
+platformNativeScriptDynamic({createFrameOnBootstrap: true}).bootstrapModule(AppModule);

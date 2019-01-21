@@ -1,95 +1,83 @@
 # NativeScript plugin for LivePerson LiveEngage
 
-[![npm version](https://img.shields.io/npm/v/nativescript-live-engage.svg?style=flat-square)](https://www.npmjs.com/package/nativescript-live-engage)
+[![npm version](https://badge.fury.io/js/nativescript-live-engage.svg)](https://www.npmjs.com/package/nativescript-live-engage)
 
-This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v3.1.0, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v3.1.0).
-To use this plugin you need to have an account from [LivePerson](https://www.liveperson.com).
+This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v3.5.0, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v3.5.0).
 
-### Successfully Tested with the following configurations
+## Requirements
+* Xcode 10.x
+* Android SDK 28
+* NativeScript CLI 5.x
+* [LivePerson account](https://www.liveperson.com)
 
-> test case
-- tns cli version 4.0.0
-- tns-core-modules 4.0.0
-- android runtime 4.0.1
-- ios runtime 4.0.1
-- xcode 9.2
+## Installation
+Run the following command from the root of your project:
 
-# Usage
+```console
+npm install nativescript-live-engage
+```
 
-## Demo
-
-Check out the [demo](./demo) folder for a sample usage.
-
-## Angular 2
-
-Usage:
-
-1. Add the plugin to your project:
-
-  ```console
-  tns plugin add nativescript-live-engage
-  ```
-
-2. At the launch of your app call `initializeChat` with your credentials (our example [main.ts](./demo/app/main.ts)):
-
-  ```ts
-  LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp');
-  ```
-
-4. To open the chat window call `showChat`:
+### Setup
+At the launch of your app call `initializeChat` with your credentials (our example [main.ts](./demo/app/main.ts)):
 ```ts
-  LiveEngage.getInstance().showChat();
-  ```
+LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp');
+```
 
-5. For iOS:
+#### Android
+1. Set the minSdkVersion to at least 19, in your [AndroidManifest.xml](./demo/app/App_Resources/Android/src/main/AndroidManifest.xml) and [app.gradle](./demo/app/App_Resources/Android/app.gradle).
+   
+2. Include the following dependencies in the include.gradle file of your app:
+   ```gradle
+     compile "com.android.support:appcompat-v7:24.2.1"
+     compile "com.android.support:design:24.2.1"
+     compile "com.android.support:percent:24.2.1"
+     compile 'com.google.android.gms:play-services-maps:9.8.0'
+     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+   
+     compile 'com.squareup.picasso:picasso:2.5.2'
+     compile 'com.neovisionaries:nv-websocket-client:1.31'
+     compile 'com.squareup.okhttp3:okhttp:3.6.0'
+     ```
+
+#### iOS
 You need to enable keychain sharing, to do this we need a custom entitlements file with a keychain-access-groups key.
 
-    Add [nativescript-custom-entitlements](https://github.com/Essent/nativescript-custom-entitlements) to your devDependencies and create a new entitlements file like our example [app.entitlements](./demo/app/App_Resources/iOS/app.entitlements).
+Add [nativescript-custom-entitlements](https://github.com/Essent/nativescript-custom-entitlements) to your devDependencies and create a new entitlements file like our example [app.entitlements](./demo/app/App_Resources/iOS/app.entitlements).
 
-6. For Android:
-Make sure the main activity in your AndroidManifest extends `android.support.v7.app.AppCompatActivity`, check out our [main activity](./demo/app/activity.android.ts) as an example.
+### Chatting
+To open the chat window call `showChat`:
+```ts
+LiveEngage.getInstance().showChat();
+```
 
-    Set the minSdkVersion to at least 19, in your [AndroidManifest.xml](./demo/app/App_Resources/Android/AndroidManifest.xml) and [app.gradle](./demo/app/App_Resources/Android/app.gradle).
+### Optional functions
 
-    Include the following dependencies in the include.gradle file of your app:
-```gradle
-  compile "com.android.support:appcompat-v7:24.2.1"
-  compile "com.android.support:design:24.2.1"
-  compile "com.android.support:percent:24.2.1"
-  compile 'com.google.android.gms:play-services-maps:9.8.0'
-  compile 'com.android.support.constraint:constraint-layout:1.0.2'
+#### Setting customer information
+Add the first name, last name, nick name, avatar url or phone number of a user.
+```ts
+const chatProfile: ChatProfile = {
+          firstName: 'Jane',
+          lastName: 'Doe',
+          nickName: 'JD',
+          phone: '0132100000',
+          avatarUrl: ''
+      };
+LiveEngage.getInstance().setUserProfileValues(chatProfile);
+```
 
-  compile 'com.squareup.picasso:picasso:2.5.2'
-  compile 'com.neovisionaries:nv-websocket-client:1.31'
-  compile 'com.squareup.okhttp3:okhttp:3.6.0'
-  ```
+#### oAuth
+Add a JWT for oAuth support when starting a conversation. Make sure you configure the Live Person data source to support the oAuth 2 authentication in terms of Live person public keys, Signing identities and possible (custom) claims definitions. Make sure to call this method before you start the conversation.
+```ts
+LiveEngage.getInstance().setAuthenticationCode('<JWT encoded token string>');
+```
 
-7. Optional: Add the first name, last name, nick name, avatar url or phone number of a user.
-
-  ```ts
-  const chatProfile: ChatProfile = {
-              firstName: 'Jane',
-              lastName: 'Doe',
-              nickName: 'JD',
-              phone: '0132100000',
-              avatarUrl: ''
-          };
-  LiveEngage.getInstance().setUserProfileValues(chatProfile);
-  ```
-8. Optional: Add a JWT token for oAuth support when starting a conversation. Make sure you configure the Live Person data source to support the oAuth 2 authentication in terms of Live person public keys, Signing identities and possible (custom) claims definitions. Make sure to call this method before you start the conversation.
-
-  ```ts
-  LiveEngage.getInstance().setAuthenticationCode('<JWT encoded token string>');
-  ```
-
-### Hiding chat
+#### Hiding chat
 When you want to hide the chat window programmatically call `closeChat()`.
-
 ```ts
 LiveEngage.getInstance().closeChat();
 ```
 
-### Logging Out
+#### Logging Out
 When you want to remove all user data and unregister for push notifications call `killChat()`.
 
 ```ts
@@ -101,15 +89,15 @@ LiveEngage.getInstance().killChat()
         });
 ```
 
-### Push Notifications
+#### Push Notifications
 To recieve push notifications when the agent sends a new message you need to send the push token to LivePerson.
-When you have a push token (GCM for Android and APNS for iOS) you can send it to LivePerson using `registerPushToken`
+When you have a push token (FCM for Android and APNS for iOS) you can send it to LivePerson using `registerPushToken`
 ```ts
 LiveEngage.getInstance().registerPushToken('your-token');
 ```
 
 #### Parsing message on Android
-To parse the push notification message on android in `onMessageReceived()` in your GcmListenerService, use `parsePushMessage()`.
+To parse the push notification message on android in `onMessageReceived()` in your FirebaseMessagingService, use `parsePushMessage()`.
 This will return a `PushMessageParser` object which has the method `getMessage()` to return the title of the push message.
 ```ts
 try {
@@ -120,24 +108,29 @@ try {
 }
 ```
 
+#### Getting unread message count
+To get the total amount of unread messages, use `getUnreadMessagesCount()`.
+This will only work when push notifications are enabled.
+```ts
+LiveEngage.getInstance().getUnreadMessagesCount((count: number) => {
+    console.log('Unread messages:', count);
+}, (error: any) => {
+    console.log('Failed to get count: ', error);
+});
+```
+
 ### Development setup
 
 For easier development and debugging purposes continue with the following steps:
 
-Open a command prompt/terminal, navigate to src folder and run ```npm run demo.ios``` or ```npm run demo.android``` to run the demo.
-
-Open another command prompt/terminal, navigate to src folder and run ```npm run plugin.tscwatch``` to watch for file changes in your plugin.
+Open a command prompt/terminal, navigate to src folder and run `npm run demo.ios` or `npm run demo.android` to run the demo.
 
 Now go and make a change to your plugin. It will be automatically applied to the demo project.
 
-### Clean plugin and demo files
+#### Clean plugin and demo files
 
-Sometimes you may need to wipe away the node_modules and demo/platforms folders to reinstall them fresh.
+Sometimes you may need to wipe away all generated folders to reinstall them fresh.
+Run `npm run clean` to wipe those clean then you can can run `plugin.prepare` to install fresh dependencies.
 
-Run ```npm run clean``` to wipe those clean then you can can run ```npm i``` to install fresh dependencies.
-Sometimes you just need to wipe out the demo's platforms directory only:
-
-Run ```npm run demo.reset``` to delete the demo's platforms directory only.
-Sometimes you may need to ensure plugin files are updated in the demo:
-
-Run ```npm run plugin.prepare``` will do a fresh build of the plugin then remove itself from the demo and add it back for assurance.
+Sometimes you just need to wipe out the demo's platforms, node_modules and hooks directory only.
+Run ```npm run demo.reset``` to delete those.

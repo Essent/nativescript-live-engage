@@ -1,8 +1,19 @@
 import { CommonLiveEngage, ChatProfile } from './live-engage.common';
 import * as application from 'tns-core-modules/application';
 
-declare const com: any;
-declare const android: any;
+import LivePerson = com.liveperson.messaging.sdk.api.LivePerson;
+import InitLivePersonProperties = com.liveperson.infra.InitLivePersonProperties;
+import InitLivePersonCallBack = com.liveperson.infra.callbacks.InitLivePersonCallBack;
+import MessagingUIFactory = com.liveperson.infra.messaging_ui.MessagingUIFactory;
+import LogoutLivePersonCallBack = com.liveperson.messaging.sdk.api.callbacks.LogoutLivePersonCallback;
+import LPAuthenticationParams = com.liveperson.infra.LPAuthenticationParams;
+import ConversationViewParams = com.liveperson.infra.ConversationViewParams;
+import ConversationActivity = com.liveperson.infra.messaging_ui.ConversationActivity;
+import ConsumerProfile = com.liveperson.messaging.sdk.api.model.ConsumerProfile;
+import ICallback = com.liveperson.infra.ICallback;
+import PushMessageParser = com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser;
+import NotificationController = com.liveperson.infra.messaging_ui.notification.NotificationController;
+import LPMobileLog = com.liveperson.infra.log.LPMobileLog;
 
 export class LiveEngage implements CommonLiveEngage {
 
@@ -11,7 +22,7 @@ export class LiveEngage implements CommonLiveEngage {
     private brandId: string;
     private appId: string;
     private chatProfile: ChatProfile;
-    private gcmToken: string;
+    private fcmToken: string;
 
     constructor() {
         if (LiveEngage.instance) {
@@ -30,52 +41,60 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public enableLogging(logLevel: number): void {
-        com.liveperson.infra.log.LPMobileLog.setDebugMode(true);
+        LPMobileLog.setDebugMode(true);
     }
 
-    private getSDKVersion(): string {
-        return com.liveperson.infra.BuildConfig.VERSION_NAME;
-    };
+    public getSDKVersion(): string {
+        return LivePerson.getSDKVersion();
+    }
 
     private isValidState(): boolean {
-        return com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().isInitialized();
+        return MessagingUIFactory.getInstance().isInitialized();
     }
 
-    public showChat(): void {
+    private initialize(successCallback: () => void): void {
         if (!this.brandId || !this.appId) {
             return;
         }
 
         const that = new WeakRef<LiveEngage>(this);
-        const Callback: any = com.liveperson.infra.callbacks.InitLivePersonCallBack.extend({
+        const callback: any = new InitLivePersonCallBack({
             onInitSucceed: () => {
-                const lpAuthenticationParams = new com.liveperson.infra.LPAuthenticationParams().setHostAppJWT(this.authCode);
-                com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().showConversation(application.android.foregroundActivity, this.brandId, lpAuthenticationParams, new com.liveperson.infra.ConversationViewParams(false));
-                const instance = that.get();
-                instance.setUserProfileValues(instance.chatProfile);
-                instance.registerPushToken(instance.gcmToken);
+                successCallback();
             },
             onInitFailed: (err: any) => {
                 console.error(err);
             }
         });
+        let properties = new InitLivePersonProperties(
+            this.brandId,
+            this.appId,
+            callback
+        );
+        LivePerson.initialize(application.android.context, properties);
+    }
 
-        let properties = new com.liveperson.infra.InitLivePersonProperties(this.brandId, this.appId, new Callback());
-        if (!com.liveperson.infra.InitLivePersonProperties.isValid(properties)) {
-            if (properties != null && properties.getInitCallBack() != null) {
-                properties.getInitCallBack().onInitFailed("InitLivePersonProperties not valid or missing parameters.");
-            }
-            return;
-        }
-        // check if initialized
+    private showConversation(instance) {
+        const lpAuthenticationParams = new LPAuthenticationParams().setHostAppJWT(this.authCode);
+        const conversationViewParams = new ConversationViewParams(false);
+        LivePerson.showConversation(
+            application.android.foregroundActivity,
+            lpAuthenticationParams,
+            conversationViewParams
+        );
+
+        instance.setUserProfileValues(instance.chatProfile);
+        instance.registerPushToken(instance.fcmToken);
+    }
+
+    public showChat(): void {
         if (!this.isValidState()) {
-            com.liveperson.infra.messaging_ui.configuration.UIConfigurationKeys.setDefaultConfiguration(application.android.context);
-            const messagingUiInitData = new com.liveperson.infra.messaging_ui.MessagingUiInitData(properties, this.getSDKVersion());
-            const initData = new com.liveperson.infra.messaging_ui.MessagingUiConfiguration(null);
-            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().init(application.android.context, messagingUiInitData, initData);
+            const weakRefThis = new WeakRef<LiveEngage>(this);
+            this.initialize(() => {
+                this.showConversation(weakRefThis.get());
+            });
         } else {
-            properties.getInitCallBack().onInitSucceed();
-            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().setConfiguration(new com.liveperson.infra.messaging_ui.MessagingUiConfiguration(null));
+            this.showConversation(this);
         }
     }
 
@@ -85,8 +104,8 @@ export class LiveEngage implements CommonLiveEngage {
         }
 
         // only try hideConversation() if foregroundActivity is a ConversationActivity or it will crash
-        if (application.android.foregroundActivity instanceof com.liveperson.infra.messaging_ui.ConversationActivity) {
-            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().hideConversation(application.android.foregroundActivity);
+        if (application.android.foregroundActivity instanceof ConversationActivity) {
+            LivePerson.hideConversation(application.android.foregroundActivity as any);
         }
     }
 
@@ -98,14 +117,14 @@ export class LiveEngage implements CommonLiveEngage {
         }
 
         if (this.isValidState()) {
-            const userProfile = new com.liveperson.messaging.model.UserProfileBundle.Builder()
+            const consumerProfile = new ConsumerProfile.Builder()
                 .setFirstName(chatProfile.firstName)
                 .setLastName(chatProfile.lastName)
                 .setPhoneNumber(chatProfile.phone)
                 .setNickname(chatProfile.nickName)
                 .setAvatarUrl(chatProfile.avatarUrl)
                 .build();
-            com.liveperson.messaging.MessagingFactory.getInstance().getController().sendUserProfile(this.brandId, userProfile);
+            LivePerson.setUserProfile(consumerProfile);
         }
     }
 
@@ -113,42 +132,47 @@ export class LiveEngage implements CommonLiveEngage {
         this.authCode = jwt;
     }
 
-    // getting unread message count will only work with enabled push notifications
-    public getUnreadMessagesCount(): Promise<number> {
-        return new Promise((resolve, reject) => {
-            if (!this.isValidState()) {
-                reject(new Error('isValidState false'));
-            }
+    private getNumUnreadMessages(onSuccess: (value: number) => void, onError: (err: any) => void): void {
+        if (!this.appId) {
+            onError('appId missing');
+            return;
+        }
 
-            const iCallback: any = com.liveperson.infra.ICallback.extend({
-                onSuccess: (value: number) => {
-                    resolve(value);
-                },
-                onError: (exception: any) => {
-                    reject(exception);
-                }
-            });
-            com.liveperson.messaging.MessagingFactory.getInstance().getController().getUnreadMessagesCount(
-                this.brandId,
-                this.appId,
-                new iCallback()
-            );
+        const callback: any = new ICallback({
+            onSuccess: (value: any) => {
+                onSuccess(value);
+            },
+            onError: (exception: any) => {
+                onError(exception);
+            }
         });
+        LivePerson.getNumUnreadMessages(
+            this.appId,
+            callback
+        );
+    }
+
+    // getting unread message count will only work with enabled push notifications
+    public getUnreadMessagesCount(onSuccess: (value: number) => void, onError: (err: any) => void): void {
+        if (!this.isValidState()) {
+            this.initialize(() => {
+                this.getNumUnreadMessages(onSuccess, onError);
+            });
+        } else {
+            this.getNumUnreadMessages(onSuccess, onError);
+        }
     }
 
     public registerPushToken(token: any, delegate?: any): void {
-        this.gcmToken = token;
-        if (!this.isValidState()) {
-            return;
-        }
-        com.liveperson.messaging.MessagingFactory.getInstance().getController().registerPusher(this.brandId, this.appId, token);
+        this.fcmToken = token;
+        LivePerson.registerLPPusher(this.brandId, this.appId, token);
     }
 
     public unregisterPushToken(): void {
         if (!this.isValidState()) {
             return;
         }
-        com.liveperson.messaging.MessagingFactory.getInstance().getController().unregisterPusher(this.brandId, this.appId, null, false);
+        LivePerson.unregisterLPPusher(this.brandId, this.appId);
     }
 
     public handlePushMessage(data: any, image?: any, showNotification?: boolean): void {
@@ -157,11 +181,11 @@ export class LiveEngage implements CommonLiveEngage {
         }
 
         const message = data.getString("message");
-        com.liveperson.infra.messaging_ui.notification.NotificationController.instance.addMessageAndDisplayNotification(application.android.context, this.brandId, message, showNotification, image);
+        NotificationController.instance.addMessageAndDisplayNotification(application.android.context, this.brandId, message, showNotification, image);
     }
 
     public parsePushMessage(data: any): any {
-        return new com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser.parseBundle(this.brandId, data);
+        return PushMessageParser.parseBundle(this.brandId, data);
     }
 
     public killChat(): Promise<boolean> {
@@ -174,19 +198,18 @@ export class LiveEngage implements CommonLiveEngage {
                 reject(new Error('isValidState false'));
             }
 
-            com.liveperson.messaging.MessagingFactory.getInstance().getController().resolveConversation(this.brandId, this.brandId);
-            const LogoutCallback: any = com.liveperson.infra.callbacks.LogoutLivePersonCallBack.extend({
+            LivePerson.resolveConversation();
+
+            const callback: any = new LogoutLivePersonCallBack({
                 onLogoutSucceed: () => {
                     resolve(true);
                 },
-                onLogoutFailed: (err: any) => {
-                    console.error(err);
-                    reject(err);
+                onLogoutFailed: () => {
+                    console.error('Logout failed');
+                    reject(false);
                 }
             });
-            const initProperties = new com.liveperson.infra.InitLivePersonProperties(this.brandId, this.appId, null);
-            const ui = new com.liveperson.infra.messaging_ui.MessagingUiInitData(initProperties, this.getSDKVersion());
-            com.liveperson.infra.messaging_ui.MessagingUIFactory.getInstance().logout(application.android.context, ui, new LogoutCallback());
+            LivePerson.logOut(application.android.context, this.brandId, this.appId, callback);
         });
     }
 }
