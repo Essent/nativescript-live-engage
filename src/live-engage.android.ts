@@ -135,6 +135,7 @@ export class LiveEngage implements CommonLiveEngage {
     private getNumUnreadMessages(onSuccess: (value: number) => void, onError: (err: any) => void): void {
         if (!this.appId) {
             onError('appId missing');
+            return;
         }
 
         const callback: any = new ICallback({
