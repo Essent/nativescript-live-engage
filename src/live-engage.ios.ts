@@ -115,7 +115,7 @@ export class LiveEngage implements CommonLiveEngage {
             return;
         }
 
-        LPMessagingSDK.instance.registerPushNotificationsWithTokenNotificationDelegateAlternateBundleID(token, this.apnsDelegate, this.appId);
+        LPMessagingSDK.instance.registerPushNotificationsWithTokenNotificationDelegateAlternateBundleIDAuthenticationParams(token, this.apnsDelegate, this.appId, null);
     }
 
     public unregisterPushToken(): void {
