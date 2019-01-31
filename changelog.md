@@ -1,3 +1,6 @@
+## 4.0.1
+* Fixed crash on iOS when setting push token
+
 ## 4.0.0
 * Upgraded to NativeScript 5.1
 * Upgraded LivePerson SDK to v3.5.0 for iOS and Android
