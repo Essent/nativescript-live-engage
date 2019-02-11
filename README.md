@@ -119,6 +119,14 @@ LiveEngage.getInstance().getUnreadMessagesCount((count: number) => {
 });
 ```
 
+#### Close window callback on iOS
+To get notified when the conversation was dismissed, you can provide a callback when opening the chat on iOS:
+```ts
+LiveEngage.getInstance().showChat(() => {
+    console.log('Chat window was closed');
+});
+```
+
 ### Development setup
 
 For easier development and debugging purposes continue with the following steps:
