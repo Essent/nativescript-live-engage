@@ -8,7 +8,7 @@ export declare class LiveEngage implements CommonLiveEngage {
     private fcmToken;
     constructor();
     static getInstance(): LiveEngage;
-    initializeChat(brandId: string, appId: string): void;
+    initializeChat(brandId: string, appId: string, callback?: () => void): void;
     enableLogging(logLevel: number): void;
     getSDKVersion(): string;
     private isValidState();

@@ -11,7 +11,9 @@ application.on(application.launchEvent, function (args: application.ApplicationE
      For iOS applications you can also subclass AppDelegate for this
      For Android applications you can also subclass Application for this
      */
-    LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp');
+    LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp', () => {
+        console.log('DisDismiss');
+    });
 });
 
 platformNativeScriptDynamic({createFrameOnBootstrap: true}).bootstrapModule(AppModule);
