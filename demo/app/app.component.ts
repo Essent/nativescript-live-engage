@@ -19,7 +19,9 @@ export class AppComponent {
             avatarUrl: ''
         };
 
-        LiveEngage.getInstance().showChat();
+        LiveEngage.getInstance().showChat(() => {
+            console.log('Closed chat');
+        });
         LiveEngage.getInstance().setUserProfileValues(chatProfile);
     }
 

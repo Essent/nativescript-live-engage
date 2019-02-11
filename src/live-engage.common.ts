@@ -1,10 +1,10 @@
 export interface CommonLiveEngage {
 
-  initializeChat(brandId: string, appId: string, callback?: () => void): void;
+  initializeChat(brandId: string, appId: string): void;
 
   enableLogging(logLevel: number): void;
 
-  showChat(): void;
+  showChat(closeCallback?: () => void): void;
 
   closeChat(): void;
 

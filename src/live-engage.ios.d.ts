@@ -9,9 +9,9 @@ export declare class LiveEngage implements CommonLiveEngage {
     private apnsDelegate;
     constructor();
     static getInstance(): LiveEngage;
-    initializeChat(brandId: string, appId: string, callback?: () => void): void;
+    initializeChat(brandId: string, appId: string): void;
     enableLogging(logLevel: number): void;
-    showChat(): void;
+    showChat(closeCallback?: () => void): void;
     closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
     setAuthenticationCode(jwt: any): void;

@@ -27,15 +27,9 @@ export class LiveEngage implements CommonLiveEngage {
         return LiveEngage.instance;
     }
 
-    public initializeChat(brandId: string, appId: string, callback?: () => void): void {
+    public initializeChat(brandId: string, appId: string): void {
         if (!brandId) {
             return;
-        }
-        console.log('INIT');
-
-        if (callback) {
-            console.log('INIT CALLBCK');
-            LPMessagingSDK.instance.delegate = LPMessagingSDKdelegateImpl.initWithCallback(callback);
         }
 
         try {
@@ -55,7 +49,7 @@ export class LiveEngage implements CommonLiveEngage {
         }));
     }
 
-    public showChat(): void {
+    public showChat(closeCallback?: () => void): void {
         if (!this.brandId) {
             return;
         }
@@ -69,6 +63,10 @@ export class LiveEngage implements CommonLiveEngage {
         LPMessagingSDK.instance.showConversationAuthenticationParams(conversationViewParams, this.authenticationParams);
         this.setUserProfileValues(this.chatProfile);
         this.registerPushToken(this.apnsToken, this.apnsDelegate);
+
+        if (closeCallback) {
+            LPMessagingSDK.instance.delegate = LPMessagingSDKdelegateImpl.initWithCloseCallback(closeCallback);
+        }
     }
 
     public closeChat(): void {
@@ -148,22 +146,22 @@ export class LiveEngage implements CommonLiveEngage {
 class LPMessagingSDKdelegateImpl extends NSObject implements LPMessagingSDKdelegate {
     public static ObjCProtocols = [LPMessagingSDKdelegate];
 
-    private callback: () => void;
+    private closeCallback: () => void;
 
-    public static initWithCallback(callback: () => void): LPMessagingSDKdelegateImpl {
+    public static initWithCloseCallback(closeCallback: () => void): LPMessagingSDKdelegateImpl {
         let delegate = <LPMessagingSDKdelegateImpl>LPMessagingSDKdelegateImpl.new();
-        delegate.callback = callback;
-        console.log('INIT WITH CALLBACK');
+        delegate.closeCallback = closeCallback;
         return delegate;
     }
 
-    // Required functions for delegate
-    LPMessagingSDKAuthenticationFailed(err: NSError): void {this.callback();}
-    LPMessagingSDKError(err: NSError): void {this.callback();}
-    LPMessagingSDKObseleteVersion(err: NSError): void {this.callback();}
-    LPMessagingSDKTokenExpired(brandID: String): void {this.callback();}
+    // Required functions for LPMessagingSDKdelegate
+    LPMessagingSDKAuthenticationFailed(err: NSError): void { }
+    LPMessagingSDKError(err: NSError): void { }
+    LPMessagingSDKObseleteVersion(err: NSError): void { }
+    LPMessagingSDKTokenExpired(brandID: String): void { }
 
+    // Optional functions for LPMessagingSDKdelegate
     LPMessagingSDKConversationViewControllerDidDismiss(): void {
-        this.callback();
+        this.closeCallback();
     }
 }
