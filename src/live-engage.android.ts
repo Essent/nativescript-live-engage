@@ -87,7 +87,7 @@ export class LiveEngage implements CommonLiveEngage {
         instance.registerPushToken(instance.fcmToken);
     }
 
-    public showChat(): void {
+    public showChat(closeCallback?: () => void): void {
         if (!this.isValidState()) {
             const weakRefThis = new WeakRef<LiveEngage>(this);
             this.initialize(() => {

@@ -1,3 +1,6 @@
+## 4.1.0
+* Added close chat callback
+
 ## 4.0.1
 * Fixed crash on iOS when setting push token
 

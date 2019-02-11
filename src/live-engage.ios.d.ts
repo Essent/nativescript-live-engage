@@ -11,7 +11,7 @@ export declare class LiveEngage implements CommonLiveEngage {
     static getInstance(): LiveEngage;
     initializeChat(brandId: string, appId: string): void;
     enableLogging(logLevel: number): void;
-    showChat(): void;
+    showChat(closeCallback?: () => void): void;
     closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
     setAuthenticationCode(jwt: any): void;

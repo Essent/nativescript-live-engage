@@ -1,7 +1,7 @@
 export interface CommonLiveEngage {
     initializeChat(brandId: string, appId: string): void;
     enableLogging(logLevel: number): void;
-    showChat(): void;
+    showChat(closeCallback?: () => void): void;
     closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
     setAuthenticationCode(jwt: string): void;

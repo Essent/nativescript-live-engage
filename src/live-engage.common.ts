@@ -4,7 +4,7 @@ export interface CommonLiveEngage {
 
   enableLogging(logLevel: number): void;
 
-  showChat(): void;
+  showChat(closeCallback?: () => void): void;
 
   closeChat(): void;
 

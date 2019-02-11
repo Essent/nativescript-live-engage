@@ -14,7 +14,7 @@ export declare class LiveEngage implements CommonLiveEngage {
     private isValidState();
     private initialize(successCallback);
     private showConversation(instance);
-    showChat(): void;
+    showChat(closeCallback?: () => void): void;
     closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
     setAuthenticationCode(jwt: string): void;
