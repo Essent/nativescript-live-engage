@@ -35,7 +35,7 @@ export class LiveEngage implements CommonLiveEngage {
         return LiveEngage.instance;
     }
 
-    public initializeChat(brandId: string, appId: string, callback?: () => void): void {
+    public initializeChat(brandId: string, appId: string): void {
         this.brandId = brandId;
         this.appId = appId;
     }
