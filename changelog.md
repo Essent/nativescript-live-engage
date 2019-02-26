@@ -1,3 +1,6 @@
+## 4.1.1
+* Upgraded LiveEngage SDK for iOS and Android to 3.6.0.
+
 ## 4.1.0
 * Added close chat callback
 
