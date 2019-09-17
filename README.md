@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/nativescript-live-engage.svg)](https://www.npmjs.com/package/nativescript-live-engage)
 
-This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v3.6.0, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v3.6.0).
+This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v4.2.0, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v4.1.0).
 
 ## Requirements
 * Xcode 10.x

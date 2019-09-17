@@ -1,3 +1,6 @@
+## 4.1.2
+* Upgraded LiveEngage SDK for iOS to 4.1.0 and for Android to 4.2.0.
+
 ## 4.1.1
 * Upgraded LiveEngage SDK for iOS and Android to 3.6.0.
 
