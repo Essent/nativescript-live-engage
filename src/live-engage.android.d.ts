@@ -25,4 +25,5 @@ export declare class LiveEngage implements CommonLiveEngage {
     handlePushMessage(data: any, image?: any, showNotification?: boolean): void;
     parsePushMessage(data: any): any;
     killChat(): Promise<boolean>;
+    resolveConversation(): void;
 }

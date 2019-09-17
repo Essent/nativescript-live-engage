@@ -141,6 +141,10 @@ export class LiveEngage implements CommonLiveEngage {
             resolve(true);
         });
     }
+
+    public resolveConversation(): void {
+        LPMessagingSDK.instance.resolveConversation(null);
+    }
 }
 
 class LPMessagingSDKdelegateImpl extends NSObject implements LPMessagingSDKdelegate {

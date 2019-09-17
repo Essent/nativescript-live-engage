@@ -41,4 +41,8 @@ export class AppComponent {
             console.log('getUnreadMessagesCount error: ', error);
         });
     }
+
+    public resolveChat(): void {
+        LiveEngage.getInstance().resolveConversation();
+    }
 }

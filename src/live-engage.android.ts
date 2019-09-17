@@ -212,4 +212,8 @@ export class LiveEngage implements CommonLiveEngage {
             LivePerson.logOut(application.android.context, this.brandId, this.appId, callback);
         });
     }
+
+    public resolveConversation(): void {
+        LivePerson.resolveConversation();
+    }
 }

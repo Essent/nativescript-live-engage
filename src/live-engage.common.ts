@@ -23,6 +23,8 @@ export interface CommonLiveEngage {
   parsePushMessage(data: any): any;
 
   killChat(): Promise<boolean>;
+
+  resolveConversation(): void;
 }
 
 export interface ChatProfile {
