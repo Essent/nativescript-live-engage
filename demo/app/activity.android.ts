@@ -3,30 +3,32 @@ import {setActivityCallbacks, AndroidActivityCallbacks} from "tns-core-modules/u
 declare const com: any;
 
 @JavaProxy("org.myApp.MainActivity")
-class Activity extends android.support.v7.app.AppCompatActivity {
+class Activity extends androidx.appcompat.app.AppCompatActivity {
     private _callbacks: AndroidActivityCallbacks;
 
-    protected onCreate(savedInstanceState: android.os.Bundle): void {
+    public onCreate(savedInstanceState: android.os.Bundle): void {
         if (!this._callbacks) {
             setActivityCallbacks(this);
         }
 
-        this._callbacks.onCreate(this, savedInstanceState, super.onCreate);
+        const intent = this.getIntent();
+
+        this._callbacks.onCreate(this, savedInstanceState, intent, super.onCreate);
     }
 
-    protected onSaveInstanceState(outState: android.os.Bundle): void {
+    public onSaveInstanceState(outState: android.os.Bundle): void {
         this._callbacks.onSaveInstanceState(this, outState, super.onSaveInstanceState);
     }
 
-    protected onStart(): void {
+    public onStart(): void {
         this._callbacks.onStart(this, super.onStart);
     }
 
-    protected onStop(): void {
+    public onStop(): void {
         this._callbacks.onStop(this, super.onStop);
     }
 
-    protected onDestroy(): void {
+    public onDestroy(): void {
         this._callbacks.onDestroy(this, super.onDestroy);
     }
 
@@ -34,11 +36,11 @@ class Activity extends android.support.v7.app.AppCompatActivity {
         this._callbacks.onBackPressed(this, super.onBackPressed);
     }
 
-    public onRequestPermissionsResult(requestCode: number, permissions: Array<String>, grantResults: Array<number>): void {
+    public onRequestPermissionsResult(requestCode: number, permissions: Array<string>, grantResults: Array<number>): void {
         this._callbacks.onRequestPermissionsResult(this, requestCode, permissions, grantResults, undefined /*TODO: Enable if needed*/);
     }
 
-    protected onActivityResult(requestCode: number, resultCode: number, data: android.content.Intent): void {
+    public onActivityResult(requestCode: number, resultCode: number, data: android.content.Intent): void {
         this._callbacks.onActivityResult(this, requestCode, resultCode, data, super.onActivityResult);
     }
 }
