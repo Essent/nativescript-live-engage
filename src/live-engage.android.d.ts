@@ -11,14 +11,14 @@ export declare class LiveEngage implements CommonLiveEngage {
     initializeChat(brandId: string, appId: string): void;
     enableLogging(logLevel: number): void;
     getSDKVersion(): string;
-    private isValidState();
-    private initialize(successCallback);
-    private showConversation(instance);
+    private isValidState;
+    private initialize;
+    private showConversation;
     showChat(closeCallback?: () => void): void;
     closeChat(): void;
     setUserProfileValues(chatProfile: ChatProfile): void;
     setAuthenticationCode(jwt: string): void;
-    private getNumUnreadMessages(onSuccess, onError);
+    private getNumUnreadMessages;
     getUnreadMessagesCount(onSuccess: (value: number) => void, onError: (err: any) => void): void;
     registerPushToken(token: any, delegate?: any): void;
     unregisterPushToken(): void;
