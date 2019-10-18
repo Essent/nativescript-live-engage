@@ -1,9 +1,11 @@
-/// <reference path="./_helpers.d.ts" />
+/// <reference path="android-declarations.d.ts"/>
+
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export class BuildConfig {
+					public static class: java.lang.Class<com.liveperson.infra.messaging_ui.BuildConfig>;
 					public static DEBUG: boolean;
 					public static APPLICATION_ID: string;
 					public static BUILD_TYPE: string;
@@ -17,46 +19,35 @@ declare module com {
 	}
 }
 
-import androidosBundle = android.os.Bundle;
-import androidviewKeyEvent = android.view.KeyEvent;
-import androidviewMenu = android.view.Menu;
-import androidviewMenuItem = android.view.MenuItem;
-import androidcontentIntent = android.content.Intent;
-/// <reference path="./android.content.Intent.d.ts" />
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.KeyEvent.d.ts" />
-/// <reference path="./android.view.Menu.d.ts" />
-/// <reference path="./android.view.MenuItem.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.fragment.IFeedbackActions.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.MessagingUIUtils.d.ts" />
-/// <reference path="./com.liveperson.messaging.Messaging.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
-				export class ConversationActivity {
+				export class ConversationActivity implements com.liveperson.infra.messaging_ui.fragment.ConversationFragmentCallbacks {
+					public static class: java.lang.Class<com.liveperson.infra.messaging_ui.ConversationActivity>;
 					public static INTENT_ACTION: string;
 					public static TYPE_CLOSE_CHAT: number;
-					public onNewIntent(param0: androidcontentIntent): void;
+					public onKeyDown(param0: number, param1: globalAndroid.view.KeyEvent): boolean;
 					public setFeedBackMode(param0: boolean, param1: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 					public onSurveySubmitted(param0: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
-					public onPrepareOptionsMenu(param0: androidviewMenu): boolean;
+					public onCreate(param0: globalAndroid.os.Bundle): void;
+					public onCreateOptionsMenu(param0: globalAndroid.view.Menu): boolean;
+					public onPrepareOptionsMenu(param0: globalAndroid.view.Menu): boolean;
 					public onBackPressed(): void;
-					public onCreate(param0: androidosBundle): void;
-					public onKeyDown(param0: number, param1: androidviewKeyEvent): boolean;
 					public setSecureFormMode(param0: boolean, param1: string): void;
 					public onResume(): void;
 					public getUiUtils(): com.liveperson.infra.messaging_ui.uicomponents.MessagingUIUtils;
-					public onPostCreate(param0: androidosBundle): void;
-					public onCreateOptionsMenu(param0: androidviewMenu): boolean;
+					public onStart(): void;
+					public setFullImageMode(param0: boolean): void;
+					public onNewIntent(param0: globalAndroid.content.Intent): void;
 					public constructor();
+					public onPostCreate(param0: globalAndroid.os.Bundle): void;
 					public onPause(): void;
 					public setPCIToolbar(param0: string): void;
 					public onResolveConversationClick(): void;
 					public onMarkAsUrgentClick(param0: com.liveperson.messaging.Messaging): void;
+					public onOptionsItemSelected(param0: globalAndroid.view.MenuItem): boolean;
 					public onConnectionChanged(param0: boolean): void;
-					public onOptionsItemSelected(param0: androidviewMenuItem): boolean;
 					public onClearHistoryClicked(): void;
 				}
 			}
@@ -64,85 +55,61 @@ declare module com {
 	}
 }
 
-import androidcontentContext = android.content.Context;
-import androidsupportv4appFragment = android.support.v4.app.Fragment;
-import androidappActivity = android.app.Activity;
-/// <reference path="./android.app.Activity.d.ts" />
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.support.v4.app.Fragment.d.ts" />
-/// <reference path="./com.liveperson.infra.ConversationViewParams.d.ts" />
-/// <reference path="./com.liveperson.infra.LPAuthenticationParams.d.ts" />
-/// <reference path="./com.liveperson.infra.callbacks.LogoutLivePersonCallBack.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.MessagingUiConfiguration.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.MessagingUiInitData.d.ts" />
-/// <reference path="./com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export class IMessagingUi {
+					public static class: java.lang.Class<com.liveperson.infra.messaging_ui.IMessagingUi>;
 					/**
-					 * Constructs a new instance of the com.liveperson.infra.messaging_ui.IMessagingUi interface with the provided implementation.
+					 * Constructs a new instance of the com.liveperson.infra.messaging_ui.IMessagingUi interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 					 */
 					public constructor(implementation: {
-						init(param0: androidcontentContext, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.messaging_ui.MessagingUiConfiguration): void;
+						init(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData): void;
 						isInitialized(): boolean;
 						shutDown(param0: com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener): void;
-						logout(param0: androidcontentContext, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
-						getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): androidsupportv4appFragment;
-						showConversation(param0: androidappActivity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
-						hideConversation(param0: androidappActivity): void;
-						setConfiguration(param0: com.liveperson.infra.messaging_ui.MessagingUiConfiguration): void;
+						logout(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
+						getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): globalAndroid.support.v4.app.Fragment;
+						showConversation(param0: globalAndroid.app.Activity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
+						hideConversation(param0: globalAndroid.app.Activity): void;
 						onAgentAvatarTapped(param0: string): void;
 					});
+					public constructor();
+					public showConversation(param0: globalAndroid.app.Activity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
+					public logout(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
 					public onAgentAvatarTapped(param0: string): void;
-					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): androidsupportv4appFragment;
-					public init(param0: androidcontentContext, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.messaging_ui.MessagingUiConfiguration): void;
-					public hideConversation(param0: androidappActivity): void;
-					public setConfiguration(param0: com.liveperson.infra.messaging_ui.MessagingUiConfiguration): void;
+					public hideConversation(param0: globalAndroid.app.Activity): void;
+					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): globalAndroid.support.v4.app.Fragment;
+					public init(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData): void;
 					public isInitialized(): boolean;
-					public logout(param0: androidcontentContext, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
 					public shutDown(param0: com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener): void;
-					public showConversation(param0: androidappActivity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
 				}
 			}
 		}
 	}
 }
 
-/// <reference path="./android.app.Activity.d.ts" />
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.support.v4.app.Fragment.d.ts" />
-/// <reference path="./com.liveperson.infra.ConversationViewParams.d.ts" />
-/// <reference path="./com.liveperson.infra.LPAuthenticationParams.d.ts" />
-/// <reference path="./com.liveperson.infra.callbacks.LogoutLivePersonCallBack.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.MessagingUi.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.MessagingUiConfiguration.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.MessagingUiInitData.d.ts" />
-/// <reference path="./com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
-				export class MessagingUIFactory {
+				export class MessagingUIFactory extends com.liveperson.infra.messaging_ui.IMessagingUi {
+					public static class: java.lang.Class<com.liveperson.infra.messaging_ui.MessagingUIFactory>;
 					public static instance: com.liveperson.infra.messaging_ui.MessagingUIFactory;
 					public mMessagingUi: com.liveperson.infra.messaging_ui.MessagingUi;
-					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): androidsupportv4appFragment;
-					public setConfiguration(param0: com.liveperson.infra.messaging_ui.MessagingUiConfiguration): void;
+					public showConversation(param0: globalAndroid.app.Activity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
+					public logout(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
+					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): globalAndroid.support.v4.app.Fragment;
+					public init(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData): void;
 					public isInitialized(): boolean;
 					public restart(): void;
 					public getMessagingUi(): com.liveperson.infra.messaging_ui.MessagingUi;
-					public showConversation(param0: androidappActivity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
 					public onAgentAvatarTapped(param0: string): void;
 					public constructor();
-					public init(param0: androidcontentContext, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.messaging_ui.MessagingUiConfiguration): void;
+					public hideConversation(param0: globalAndroid.app.Activity): void;
 					public createController(): com.liveperson.infra.messaging_ui.MessagingUi;
 					public clear(): void;
-					public hideConversation(param0: androidappActivity): void;
 					public static getInstance(): com.liveperson.infra.messaging_ui.MessagingUIFactory;
-					public logout(param0: androidcontentContext, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
 					public shutDown(param0: com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener): void;
 				}
 			}
@@ -150,35 +117,24 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.app.Activity.d.ts" />
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.support.v4.app.Fragment.d.ts" />
-/// <reference path="./com.liveperson.infra.ConversationViewParams.d.ts" />
-/// <reference path="./com.liveperson.infra.LPAuthenticationParams.d.ts" />
-/// <reference path="./com.liveperson.infra.callbacks.LogoutLivePersonCallBack.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.MessagingUiConfiguration.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.MessagingUiInitData.d.ts" />
-/// <reference path="./com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
-				export class MessagingUi {
+				export class MessagingUi extends com.liveperson.infra.messaging_ui.IMessagingUi {
+					public static class: java.lang.Class<com.liveperson.infra.messaging_ui.MessagingUi>;
 					public static TAG: string;
-					public mMessagingUiConfiguration: com.liveperson.infra.messaging_ui.MessagingUiConfiguration;
-					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): androidsupportv4appFragment;
-					public setConfiguration(param0: com.liveperson.infra.messaging_ui.MessagingUiConfiguration): void;
-					public restart(): void;
-					public isInitialized(): boolean;
-					public showConversation(param0: androidappActivity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
+					public showConversation(param0: globalAndroid.app.Activity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
+					public logout(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
 					public onAgentAvatarTapped(param0: string): void;
 					public constructor();
-					public init(param0: androidcontentContext, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.messaging_ui.MessagingUiConfiguration): void;
+					public hideConversation(param0: globalAndroid.app.Activity): void;
 					public clear(): void;
-					public hideConversation(param0: androidappActivity): void;
+					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): globalAndroid.support.v4.app.Fragment;
+					public init(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData): void;
+					public restart(): void;
+					public isInitialized(): boolean;
 					public getInitBrandId(): string;
-					public logout(param0: androidcontentContext, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
 					public shutDown(param0: com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener): void;
 				}
 			}
@@ -186,43 +142,12 @@ declare module com {
 	}
 }
 
-import javautilHashMap = java.util.HashMap;
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.HashMap.d.ts" />
-declare module com {
-	export module liveperson {
-		export module infra {
-			export module messaging_ui {
-				export class MessagingUiConfiguration {
-					public static CLEAR_HISTORY_SHOW_CONFIRM_DIALOG: string;
-					public static TTR_MESSAGE_OFF_HOURS_ENABLED: string;
-					public static DISABLE_TTR_POPUP: string;
-					public static SHOW_TIMESTAMP_IN_TTR_NOTIFICATION: string;
-					public static CONTEXTUAL_MENU_ON_TOOLBAR: string;
-					public static SHOW_FEEDBACK: string;
-					public static SHOW_CSAT_THANK_YOU: string;
-					public static SHOW_AGENT_DETAILS_CSAT: string;
-					public static SHOW_YES_NO_QUESTION: string;
-					public static ENABLE_PHOTO_SHARING: string;
-					public getFeature(param0: string): boolean;
-					public putFeature(param0: string, param1: boolean): void;
-					public constructor(param0: javautilHashMap);
-					public getAllFeatures(): javautilHashMap;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./com.liveperson.infra.InitLivePersonProperties.d.ts" />
-/// <reference path="./com.liveperson.infra.Interceptors.d.ts" />
-/// <reference path="./com.liveperson.infra.callbacks.InitLivePersonCallBack.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export class MessagingUiInitData {
+					public static class: java.lang.Class<com.liveperson.infra.messaging_ui.MessagingUiInitData>;
 					public constructor(param0: com.liveperson.infra.callbacks.InitLivePersonCallBack, param1: string, param2: com.liveperson.infra.Interceptors);
 					public getInitCallBack(): com.liveperson.infra.callbacks.InitLivePersonCallBack;
 					public constructor(param0: com.liveperson.infra.InitLivePersonProperties, param1: string, param2: com.liveperson.infra.Interceptors);
@@ -232,38 +157,16 @@ declare module com {
 	}
 }
 
-/// <reference path="./java.lang.String.d.ts" />
-declare module com {
-	export module liveperson {
-		export module infra {
-			export module messaging_ui {
-				export class ResourceMapper {
-					public static INSTANCE: com.liveperson.infra.messaging_ui.ResourceMapper;
-					public static KEY_CONVERSATION_BG_COLOR: string;
-					public static VALUE_CONVERSATION_BG_COLOR: string;
-					public static KEY_AGENT_CONVERSATION_BUBBLE_BG_COLOR: string;
-					public static VALUE_AGENT_CONVERSATION_BUBBLE_BG_COLOR: string;
-					public static valueOf(param0: string): com.liveperson.infra.messaging_ui.ResourceMapper;
-					public static values(): native.Array<com.liveperson.infra.messaging_ui.ResourceMapper>;
-				}
-			}
-		}
-	}
-}
-
-import androidappDialog = android.app.Dialog;
-/// <reference path="./android.app.Dialog.d.ts" />
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module dialog {
 					export class ClearHistoryConfirmationDialog {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.dialog.ClearHistoryConfirmationDialog>;
 						public static TARGET_ID: string;
 						public constructor();
-						public onCreateDialog(param0: androidosBundle): androidappDialog;
+						public onCreateDialog(param0: globalAndroid.os.Bundle): globalAndroid.app.Dialog;
 						public static getInstance(param0: string): com.liveperson.infra.messaging_ui.dialog.ClearHistoryConfirmationDialog;
 					}
 				}
@@ -272,16 +175,15 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.app.Dialog.d.ts" />
-/// <reference path="./android.os.Bundle.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module dialog {
 					export class ConversationIsActiveWarningDialog {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.dialog.ConversationIsActiveWarningDialog>;
 						public constructor();
-						public onCreateDialog(param0: androidosBundle): androidappDialog;
+						public onCreateDialog(param0: globalAndroid.os.Bundle): globalAndroid.app.Dialog;
 						public static getInstance(): com.liveperson.infra.messaging_ui.dialog.ConversationIsActiveWarningDialog;
 					}
 				}
@@ -290,16 +192,15 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.app.Dialog.d.ts" />
-/// <reference path="./android.os.Bundle.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module dialog {
 					export class NewUserDialog {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.dialog.NewUserDialog>;
 						public constructor();
-						public onCreateDialog(param0: androidosBundle): androidappDialog;
+						public onCreateDialog(param0: globalAndroid.os.Bundle): globalAndroid.app.Dialog;
 						public static getInstance(): com.liveperson.infra.messaging_ui.dialog.NewUserDialog;
 					}
 				}
@@ -308,28 +209,22 @@ declare module com {
 	}
 }
 
-import androidutilAttributeSet = android.util.AttributeSet;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.fragment.IConnectable.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module fragment {
 					export class ConnectionStatusController {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.ConnectionStatusController>;
 						public static TAG: string;
 						public static TRYING_TO_CONNECT_DELAY: number;
 						public static CONNECTING_DELAY: number;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
-						public onError(): void;
 						public registerToChanges(param0: com.liveperson.infra.messaging_ui.fragment.IConnectable): void;
+						public constructor(param0: globalAndroid.content.Context);
 						public unregister(): void;
 						public initState(param0: boolean, param1: boolean): void;
-						public onConnected(): void;
-						public onConnecting(param0: boolean): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
-						public constructor(param0: androidcontentContext);
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
 					}
 				}
 			}
@@ -337,49 +232,21 @@ declare module com {
 	}
 }
 
-import androidviewLayoutInflater = android.view.LayoutInflater;
-import androidviewViewGroup = android.view.ViewGroup;
-import androidviewView = android.view.View;
-import androidsupportv4appFragmentActivity = android.support.v4.app.FragmentActivity;
-import androidwidgetTextView = android.widget.TextView;
-import androidwidgetRelativeLayout = android.widget.RelativeLayout;
-/// <reference path="./android.app.Activity.d.ts" />
-/// <reference path="./android.content.Intent.d.ts" />
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.support.v4.app.FragmentActivity.d.ts" />
-/// <reference path="./android.view.LayoutInflater.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./android.widget.RelativeLayout.d.ts" />
-/// <reference path="./android.widget.TextView.d.ts" />
-/// <reference path="./com.liveperson.api.response.types.ConversationState.d.ts" />
-/// <reference path="./com.liveperson.infra.ConversationViewParams.d.ts" />
-/// <reference path="./com.liveperson.infra.LPAuthenticationParams.d.ts" />
-/// <reference path="./com.liveperson.infra.LocalBroadcastReceiver.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.fragment.ConversationFragmentCallbacks.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.fragment.FullImageFragment.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.InlineMessagesController.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageListRecyclerView.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior.d.ts" />
-/// <reference path="./com.liveperson.infra.ui.view.uicomponents.IConversationProvider.d.ts" />
-/// <reference path="./com.liveperson.messaging.background.filesharing.FileSharingType.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.HashMap.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module fragment {
-					export class ConversationFragment {
+					export class ConversationFragment implements com.liveperson.infra.messaging_ui.fragment.NestedFragmentsContainerCallbacks, com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction, com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener, com.liveperson.infra.messaging_ui.fragment.IConnectable {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.ConversationFragment>;
 						public static TAG: string;
 						public static BUNDLE_CONVERSATION_ID: string;
 						public static PICK_PHOTO_FOR_MESSAGE: number;
 						public static REQUEST_TAKE_PHOTO: number;
 						public mRecyclerView: com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageListRecyclerView;
-						public mEmptyView: androidwidgetTextView;
+						public mEmptyView: globalAndroid.widget.TextView;
 						public mEnterMessageLayout: com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage;
-						public mConversationLayout: androidwidgetRelativeLayout;
+						public mConversationLayout: globalAndroid.widget.RelativeLayout;
 						public mConnectionReceiver: com.liveperson.infra.LocalBroadcastReceiver;
 						public mConversationStateChangeReceiver: com.liveperson.infra.LocalBroadcastReceiver;
 						public mDialogStateChangeReceiver: com.liveperson.infra.LocalBroadcastReceiver;
@@ -394,51 +261,56 @@ declare module com {
 						public mConversationViewParams: com.liveperson.infra.ConversationViewParams;
 						public mIConversationProvider: com.liveperson.infra.ui.view.uicomponents.IConversationProvider;
 						public conversationId: string;
-						public mCopyBehavior: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior;
-						public mFeaturesConfiguration: javautilHashMap;
-						public onSaveInstanceState(param0: androidosBundle): void;
-						public onFileClicked(param0: com.liveperson.messaging.background.filesharing.FileSharingType, param1: string, param2: string, param3: number, param4: number, param5: string): void;
+						public mContextualActionBehavior: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior;
 						public sendCSAT(param0: number, param1: number): void;
 						public onRequestPermissionsResult(param0: number, param1: native.Array<string>, param2: native.Array<number>): void;
-						public unregisterReceivers(): void;
-						public slideOutSecureFormFragment(): void;
-						public onActivityResult(param0: number, param1: number, param2: androidcontentIntent): void;
-						public verifyStoragePermissions(param0: androidappActivity): boolean;
-						public verifyStorageAndRecordPermissions(param0: androidappActivity): boolean;
 						public onPause(): void;
-						public onCreateView(param0: androidviewLayoutInflater, param1: androidviewViewGroup, param2: androidosBundle): androidviewView;
-						public static newInstance(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: javautilHashMap, param3: com.liveperson.infra.ConversationViewParams, param4: boolean): com.liveperson.infra.messaging_ui.fragment.ConversationFragment;
+						public static newInstance(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams, param3: boolean): com.liveperson.infra.messaging_ui.fragment.ConversationFragment;
 						public onDestroy(): void;
-						public onBackPressed(): boolean;
-						public slideOutFragment(): void;
-						public initRecyclerView(): void;
-						public onViewCreated(param0: androidviewView, param1: androidosBundle): void;
+						public performSaveFile(param0: string): void;
+						public OnFileClicked(param0: com.liveperson.messaging.background.filesharing.FileSharingType, param1: string, param2: string, param3: number, param4: number, param5: string): void;
+						public onAttach(param0: globalAndroid.content.Context): void;
+						public onCreate(param0: globalAndroid.os.Bundle): void;
+						public onCreateView(param0: globalAndroid.view.LayoutInflater, param1: globalAndroid.view.ViewGroup, param2: globalAndroid.os.Bundle): globalAndroid.view.View;
 						public handleClosedDialog(param0: string, param1: string): void;
-						public unregisterFragment(): void;
+						public PerformCopyTextToClipboard(param0: string): void;
 						public registerConnectionReceiver(): void;
-						public attachActivity(param0: androidsupportv4appFragmentActivity): void;
-						public initRelevantToolbar(): void;
 						public constructor();
 						public handleConversationUpdate(param0: string, param1: com.liveperson.api.response.types.ConversationState, param2: com.liveperson.api.response.types.CSAT.CSAT_SHOW_STATUS, param3: string): void;
+						public onActivityCreated(param0: globalAndroid.os.Bundle): void;
 						public startCamera(): void;
 						public registerBroadCastReceivers(): void;
 						public onResume(): void;
-						public verifyCameraPermissions(param0: androidappActivity): boolean;
 						public connect(): void;
 						public onStop(): void;
-						public onActivityCreated(param0: androidosBundle): void;
+						public performFileAction(param0: string, param1: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction.Action): void;
 						public registerFormStateChangeReceiver(): void;
 						public registerDialogStateChangedReceiver(): void;
-						public onCreate(param0: androidosBundle): void;
-						public onSurveySubmitted(param0: string): void;
 						public onConversationFragmentClosed(): void;
-						public setSecureFormMode(param0: boolean, param1: string): void;
 						public registerConversationStateChangedReceiver(): void;
-						public unregisterForegroundService(): void;
-						public handleConversationClosed(param0: string, param1: string): void;
+						public setFullImageMode(param0: boolean): void;
 						public initConversationProvider(): void;
 						public onConversationResolved(param0: string): void;
 						public onStart(): void;
+						public onSurveySubmitted(param0: string, param1: number): void;
+						public unregisterReceivers(): void;
+						public slideOutSecureFormFragment(): void;
+						public verifyCameraPermissions(param0: globalAndroid.app.Activity): boolean;
+						public attachActivity(param0: globalAndroid.support.v4.app.FragmentActivity): void;
+						public verifyStoragePermissions(param0: globalAndroid.app.Activity): boolean;
+						public onBackPressed(): boolean;
+						public verifyStorageAndRecordPermissions(param0: globalAndroid.app.Activity): boolean;
+						public slideOutFragment(): void;
+						public onSaveInstanceState(param0: globalAndroid.os.Bundle): void;
+						public initRecyclerView(): void;
+						public unregisterFragment(): void;
+						public initRelevantToolbar(): void;
+						public onViewCreated(param0: globalAndroid.view.View, param1: globalAndroid.os.Bundle): void;
+						public performOpenLink(param0: string): void;
+						public setSecureFormMode(param0: boolean, param1: string): void;
+						public unregisterForegroundService(): void;
+						public onActivityResult(param0: number, param1: number, param2: globalAndroid.content.Intent): void;
+						public handleConversationClosed(param0: string, param1: string): void;
 					}
 				}
 			}
@@ -446,31 +318,35 @@ declare module com {
 	}
 }
 
-/// <reference path="./com.liveperson.infra.messaging_ui.fragment.IFeedbackActions.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module fragment {
 					export class ConversationFragmentCallbacks {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.ConversationFragmentCallbacks>;
 						/**
-						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.fragment.ConversationFragmentCallbacks interface with the provided implementation.
+						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.fragment.ConversationFragmentCallbacks interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 						 */
 						public constructor(implementation: {
 							setFeedBackMode(param0: boolean, param1: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 							onSurveySubmitted(param0: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 							setSecureFormMode(param0: boolean, param1: string): void;
+							setFullImageMode(param0: boolean): void;
 						});
+						public constructor();
 						public setFeedBackMode(param0: boolean, param1: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 						public onSurveySubmitted(param0: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 						public setSecureFormMode(param0: boolean, param1: string): void;
+						public setFullImageMode(param0: boolean): void;
 					}
 					export module ConversationFragmentCallbacks {
-						export class NullConversationFragmentCallbacks {
+						export class NullConversationFragmentCallbacks extends com.liveperson.infra.messaging_ui.fragment.ConversationFragmentCallbacks {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.ConversationFragmentCallbacks.NullConversationFragmentCallbacks>;
 							public constructor();
 							public setFeedBackMode(param0: boolean, param1: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 							public setSecureFormMode(param0: boolean, param1: string): void;
+							public setFullImageMode(param0: boolean): void;
 							public onSurveySubmitted(param0: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 						}
 					}
@@ -480,49 +356,41 @@ declare module com {
 	}
 }
 
-import androidviewanimationAnimation = android.view.animation.Animation;
-import androidosMessage = android.os.Message;
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.os.Message.d.ts" />
-/// <reference path="./android.view.LayoutInflater.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./android.view.animation.Animation.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.fragment.FeedbackFragment.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.HashMap.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module fragment {
-					export class FeedbackFragment {
+					export class FeedbackFragment implements com.liveperson.infra.messaging_ui.fragment.IFeedbackActions {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.FeedbackFragment>;
 						public static TAG: string;
 						public static CSAT_FLOW_DEBUG: boolean;
-						public onSaveInstanceState(param0: androidosBundle): void;
 						public onConnectionChanged(param0: boolean): void;
 						public constructor();
 						public onResume(): void;
+						public static newInstance(param0: string, param1: string, param2: string): com.liveperson.infra.messaging_ui.fragment.FeedbackFragment;
 						public slideOutFragment(): boolean;
 						public skipFeedBackScreen(): void;
 						public onPause(): void;
-						public onCreate(param0: androidosBundle): void;
-						public onCreateAnimation(param0: number, param1: boolean, param2: number): androidviewanimationAnimation;
-						public onCreateView(param0: androidviewLayoutInflater, param1: androidviewViewGroup, param2: androidosBundle): androidviewView;
+						public onCreate(param0: globalAndroid.os.Bundle): void;
+						public onCreateAnimation(param0: number, param1: boolean, param2: number): globalAndroid.view.animation.Animation;
+						public onSaveInstanceState(param0: globalAndroid.os.Bundle): void;
+						public onCreateView(param0: globalAndroid.view.LayoutInflater, param1: globalAndroid.view.ViewGroup, param2: globalAndroid.os.Bundle): globalAndroid.view.View;
 						public closeFeedBackScreen(): void;
 						public onAttachFragment(): void;
-						public static newInstance(param0: string, param1: string, param2: string, param3: javautilHashMap): com.liveperson.infra.messaging_ui.fragment.FeedbackFragment;
 					}
 					export module FeedbackFragment {
 						export class ScreenState {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.FeedbackFragment.ScreenState>;
 							public static CSAT: com.liveperson.infra.messaging_ui.fragment.FeedbackFragment.ScreenState;
 							public static THANK_YOU: com.liveperson.infra.messaging_ui.fragment.FeedbackFragment.ScreenState;
 							public static values(): native.Array<com.liveperson.infra.messaging_ui.fragment.FeedbackFragment.ScreenState>;
 							public static valueOf(param0: string): com.liveperson.infra.messaging_ui.fragment.FeedbackFragment.ScreenState;
 						}
 						export class StarHandler {
-							public handleMessage(param0: androidosMessage): void;
-							public constructor(param0: com.liveperson.infra.messaging_ui.fragment.FeedbackFragment, param1: com.liveperson.infra.messaging_ui.fragment.FeedbackFragment);
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.FeedbackFragment.StarHandler>;
+							public constructor(param0: com.liveperson.infra.messaging_ui.fragment.FeedbackFragment);
+							public handleMessage(param0: globalAndroid.os.Message): void;
 						}
 					}
 				}
@@ -531,24 +399,24 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.LayoutInflater.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module fragment {
 					export class FullImageFragment {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.FullImageFragment>;
 						public static TAG: string;
 						public static KEY_IMAGE_URI_STRING: string;
 						public static newInstance(param0: string): com.liveperson.infra.messaging_ui.fragment.FullImageFragment;
 						public toggleFullScreen(): void;
 						public constructor();
-						public onCreateView(param0: androidviewLayoutInflater, param1: androidviewViewGroup, param2: androidosBundle): androidviewView;
-						public onViewCreated(param0: androidviewView, param1: androidosBundle): void;
+						public onViewCreated(param0: globalAndroid.view.View, param1: globalAndroid.os.Bundle): void;
+						public onMenuItemClick(param0: globalAndroid.view.MenuItem): boolean;
+						public onDestroy(): void;
+						public onResume(): void;
+						public onCreate(param0: globalAndroid.os.Bundle): void;
+						public onCreateView(param0: globalAndroid.view.LayoutInflater, param1: globalAndroid.view.ViewGroup, param2: globalAndroid.os.Bundle): globalAndroid.view.View;
 					}
 				}
 			}
@@ -562,12 +430,14 @@ declare module com {
 			export module messaging_ui {
 				export module fragment {
 					export class IConnectable {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.IConnectable>;
 						/**
-						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.fragment.IConnectable interface with the provided implementation.
+						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.fragment.IConnectable interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 						 */
 						public constructor(implementation: {
 							connect(): void;
 						});
+						public constructor();
 						public connect(): void;
 					}
 				}
@@ -582,13 +452,15 @@ declare module com {
 			export module messaging_ui {
 				export module fragment {
 					export class IFeedbackActions {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.IFeedbackActions>;
 						/**
-						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.fragment.IFeedbackActions interface with the provided implementation.
+						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.fragment.IFeedbackActions interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 						 */
 						public constructor(implementation: {
 							closeFeedBackScreen(): void;
 							skipFeedBackScreen(): void;
 						});
+						public constructor();
 						public closeFeedBackScreen(): void;
 						public skipFeedBackScreen(): void;
 					}
@@ -598,35 +470,40 @@ declare module com {
 	}
 }
 
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module fragment {
 					export class NestedFragmentsContainerCallbacks {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.NestedFragmentsContainerCallbacks>;
 						/**
-						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.fragment.NestedFragmentsContainerCallbacks interface with the provided implementation.
+						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.fragment.NestedFragmentsContainerCallbacks interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 						 */
 						public constructor(implementation: {
 							sendCSAT(param0: number, param1: number): void;
-							onSurveySubmitted(param0: string): void;
+							onSurveySubmitted(param0: string, param1: number): void;
 							slideOutFragment(): void;
 							slideOutSecureFormFragment(): void;
 							setSecureFormMode(param0: boolean, param1: string): void;
+							setFullImageMode(param0: boolean): void;
 						});
+						public constructor();
 						public sendCSAT(param0: number, param1: number): void;
-						public onSurveySubmitted(param0: string): void;
+						public onSurveySubmitted(param0: string, param1: number): void;
 						public setSecureFormMode(param0: boolean, param1: string): void;
 						public slideOutFragment(): void;
+						public setFullImageMode(param0: boolean): void;
 						public slideOutSecureFormFragment(): void;
 					}
 					export module NestedFragmentsContainerCallbacks {
-						export class NullNestedFragmentsContainerCallbacks {
+						export class NullNestedFragmentsContainerCallbacks extends com.liveperson.infra.messaging_ui.fragment.NestedFragmentsContainerCallbacks {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.NestedFragmentsContainerCallbacks.NullNestedFragmentsContainerCallbacks>;
 							public constructor();
-							public onSurveySubmitted(param0: string): void;
+							public onSurveySubmitted(param0: string, param1: number): void;
 							public slideOutFragment(): void;
 							public setSecureFormMode(param0: boolean, param1: string): void;
+							public setFullImageMode(param0: boolean): void;
 							public sendCSAT(param0: number, param1: number): void;
 							public slideOutSecureFormFragment(): void;
 						}
@@ -637,19 +514,13 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.LayoutInflater.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.fragment.SecuredFormFragment.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module fragment {
 					export class SecuredFormFragment {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.SecuredFormFragment>;
 						public static TAG: string;
 						public static JS_INTERFACE_OBJ_NAME: string;
 						public static STATE: string;
@@ -664,18 +535,19 @@ declare module com {
 						public static FORM_TITLE: string;
 						public static ABORTED: string;
 						public static NOT_DEFINED_YET: number;
-						public onActivityCreated(param0: androidosBundle): void;
 						public constructor();
-						public onCreate(param0: androidosBundle): void;
-						public onCreateView(param0: androidviewLayoutInflater, param1: androidviewViewGroup, param2: androidosBundle): androidviewView;
 						public slideOutSecureFormFragment(): boolean;
-						public onAttach(param0: androidcontentContext): void;
+						public onActivityCreated(param0: globalAndroid.os.Bundle): void;
+						public onCreate(param0: globalAndroid.os.Bundle): void;
+						public onAttach(param0: globalAndroid.content.Context): void;
 						public slideOutFragment(): boolean;
+						public onCreateView(param0: globalAndroid.view.LayoutInflater, param1: globalAndroid.view.ViewGroup, param2: globalAndroid.os.Bundle): globalAndroid.view.View;
 						public onStart(): void;
 						public onPause(): void;
 					}
 					export module SecuredFormFragment {
 						export class WebAppInterface {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.fragment.SecuredFormFragment.WebAppInterface>;
 							public onPCIMessage(param0: string): void;
 							public constructor(param0: com.liveperson.infra.messaging_ui.fragment.SecuredFormFragment);
 						}
@@ -686,25 +558,22 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./com.liveperson.infra.ICallback.d.ts" />
-/// <reference path="./com.liveperson.infra.model.PushMessage.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module notification {
-					export class NotificationController {
+					export class NotificationController extends com.liveperson.infra.Clearable {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.notification.NotificationController>;
 						public static instance: com.liveperson.infra.messaging_ui.notification.NotificationController;
 						public static ACTION_LP_UPDATE_NUM_UNREAD_MESSAGES_ACTION: string;
 						public static ACTION_LP_UPDATE_NUM_UNREAD_MESSAGES_EXTRA: string;
+						public getNumUnreadMessages(param0: string, param1: string, param2: com.liveperson.infra.ICallback<java.lang.Integer,java.lang.Exception>): void;
+						public clearMessagesForBrand(param0: globalAndroid.content.Context, param1: string): void;
 						public static valueOf(param0: string): com.liveperson.infra.messaging_ui.notification.NotificationController;
 						public addMessageToCounter(param0: string, param1: com.liveperson.infra.model.PushMessage): number;
-						public clearMessagesForBrand(param0: androidcontentContext, param1: string): void;
-						public addMessageAndDisplayNotification(param0: androidcontentContext, param1: string, param2: com.liveperson.infra.model.PushMessage, param3: boolean, param4: number): void;
-						public getNumUnreadMessages(param0: string, param1: string, param2: com.liveperson.infra.ICallback): void;
 						public clear(): void;
+						public addMessageAndDisplayNotification(param0: globalAndroid.content.Context, param1: string, param2: com.liveperson.infra.model.PushMessage, param3: boolean, param4: number): void;
 						public getNumUnreadMessages(param0: string): number;
 						public static values(): native.Array<com.liveperson.infra.messaging_ui.notification.NotificationController>;
 					}
@@ -714,13 +583,13 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module screens {
 					export class CaptionPreviewActivity {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.screens.CaptionPreviewActivity>;
 						public static BRAND_ID: string;
 						public static TARGET_ID: string;
 						public static IMAGE_URI: string;
@@ -729,8 +598,8 @@ declare module com {
 						public static AUTH_KEY: string;
 						public static VIEW_PARAMS: string;
 						public constructor();
-						public onCreate(param0: androidosBundle): void;
 						public onResume(): void;
+						public onCreate(param0: globalAndroid.os.Bundle): void;
 						public onBackPressed(): void;
 						public onPause(): void;
 					}
@@ -740,21 +609,19 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module toolbar {
 					export class CaptionPreviewToolBar {
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.toolbar.CaptionPreviewToolBar>;
 						public setTitle(param0: string): void;
+						public constructor(param0: globalAndroid.content.Context);
 						public init(): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
 						public onFinishInflate(): void;
-						public constructor(param0: androidcontentContext);
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
 					}
 				}
 			}
@@ -762,33 +629,30 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./com.liveperson.infra.LocalBroadcastReceiver.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.fragment.IFeedbackActions.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module toolbar {
 					export class ConversationToolBar extends com.liveperson.infra.messaging_ui.toolbar.LPToolBar {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.toolbar.ConversationToolBar>;
 						public mAgentTypingReceiver: com.liveperson.infra.LocalBroadcastReceiver;
+						public constructor(param0: globalAndroid.content.Context);
 						public setAgentName(param0: string): void;
 						public setFeedBackMode(param0: boolean, param1: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 						public registerReceivers(): void;
 						public onSurveySubmitted(param0: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 						public onResume(): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
 						public onFinishInflate(): void;
 						public unregisterReceivers(): void;
 						public updateAgent(): void;
 						public onPause(): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
 						public updateToolBarData(): void;
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
+						public setFullImageMode(param0: boolean): void;
 						public onInitCompleted(): void;
-						public constructor(param0: androidcontentContext);
 						public initReceivers(): void;
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
 						public setBrandId(param0: string): void;
 					}
 				}
@@ -797,32 +661,30 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.fragment.IFeedbackActions.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module toolbar {
 					export abstract class LPToolBar {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.toolbar.LPToolBar>;
 						public mBrandId: string;
+						public constructor(param0: globalAndroid.content.Context);
 						public setAgentName(param0: string): void;
 						public setFeedBackMode(param0: boolean, param1: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 						public registerReceivers(): void;
 						public onSurveySubmitted(param0: com.liveperson.infra.messaging_ui.fragment.IFeedbackActions): void;
 						public onResume(): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
 						public onFinishInflate(): void;
 						public unregisterReceivers(): void;
 						public updateAgent(): void;
 						public onPause(): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
 						public updateToolBarData(): void;
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
+						public setFullImageMode(param0: boolean): void;
 						public onInitCompleted(): void;
-						public constructor(param0: androidcontentContext);
 						public initReceivers(): void;
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
 						public setBrandId(param0: string): void;
 					}
 				}
@@ -831,22 +693,20 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module toolbar {
 					export class SecuredFormToolBar extends com.liveperson.infra.messaging_ui.toolbar.LPToolBar {
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.toolbar.SecuredFormToolBar>;
+						public constructor(param0: globalAndroid.content.Context);
 						public setAgentName(param0: string): void;
 						public onResume(): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
 						public onFinishInflate(): void;
 						public onInitCompleted(): void;
-						public constructor(param0: androidcontentContext);
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
 						public onPause(): void;
 					}
 				}
@@ -855,57 +715,51 @@ declare module com {
 	}
 }
 
-import androidosHandler = android.os.Handler;
-import androidwidgetProgressBar = android.widget.ProgressBar;
-import androidwidgetImageButton = android.widget.ImageButton;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.os.Handler.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./android.widget.ImageButton.d.ts" />
-/// <reference path="./android.widget.ProgressBar.d.ts" />
-/// <reference path="./android.widget.TextView.d.ts" />
-/// <reference path="./com.liveperson.infra.model.types.ChatState.d.ts" />
-/// <reference path="./com.liveperson.infra.ui.view.ui.TooltipWindow.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export class AmsEnterMessage {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage>;
 						public static MAX_RECORD_TIME_MS: number;
-						public mHandler: androidosHandler;
-						public mRecordProgressBar: androidwidgetProgressBar;
-						public mMaxRecordTimeTextView: androidwidgetTextView;
-						public mRecordProgressTimeTextView: androidwidgetTextView;
+						public mHandler: globalAndroid.os.Handler;
+						public mRecordProgressBar: globalAndroid.widget.ProgressBar;
+						public mMaxRecordTimeTextView: globalAndroid.widget.TextView;
+						public mRecordProgressTimeTextView: globalAndroid.widget.TextView;
 						public mMaxRecordTimeMs: number;
-						public mMicButton: androidwidgetImageButton;
+						public micButton: globalAndroid.widget.ImageButton;
+						public stopButton: globalAndroid.widget.ImageButton;
+						public replayButton: globalAndroid.widget.ImageButton;
+						public recordingIndicator: globalAndroid.widget.ImageView;
 						public mMicTooltipWindow: com.liveperson.infra.ui.view.ui.TooltipWindow;
 						public onConnectionChanged(param0: boolean): void;
 						public cancelRecording(): void;
 						public sendMessageWithURL(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string): void;
+						public isContentWaiting(): boolean;
 						public sendMessage(param0: string): void;
 						public sendMessage(): void;
 						public changeState(param0: com.liveperson.infra.model.types.ChatState): void;
+						public constructor(param0: globalAndroid.content.Context);
 						public enableMicButtonTooltips(param0: boolean): void;
-						public onCancelRecording(): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
 						public onAfterChangedText(param0: string): void;
 						public onFinishInflate(): void;
 						public isRecordingInProgress(): boolean;
 						public setEnabled(param0: boolean): void;
 						public onHasText(param0: boolean): void;
 						public onBeforeChangedText(): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
 						public shouldUpdateSendButton(): boolean;
-						public constructor(param0: androidcontentContext);
-						public onRecordVoice(): void;
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
 					}
 					export module AmsEnterMessage {
 						export class RecordingStatus {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage.RecordingStatus>;
 							public static STOPPED: com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage.RecordingStatus;
 							public static MAX_REACHED: com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage.RecordingStatus;
 							public static RECORDING: com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage.RecordingStatus;
+							public static PAUSED: com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage.RecordingStatus;
+							public static PLAYING: com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage.RecordingStatus;
 							public static values(): native.Array<com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage.RecordingStatus>;
 							public static valueOf(param0: string): com.liveperson.infra.messaging_ui.uicomponents.AmsEnterMessage.RecordingStatus;
 						}
@@ -916,34 +770,34 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./com.liveperson.infra.ui.view.uicomponents.ICloseMenuListener.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export class AttachmentMenu {
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.AttachmentMenu>;
 						public setOnCloseListener(param0: com.liveperson.infra.ui.view.uicomponents.ICloseMenuListener): void;
+						public constructor(param0: globalAndroid.content.Context);
 						public show(): void;
 						public isMenuOpen(): boolean;
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
 						public setListener(param0: com.liveperson.infra.messaging_ui.uicomponents.AttachmentMenu.AttachmentMenuListener): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
 						public onFinishInflate(): void;
 						public hide(): void;
-						public constructor(param0: androidcontentContext);
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
 					}
 					export module AttachmentMenu {
 						export class AttachmentMenuListener {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.AttachmentMenu.AttachmentMenuListener>;
 							/**
-							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.AttachmentMenu$AttachmentMenuListener interface with the provided implementation.
+							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.AttachmentMenu$AttachmentMenuListener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 							 */
 							public constructor(implementation: {
 								onGalleryButtonPressed(): void;
 								onCameraButtonPressed(): void;
 							});
+							public constructor();
 							public onGalleryButtonPressed(): void;
 							public onCameraButtonPressed(): void;
 						}
@@ -954,114 +808,39 @@ declare module com {
 	}
 }
 
-import androiddatabaseCursor = android.database.Cursor;
-import androidsupportv4appLoaderManager = android.support.v4.app.LoaderManager;
-import androidsupportv4contentCursorLoader = android.support.v4.content.CursorLoader;
-import androidsupportv4contentLoader = android.support.v4.content.Loader;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.database.Cursor.d.ts" />
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.support.v4.app.LoaderManager.d.ts" />
-/// <reference path="./android.support.v4.content.CursorLoader.d.ts" />
-/// <reference path="./android.support.v4.content.Loader.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.ChatMessageRecyclerView.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.CursorLoaderFactory.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior.d.ts" />
-/// <reference path="./com.liveperson.messaging.Messaging.d.ts" />
-declare module com {
-	export module liveperson {
-		export module infra {
-			export module messaging_ui {
-				export module uicomponents {
-					export class ChatMessageRecyclerView {
-						public static TAG: string;
-						public onConnectionChanged(param0: boolean): void;
-						public getCopyBehavior(): com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior;
-						public initListCursorLoader(param0: androidsupportv4appLoaderManager, param1: com.liveperson.messaging.Messaging, param2: com.liveperson.infra.messaging_ui.uicomponents.CursorLoaderFactory): void;
-						public changeCursor(param0: androiddatabaseCursor): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
-						public onFinishInflate(): void;
-						public setCopyBehavior(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
-						public setMoveToBeginningOnNextUpdate(): void;
-						public focusLastItem(): void;
-						public setLoaded(): void;
-						public getItemCount(): number;
-						public constructor(param0: androidcontentContext);
-					}
-					export module ChatMessageRecyclerView {
-						export class ListLoaderCallback {
-							public onLoaderReset(param0: androidsupportv4contentLoader): void;
-							public constructor(param0: com.liveperson.infra.messaging_ui.uicomponents.ChatMessageRecyclerView);
-							public setCursorLoaderFactory(param0: com.liveperson.infra.messaging_ui.uicomponents.CursorLoaderFactory): void;
-							public onCreateLoader(param0: number, param1: androidosBundle): androidsupportv4contentCursorLoader;
-							public onLoadFinished(param0: androidsupportv4contentLoader, param1: androiddatabaseCursor): void;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./android.support.v4.content.CursorLoader.d.ts" />
-declare module com {
-	export module liveperson {
-		export module infra {
-			export module messaging_ui {
-				export module uicomponents {
-					export class CursorLoaderFactory {
-						/**
-						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.CursorLoaderFactory interface with the provided implementation.
-						 */
-						public constructor(implementation: {
-							create(): androidsupportv4contentCursorLoader;
-							getTargetId(): string;
-							getBrandId(): string;
-						});
-						public getBrandId(): string;
-						public getTargetId(): string;
-						public create(): androidsupportv4contentCursorLoader;
-					}
-				}
-			}
-		}
-	}
-}
-
-import androidviewViewOnClickListener = android.view.View.OnClickListener;
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export class IScrollDownIndicator {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator>;
 						/**
-						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator interface with the provided implementation.
+						 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 						 */
 						public constructor(implementation: {
 							resetAndHide(): void;
 							resetAndShowCollapsed(): void;
 							show(param0: number, param1: string): void;
-							setOnClickListener(param0: androidviewViewOnClickListener): void;
+							setOnClickListener(param0: globalAndroid.view.View.OnClickListener): void;
 							isExpand(): boolean;
 						});
-						public setOnClickListener(param0: androidviewViewOnClickListener): void;
+						public constructor();
 						public resetAndHide(): void;
 						public isExpand(): boolean;
 						public show(param0: number, param1: string): void;
+						public setOnClickListener(param0: globalAndroid.view.View.OnClickListener): void;
 						public resetAndShowCollapsed(): void;
 					}
 					export module IScrollDownIndicator {
-						export class NullImplementation {
+						export class NullImplementation extends com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator.NullImplementation>;
 							public constructor();
 							public resetAndHide(): void;
 							public isExpand(): boolean;
 							public resetAndShowCollapsed(): void;
 							public show(param0: number, param1: string): void;
-							public setOnClickListener(param0: androidviewViewOnClickListener): void;
+							public setOnClickListener(param0: globalAndroid.view.View.OnClickListener): void;
 						}
 					}
 				}
@@ -1070,21 +849,17 @@ declare module com {
 	}
 }
 
-import androidsupportdesignwidgetCoordinatorLayout = android.support.design.widget.CoordinatorLayout;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.support.design.widget.CoordinatorLayout.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
-					export class ListBehavior {
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
-						public onDependentViewRemoved(param0: androidsupportdesignwidgetCoordinatorLayout, param1: androidviewView, param2: androidviewView): void;
-						public onDependentViewChanged(param0: androidsupportdesignwidgetCoordinatorLayout, param1: androidviewView, param2: androidviewView): boolean;
-						public layoutDependsOn(param0: androidsupportdesignwidgetCoordinatorLayout, param1: androidviewView, param2: androidviewView): boolean;
+					export class ListBehavior extends globalAndroid.support.design.widget.CoordinatorLayout.Behavior<globalAndroid.view.View> {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.ListBehavior>;
+						public layoutDependsOn(param0: globalAndroid.support.design.widget.CoordinatorLayout, param1: globalAndroid.view.View, param2: globalAndroid.view.View): boolean;
+						public onDependentViewChanged(param0: globalAndroid.support.design.widget.CoordinatorLayout, param1: globalAndroid.view.View, param2: globalAndroid.view.View): boolean;
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
+						public onDependentViewRemoved(param0: globalAndroid.support.design.widget.CoordinatorLayout, param1: globalAndroid.view.View, param2: globalAndroid.view.View): void;
 					}
 				}
 			}
@@ -1092,21 +867,17 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./com.liveperson.messaging.Messaging.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export class MessagingUIUtils {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.MessagingUIUtils>;
+						public showMarkAsUrgentDialog(param0: globalAndroid.content.Context, param1: string, param2: string): void;
 						public constructor(param0: com.liveperson.messaging.Messaging);
-						public showNoNetworkMessage(param0: androidcontentContext): void;
-						public showResolveDialog(param0: androidcontentContext, param1: string): void;
-						public showMarkAsUrgentDialog(param0: androidcontentContext, param1: string, param2: string): void;
-						public showMarkAsNormalDialog(param0: androidcontentContext, param1: string, param2: string): void;
-						public showActionNotAvailableMessage(param0: androidcontentContext): void;
+						public showResolveDialog(param0: globalAndroid.content.Context, param1: string): void;
+						public showMarkAsNormalDialog(param0: globalAndroid.content.Context, param1: string, param2: string): void;
 					}
 				}
 			}
@@ -1114,21 +885,17 @@ declare module com {
 	}
 }
 
-import javautilMap = java.util.Map;
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./com.liveperson.infra.model.PushMessage.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.Map.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export class PushMessageParser {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.PushMessageParser>;
 						public constructor();
-						public static parse(param0: string, param1: javautilMap): com.liveperson.infra.model.PushMessage;
-						public static convertDataToBundle(param0: javautilMap): androidosBundle;
-						public static parseBundle(param0: string, param1: androidosBundle): com.liveperson.infra.model.PushMessage;
+						public static convertDataToBundle(param0: java.util.Map<string,string>): globalAndroid.os.Bundle;
+						public static parseBundle(param0: string, param1: globalAndroid.os.Bundle): com.liveperson.infra.model.PushMessage;
+						public static parse(param0: string, param1: java.util.Map<string,string>): com.liveperson.infra.model.PushMessage;
 					}
 				}
 			}
@@ -1136,27 +903,26 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
-					export class ScrollDownIndicator {
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
-						public setOnClickListener(param0: androidviewViewOnClickListener): void;
+					export class ScrollDownIndicator implements com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.ScrollDownIndicator>;
+						public constructor(param0: globalAndroid.content.Context);
 						public isExpand(): boolean;
 						public resetAndHide(): void;
 						public show(param0: number, param1: string): void;
-						public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
 						public onFinishInflate(): void;
-						public constructor(param0: androidcontentContext);
+						public setOnClickListener(param0: globalAndroid.view.View.OnClickListener): void;
+						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
 						public resetAndShowCollapsed(): void;
 					}
 					export module ScrollDownIndicator {
 						export class MODE {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.ScrollDownIndicator.MODE>;
 							public static CLOSE: com.liveperson.infra.messaging_ui.uicomponents.ScrollDownIndicator.MODE;
 							public static OPEN_COLLAPSED: com.liveperson.infra.messaging_ui.uicomponents.ScrollDownIndicator.MODE;
 							public static OPEN_EXPAND: com.liveperson.infra.messaging_ui.uicomponents.ScrollDownIndicator.MODE;
@@ -1170,8 +936,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.content.Intent.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1179,15 +943,17 @@ declare module com {
 				export module uicomponents {
 					export module inlinemessages {
 						export class IInlineMessage {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.IInlineMessage>;
 							/**
-							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.IInlineMessage interface with the provided implementation.
+							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.IInlineMessage interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 							 */
 							public constructor(implementation: {
-								show(param0: androidcontentContext, param1: androidcontentIntent): void;
+								show(param0: globalAndroid.content.Context, param1: globalAndroid.content.Intent): void;
 								hide(): void;
 							});
+							public constructor();
 							public hide(): void;
-							public show(param0: androidcontentContext, param1: androidcontentIntent): void;
+							public show(param0: globalAndroid.content.Context, param1: globalAndroid.content.Intent): void;
 						}
 					}
 				}
@@ -1196,14 +962,6 @@ declare module com {
 	}
 }
 
-import androidcontentresResources = android.content.res.Resources;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.content.res.Resources.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.infra.LocalBroadcastReceiver.d.ts" />
-/// <reference path="./com.liveperson.infra.ui.view.uicomponents.IConversationProvider.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.HashMap.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1211,13 +969,14 @@ declare module com {
 				export module uicomponents {
 					export module inlinemessages {
 						export class InlineMessagesController {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.InlineMessagesController>;
 							public mTTRReceiver: com.liveperson.infra.LocalBroadcastReceiver;
-							public constructor(param0: androidcontentContext, param1: androidcontentresResources, param2: androidviewView, param3: com.liveperson.infra.ui.view.uicomponents.IConversationProvider, param4: javautilHashMap);
 							public unregister(): void;
 							public registerTTRReceiver(): void;
 							public register(param0: string): void;
 							public onConversationResolved(): void;
 							public hideAll(): void;
+							public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.content.res.Resources, param2: globalAndroid.view.View, param3: com.liveperson.infra.ui.view.uicomponents.IConversationProvider);
 						}
 					}
 				}
@@ -1226,20 +985,17 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.content.Intent.d.ts" />
-/// <reference path="./android.content.res.Resources.d.ts" />
-/// <reference path="./android.widget.TextView.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export module inlinemessages {
-						export class OffHours {
+						export class OffHours extends com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.IInlineMessage {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.OffHours>;
+							public constructor(param0: globalAndroid.content.res.Resources, param1: globalAndroid.widget.TextView);
 							public hide(): void;
-							public constructor(param0: androidcontentresResources, param1: androidwidgetTextView);
-							public show(param0: androidcontentContext, param1: androidcontentIntent): void;
+							public show(param0: globalAndroid.content.Context, param1: globalAndroid.content.Intent): void;
 						}
 					}
 				}
@@ -1248,25 +1004,21 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.content.Intent.d.ts" />
-/// <reference path="./android.content.res.Resources.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.HashMap.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export module inlinemessages {
-						export class TTRSnackBar {
+						export class TTRSnackBar extends com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.IInlineMessage {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.TTRSnackBar>;
 							public hide(): void;
-							public show(param0: androidcontentContext, param1: androidcontentIntent): void;
-							public constructor(param0: androidcontentresResources, param1: androidviewView, param2: javautilHashMap);
+							public constructor(param0: globalAndroid.content.res.Resources, param1: globalAndroid.view.View);
+							public show(param0: globalAndroid.content.Context, param1: globalAndroid.content.Intent): void;
 						}
 						export module TTRSnackBar {
 							export class TTRMode {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.TTRSnackBar.TTRMode>;
 								public static TIMESTAMP: com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.TTRSnackBar.TTRMode;
 								public static SHORTLY: com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.TTRSnackBar.TTRMode;
 								public static values(): native.Array<com.liveperson.infra.messaging_ui.uicomponents.inlinemessages.TTRSnackBar.TTRMode>;
@@ -1287,13 +1039,15 @@ declare module com {
 				export module uicomponents {
 					export module list {
 						export class ChatMessageBgFgListener {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageBgFgListener>;
 							/**
-							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageBgFgListener interface with the provided implementation.
+							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageBgFgListener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 							 */
 							public constructor(implementation: {
 								onBackground(): void;
 								onForeground(): void;
 							});
+							public constructor();
 							public onBackground(): void;
 							public onForeground(): void;
 						}
@@ -1304,43 +1058,27 @@ declare module com {
 	}
 }
 
-import androidosParcelable = android.os.Parcelable;
-import javalangRunnable = java.lang.Runnable;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.os.Parcelable.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior.d.ts" />
-/// <reference path="./com.liveperson.messaging.Messaging.d.ts" />
-/// <reference path="./java.lang.Runnable.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export module list {
-						export class ChatMessageListRecyclerView {
+						export class ChatMessageListRecyclerView implements com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageBgFgListener {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageListRecyclerView>;
 							public static TAG: string;
-							public initData(param0: com.liveperson.messaging.Messaging, param1: string, param2: androidviewView, param3: com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator, param4: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior, param5: androidosParcelable, param6: com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener): void;
 							public removeQuickRepliesMessageOfConversation(param0: string): void;
-							public post(param0: javalangRunnable): boolean;
-							public getCopyBehavior(): com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior;
 							public removeQuickRepliesMessageOfDialog(param0: string): void;
 							public onBackground(): void;
-							public removeCallbacks(param0: javalangRunnable): boolean;
+							public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
 							public onFinishInflate(): void;
-							public getView(): androidviewView;
-							public postDelayed(param0: javalangRunnable, param1: number): boolean;
-							public getContext(): androidcontentContext;
-							public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
 							public focusLastItem(): void;
-							public constructor(param0: androidcontentContext);
 							public setAgentIsTyping(param0: boolean, param1: string): void;
-							public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
+							public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
+							public initData(param0: com.liveperson.messaging.Messaging, param1: string, param2: globalAndroid.view.View, param3: com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator, param4: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior, param5: globalAndroid.os.Parcelable, param6: com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener): void;
 							public onConnectionChanged(param0: boolean): void;
+							public getCopyBehavior(): com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior;
+							public constructor(param0: globalAndroid.content.Context);
 							public onForeground(): void;
 						}
 					}
@@ -1350,61 +1088,46 @@ declare module com {
 	}
 }
 
-import javautilList = java.util.List;
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.os.Parcelable.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageListRecyclerView.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior.d.ts" />
-/// <reference path="./com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder.d.ts" />
-/// <reference path="./com.liveperson.messaging.model.AmsMessagesLoaderProvider.d.ts" />
-/// <reference path="./com.liveperson.messaging.model.FullMessageRow.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.List.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export module list {
-						export class MessagesAsListAdapter {
+						export class MessagesAsListAdapter extends globalAndroid.support.v7.widget.RecyclerView.Adapter<com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder> {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListAdapter>;
+							public constructor(param0: com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageListRecyclerView, param1: globalAndroid.view.View, param2: com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator, param3: com.liveperson.messaging.model.AmsMessagesLoaderProvider, param4: string, param5: globalAndroid.os.Parcelable);
+							public setCopyBehavior(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior): void;
 							public onClearAllMessages(param0: number, param1: number): void;
 							public getItemViewType(param0: number): number;
-							public hideAgentIsTyping(): void;
-							public showAgentIsTyping(param0: string): void;
 							public notifyUnreadMessagesChanged(param0: number, param1: string, param2: number): void;
 							public getAgentAvatarUrl(param0: string): string;
 							public onNewSystemMessageAdded(param0: number, param1: com.liveperson.messaging.model.FullMessageRow): void;
 							public onItemRemoved(param0: number): void;
 							public onItemMoved(param0: number, param1: number): void;
-							public onCreateHeaderViewHolder(param0: androidviewViewGroup): com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder;
+							public onMessageUpdated(param0: number, param1: globalAndroid.os.Bundle): void;
+							public onCreateHeaderViewHolder(param0: globalAndroid.view.ViewGroup): com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder;
+							public onCreateViewHolder(param0: globalAndroid.view.ViewGroup, param1: number): com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder;
 							public getItem(param0: number): com.liveperson.messaging.model.FullMessageRow;
+							public getCopyBehavior(): com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior;
 							public onConnectionLost(): void;
 							public onForeground(): void;
 							public onBindViewHolder(param0: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param1: number): void;
 							public onHistoryLoaded(param0: number, param1: number, param2: boolean): void;
 							public getHeaderId(param0: number): number;
 							public onNewUserMessageAdded(param0: number): void;
+							public onBindViewHolder(param0: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param1: number, param2: java.util.List<any>): void;
 							public onBindHeaderViewHolder(param0: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param1: number): void;
 							public removeQuickRepliesMessageOfConversation(param0: string): void;
-							public getCopyBehavior(): com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior;
 							public removeQuickRepliesMessageOfDialog(param0: string): void;
-							public constructor(param0: com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageListRecyclerView, param1: androidviewView, param2: com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator, param3: com.liveperson.messaging.model.AmsMessagesLoaderProvider, param4: string, param5: androidosParcelable);
 							public onBackground(): void;
 							public onNewAgentMessagesLoaded(param0: number, param1: number): void;
-							public onMessageUpdated(param0: number, param1: androidosBundle): void;
 							public onConnectionAvailable(): void;
 							public onNewUnreadMessages(param0: number, param1: number): void;
 							public getLastVisibleItemPosition(): number;
 							public onNewAgentMessageReceived(param0: number, param1: com.liveperson.messaging.model.FullMessageRow): void;
-							public onCreateViewHolder(param0: androidviewViewGroup, param1: number): com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder;
 							public onNewMessagesLoaded(param0: number, param1: number, param2: number): void;
-							public setCopyBehavior(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior): void;
 							public getItemCount(): number;
-							public onBindViewHolder(param0: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param1: number, param2: javautilList): void;
 							public getFirstVisibleItemPosition(): number;
 							public onViewRecycled(param0: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): void;
 							public setListener(param0: com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener): void;
@@ -1416,76 +1139,59 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.messaging.model.AmsMessagesLoaderProvider.d.ts" />
-/// <reference path="./com.liveperson.messaging.model.FullMessageRow.d.ts" />
-/// <reference path="./java.lang.Runnable.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
 					export module list {
-						export class MessagesAsListLoader {
+						export class MessagesAsListLoader extends com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageBgFgListener {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader>;
+							public addWelcomeMessage(): boolean;
+							public getMDataSet(): java.util.ArrayList<com.liveperson.messaging.model.FullMessageRow>;
 							public size(): number;
 							public isItemAtPositionVisible(param0: number): boolean;
 							public removeListener(): void;
 							public hasVisibleItems(): boolean;
+							public constructor(param0: com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageListRecyclerView, param1: globalAndroid.view.View, param2: com.liveperson.messaging.model.AmsMessagesLoaderProvider, param3: com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader.OnListUpdated, param4: string);
 							public removeQuickRepliesMessageOfConversation(param0: string): void;
 							public removeQuickRepliesMessageOfDialog(param0: string): void;
 							public onScroll(param0: number): void;
 							public onBackground(): void;
-							public setNumOfUnreadAgentMessages(param0: number): void;
-							public onAgentIsTyping(param0: boolean, param1: string): void;
+							public hideShowQuickRepliesFlagInSharedPreference(): void;
 							public getAgentAvatarUrl(param0: string): string;
 							public onConnectionAvailable(): void;
-							public setQuickRepliesMessageShown(param0: boolean): void;
+							public removeIfResolvedMessagesIsDisabled(param0: java.util.List<com.liveperson.messaging.model.FullMessageRow>): java.util.List<com.liveperson.messaging.model.FullMessageRow>;
 							public getPositionMergeStarts(param0: com.liveperson.messaging.model.FullMessageRow): number;
-							public constructor(param0: com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader.IHandlerProvider, param1: androidviewView, param2: com.liveperson.messaging.model.AmsMessagesLoaderProvider, param3: com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader.OnListUpdated, param4: string);
 							public getUnreadPosition(): number;
+							public removeItemFromDataSet(param0: number, param1: string): void;
 							public getTimeAtPosition(param0: number): number;
 							public onConnectionLost(): void;
+							public getLoadingMessagesHandler(): com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader.LoadingMessagesHandler;
 							public getItem(param0: number): com.liveperson.messaging.model.FullMessageRow;
 							public onForeground(): void;
 						}
 						export module MessagesAsListLoader {
-							export class IHandlerProvider {
-								/**
-								 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader$IHandlerProvider interface with the provided implementation.
-								 */
-								public constructor(implementation: {
-									post(param0: javalangRunnable): boolean;
-									postDelayed(param0: javalangRunnable, param1: number): boolean;
-									removeCallbacks(param0: javalangRunnable): boolean;
-									getContext(): androidcontentContext;
-									getView(): androidviewView;
-								});
-								public getView(): androidviewView;
-								public postDelayed(param0: javalangRunnable, param1: number): boolean;
-								public getContext(): androidcontentContext;
-								public removeCallbacks(param0: javalangRunnable): boolean;
-								public post(param0: javalangRunnable): boolean;
-							}
 							export class LoadingMessagesHandler {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader.LoadingMessagesHandler>;
 								public static SECOND_PHASE_DELAY_MILLIS: number;
 								public static FIRST_PHASE_DELAY_MILLIS: number;
-								public removeAgentIsTyping(): void;
-								public showAgentIsTyping(param0: string): void;
+								public constructor(param0: com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader);
 							}
 							export module LoadingMessagesHandler {
 								export class LoadingNewMessagesRunnableFirstPhase {
+									public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader.LoadingMessagesHandler.LoadingNewMessagesRunnableFirstPhase>;
 									public run(): void;
 								}
 								export class LoadingNewMessagesRunnableSecondPhase {
+									public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader.LoadingMessagesHandler.LoadingNewMessagesRunnableSecondPhase>;
 									public run(): void;
 								}
 							}
 							export class OnListUpdated {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader.OnListUpdated>;
 								/**
-								 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader$OnListUpdated interface with the provided implementation.
+								 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListLoader$OnListUpdated interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 								 */
 								public constructor(implementation: {
 									onNewAgentMessageReceived(param0: number, param1: com.liveperson.messaging.model.FullMessageRow): void;
@@ -1494,7 +1200,7 @@ declare module com {
 									onHistoryLoaded(param0: number, param1: number, param2: boolean): void;
 									onNewMessagesLoaded(param0: number, param1: number, param2: number): void;
 									onNewAgentMessagesLoaded(param0: number, param1: number): void;
-									onMessageUpdated(param0: number, param1: androidosBundle): void;
+									onMessageUpdated(param0: number, param1: globalAndroid.os.Bundle): void;
 									onClearAllMessages(param0: number, param1: number): void;
 									onItemRemoved(param0: number): void;
 									onItemMoved(param0: number, param1: number): void;
@@ -1503,12 +1209,13 @@ declare module com {
 									notifyUnreadMessagesChanged(param0: number, param1: string, param2: number): void;
 									onNewUnreadMessages(param0: number, param1: number): void;
 								});
+								public constructor();
 								public getFirstVisibleItemPosition(): number;
 								public notifyUnreadMessagesChanged(param0: number, param1: string, param2: number): void;
 								public onNewAgentMessagesLoaded(param0: number, param1: number): void;
 								public onNewSystemMessageAdded(param0: number, param1: com.liveperson.messaging.model.FullMessageRow): void;
 								public onClearAllMessages(param0: number, param1: number): void;
-								public onMessageUpdated(param0: number, param1: androidosBundle): void;
+								public onMessageUpdated(param0: number, param1: globalAndroid.os.Bundle): void;
 								public onNewUnreadMessages(param0: number, param1: number): void;
 								public onNewMessagesLoaded(param0: number, param1: number, param2: number): void;
 								public getLastVisibleItemPosition(): number;
@@ -1526,8 +1233,6 @@ declare module com {
 	}
 }
 
-import orgjsonJSONArray = org.json.JSONArray;
-/// <reference path="./org.json.JSONArray.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1535,8 +1240,9 @@ declare module com {
 				export module uicomponents {
 					export module list {
 						export abstract class OnSCActionClickListener {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener>;
 							public constructor();
-							public onClick(param0: orgjsonJSONArray): void;
+							public onClick(param0: org.json.JSONArray): void;
 						}
 					}
 				}
@@ -1552,12 +1258,14 @@ declare module com {
 				export module uicomponents {
 					export module structuredcontent {
 						export class QRActionClickListener {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener>;
 							/**
-							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener interface with the provided implementation.
+							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 							 */
 							public constructor(implementation: {
 								onClick(): void;
 							});
+							public constructor();
 							public onClick(): void;
 						}
 					}
@@ -1567,13 +1275,6 @@ declare module com {
 	}
 }
 
-import androidviewMotionEvent = android.view.MotionEvent;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./android.view.MotionEvent.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.actions.BaseAction.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1581,11 +1282,12 @@ declare module com {
 				export module uicomponents {
 					export module structuredcontent {
 						export class TouchyWebView {
-							public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
-							public setWebViewOnClickListener(param0: androidcontentContext, param1: string, param2: com.liveperson.messaging.structuredcontent.model.actions.BaseAction, param3: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener): void;
-							public constructor(param0: androidcontentContext);
-							public constructor(param0: androidcontentContext, param1: androidutilAttributeSet, param2: number);
-							public onTouchEvent(param0: androidviewMotionEvent): boolean;
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.TouchyWebView>;
+							public setWebViewOnClickListener(param0: globalAndroid.content.Context, param1: string, param2: com.liveperson.messaging.structuredcontent.model.actions.BaseAction, param3: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener): void;
+							public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
+							public onTouchEvent(param0: globalAndroid.view.MotionEvent): boolean;
+							public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet, param2: number);
+							public constructor(param0: globalAndroid.content.Context);
 						}
 					}
 				}
@@ -1594,12 +1296,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.complex.QuickRepliesElement.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1608,10 +1304,11 @@ declare module com {
 					export module structuredcontent {
 						export module quickreplies {
 							export class QuickRepliesControl {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.quickreplies.QuickRepliesControl>;
 								public static TAG: string;
-								public constructor(param0: androidcontentContext);
+								public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
+								public constructor(param0: globalAndroid.content.Context);
 								public setQuickRepliesElement(param0: com.liveperson.messaging.structuredcontent.model.elements.complex.QuickRepliesElement, param1: number, param2: string, param3: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param4: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener): void;
-								public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
 							}
 						}
 					}
@@ -1621,8 +1318,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.util.AttributeSet.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1631,9 +1326,10 @@ declare module com {
 					export module structuredcontent {
 						export module viewpager {
 							export class CustomViewPager {
-								public constructor(param0: androidcontentContext);
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.viewpager.CustomViewPager>;
+								public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
+								public constructor(param0: globalAndroid.content.Context);
 								public onMeasure(param0: number, param1: number): void;
-								public constructor(param0: androidcontentContext, param1: androidutilAttributeSet);
 							}
 						}
 					}
@@ -1643,14 +1339,6 @@ declare module com {
 	}
 }
 
-import javalangObject = java.lang.Object;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener.d.ts" />
-/// <reference path="./java.lang.Object.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.List.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1659,11 +1347,12 @@ declare module com {
 					export module structuredcontent {
 						export module viewpager {
 							export class CustomViewPagerAdapter {
-								public isViewFromObject(param0: androidviewView, param1: javalangObject): boolean;
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.viewpager.CustomViewPagerAdapter>;
 								public getPageWidth(param0: number): number;
-								public destroyItem(param0: androidviewViewGroup, param1: number, param2: javalangObject): void;
-								public constructor(param0: androidcontentContext, param1: string, param2: javautilList, param3: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations, param4: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener);
-								public instantiateItem(param0: androidviewViewGroup, param1: number): javalangObject;
+								public destroyItem(param0: globalAndroid.view.ViewGroup, param1: number, param2: any): void;
+								public isViewFromObject(param0: globalAndroid.view.View, param1: any): boolean;
+								public instantiateItem(param0: globalAndroid.view.ViewGroup, param1: number): any;
+								public constructor(param0: globalAndroid.content.Context, param1: string, param2: java.util.List<com.liveperson.messaging.structuredcontent.model.elements.BaseElement>, param3: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations, param4: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener);
 								public getCount(): number;
 							}
 						}
@@ -1682,6 +1371,7 @@ declare module com {
 					export module structuredcontent {
 						export module viewpager {
 							export class ViewPaperPageListener {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.viewpager.ViewPaperPageListener>;
 								public static TAG: string;
 								public constructor(param0: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations);
 								public onPageScrolled(param0: number, param1: number, param2: number): void;
@@ -1694,16 +1384,6 @@ declare module com {
 	}
 }
 
-import javalangStringBuilder = java.lang.StringBuilder;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.widget.TextView.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.ActionableElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.ElementStyle.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.lang.StringBuilder.d.ts" />
-/// <reference path="./java.util.List.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1712,17 +1392,18 @@ declare module com {
 					export module structuredcontent {
 						export module visitor {
 							export abstract class BaseViewBuilderVisitor {
-								public mContext: androidcontentContext;
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.BaseViewBuilderVisitor>;
+								public mContext: globalAndroid.content.Context;
 								public mGlobalListener: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener;
 								public mBrandId: string;
-								public mContentDescriptionStringBuilder: javalangStringBuilder;
+								public mContentDescriptionStringBuilder: java.lang.StringBuilder;
 								public mStructuredContentContainerOperations: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations;
-								public setElementClickListener(param0: com.liveperson.messaging.structuredcontent.model.elements.ActionableElement, param1: androidviewView): void;
-								public convertDip2Pixels(param0: androidcontentContext, param1: number): number;
-								public createElementContentDescription(param0: androidviewView, param1: string, param2: string): string;
-								public activateActions(param0: javautilList, param1: com.liveperson.messaging.structuredcontent.model.elements.ActionableElement): void;
-								public setStyle(param0: androidwidgetTextView, param1: com.liveperson.messaging.structuredcontent.model.elements.basic.ElementStyle): void;
-								public constructor(param0: androidcontentContext, param1: string, param2: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param3: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations);
+								public activateActions(param0: java.util.List<com.liveperson.messaging.structuredcontent.model.actions.BaseAction>, param1: com.liveperson.messaging.structuredcontent.model.elements.ActionableElement): void;
+								public convertDip2Pixels(param0: globalAndroid.content.Context, param1: number): number;
+								public setStyle(param0: globalAndroid.widget.TextView, param1: com.liveperson.messaging.structuredcontent.model.elements.basic.ElementStyle): void;
+								public constructor(param0: globalAndroid.content.Context, param1: string, param2: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param3: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations);
+								public createElementContentDescription(param0: globalAndroid.view.View, param1: string, param2: string): string;
+								public setElementClickListener(param0: com.liveperson.messaging.structuredcontent.model.elements.ActionableElement, param1: globalAndroid.view.View): void;
 							}
 						}
 					}
@@ -1732,25 +1413,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./android.widget.TextView.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.ActionableElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.ButtonElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.ElementStyle.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.ImageElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.LinkElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.MapElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.TextElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.WebViewElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.complex.CarouselElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.complex.LayoutElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.complex.QuickRepliesElement.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.List.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1759,21 +1421,22 @@ declare module com {
 					export module structuredcontent {
 						export module visitor {
 							export class QuickRepliesViewBuilderVisitor extends com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.BaseViewBuilderVisitor {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.QuickRepliesViewBuilderVisitor>;
 								public static TAG: string;
+								public activateActions(param0: java.util.List<com.liveperson.messaging.structuredcontent.model.actions.BaseAction>, param1: com.liveperson.messaging.structuredcontent.model.elements.ActionableElement): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.ButtonElement): void;
-								public createElementContentDescription(param0: androidviewView, param1: string, param2: string): string;
-								public activateActions(param0: javautilList, param1: com.liveperson.messaging.structuredcontent.model.elements.ActionableElement): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.ImageElement): void;
-								public setStyle(param0: androidwidgetTextView, param1: com.liveperson.messaging.structuredcontent.model.elements.basic.ElementStyle): void;
-								public constructor(param0: androidcontentContext, param1: string, param2: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param3: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations);
+								public constructor(param0: globalAndroid.content.Context, param1: string, param2: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param3: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations);
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.WebViewElement): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.complex.CarouselElement): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.complex.QuickRepliesElement): void;
-								public constructor(param0: androidcontentContext, param1: androidviewViewGroup, param2: string, param3: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param4: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener, param5: number, param6: number, param7: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations);
-								public getOutputView(): androidviewView;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.complex.LayoutElement): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.LinkElement): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.TextElement): void;
+								public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.view.ViewGroup, param2: string, param3: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param4: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener, param5: number, param6: number, param7: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations);
+								public getOutputView(): globalAndroid.view.View;
+								public setStyle(param0: globalAndroid.widget.TextView, param1: com.liveperson.messaging.structuredcontent.model.elements.basic.ElementStyle): void;
+								public createElementContentDescription(param0: globalAndroid.view.View, param1: string, param2: string): string;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.MapElement): void;
 							}
 						}
@@ -1784,20 +1447,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.ButtonElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.ImageElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.LinkElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.MapElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.TextElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.basic.WebViewElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.complex.CarouselElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.complex.LayoutElement.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.complex.QuickRepliesElement.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1806,16 +1455,17 @@ declare module com {
 					export module structuredcontent {
 						export module visitor {
 							export class ViewBuilderVisitor extends com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.BaseViewBuilderVisitor {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor>;
 								public static TAG: string;
 								public mQuickRepliesActionListener: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.ButtonElement): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.ImageElement): void;
-								public constructor(param0: androidcontentContext, param1: string, param2: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param3: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations);
+								public constructor(param0: globalAndroid.content.Context, param1: string, param2: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param3: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations);
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.WebViewElement): void;
-								public getViewGroup(): androidviewViewGroup;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.complex.CarouselElement): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.complex.QuickRepliesElement): void;
 								public setQuickRepliesActionListener(param0: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener): void;
+								public getViewGroup(): globalAndroid.view.ViewGroup;
 								public createViewGroupIfMissing(): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.complex.LayoutElement): void;
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.LinkElement): void;
@@ -1823,9 +1473,14 @@ declare module com {
 								public visit(param0: com.liveperson.messaging.structuredcontent.model.elements.basic.MapElement): void;
 							}
 							export module ViewBuilderVisitor {
+								export class AccessibilityDelegateForSc {
+									public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.AccessibilityDelegateForSc>;
+									public onRequestSendAccessibilityEvent(param0: globalAndroid.view.ViewGroup, param1: globalAndroid.view.View, param2: globalAndroid.view.accessibility.AccessibilityEvent): boolean;
+								}
 								export class StructuredContentContainerOperations {
+									public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations>;
 									/**
-									 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor$StructuredContentContainerOperations interface with the provided implementation.
+									 * Constructs a new instance of the com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor$StructuredContentContainerOperations interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 									 */
 									public constructor(implementation: {
 										onChangeContainerSize(param0: number): void;
@@ -1833,6 +1488,7 @@ declare module com {
 										showAvatar(param0: boolean): void;
 										showTimestamp(param0: boolean): void;
 									});
+									public constructor();
 									public showTimestamp(param0: boolean): void;
 									public getLeftPadding(): number;
 									public onChangeContainerSize(param0: number): void;
@@ -1852,7 +1508,30 @@ declare module com {
 		export module infra {
 			export module messaging_ui {
 				export module utils {
+					export class ConversationStateHandler {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.utils.ConversationStateHandler>;
+						public static TAG: string;
+						public static setIsHideConversationCalledInBackground(param0: boolean): void;
+						public static isConversationFragmentRunning(): boolean;
+						public constructor();
+						public static setIsConversationFragmentRunning(param0: boolean): void;
+						public static setConversationBackgroundStatus(param0: boolean): void;
+						public static isConversationInBackground(): boolean;
+						public static isHideConversationCalledInBackground(): boolean;
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module liveperson {
+		export module infra {
+			export module messaging_ui {
+				export module utils {
 					export class LpFileProvider {
+						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.utils.LpFileProvider>;
 						public constructor();
 					}
 				}
@@ -1861,53 +1540,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./com.liveperson.messaging.model.FileMessage.d.ts" />
-/// <reference path="./com.liveperson.messaging.model.MessagingChatMessage.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-declare module com {
-	export module liveperson {
-		export module infra {
-			export module messaging_ui {
-				export module view {
-					export module adapter {
-						export class ChatMessageRow {
-							public constructor(param0: com.liveperson.messaging.model.MessagingChatMessage, param1: string, param2: string, param3: com.liveperson.messaging.model.FileMessage);
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./java.lang.String.d.ts" />
-declare module com {
-	export module liveperson {
-		export module infra {
-			export module messaging_ui {
-				export module view {
-					export module adapter {
-						export class MessageRow {
-							public getMessageState(): com.liveperson.messaging.model.MessagingChatMessage.MessageState;
-							public setMessageState(param0: number): void;
-							public getMessageType(): com.liveperson.messaging.model.MessagingChatMessage.MessageType;
-							public constructor(param0: string, param1: number, param2: number);
-							public getAgentAvatarUrl(): string;
-							public getTimestamp(): number;
-							public setAgentAvatarUrl(param0: string): void;
-							public getMessage(): string;
-							public getEventId(): string;
-							public setEventId(param0: string): void;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./com.liveperson.messaging.background.filesharing.FileSharingType.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1915,13 +1547,15 @@ declare module com {
 				export module view {
 					export module adapter {
 						export class MessagingAdapterListener {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener>;
 							/**
-							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener interface with the provided implementation.
+							 * Constructs a new instance of the com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 							 */
 							public constructor(implementation: {
-								onFileClicked(param0: com.liveperson.messaging.background.filesharing.FileSharingType, param1: string, param2: string, param3: number, param4: number, param5: string): void;
+								OnFileClicked(param0: com.liveperson.messaging.background.filesharing.FileSharingType, param1: string, param2: string, param3: number, param4: number, param5: string): void;
 							});
-							public onFileClicked(param0: com.liveperson.messaging.background.filesharing.FileSharingType, param1: string, param2: string, param3: number, param4: number, param5: string): void;
+							public constructor();
+							public OnFileClicked(param0: com.liveperson.messaging.background.filesharing.FileSharingType, param1: string, param2: string, param3: number, param4: number, param5: string): void;
 						}
 					}
 				}
@@ -1930,45 +1564,6 @@ declare module com {
 	}
 }
 
-import androidsupportv7widgetRecyclerViewViewHolder = android.support.v7.widget.RecyclerView.ViewHolder;
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.database.Cursor.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.ChatMessageRow.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior.d.ts" />
-/// <reference path="./com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder.d.ts" />
-declare module com {
-	export module liveperson {
-		export module infra {
-			export module messaging_ui {
-				export module view {
-					export module adapter {
-						export class MessagingRecyclerViewCursorAdapter {
-							public static TAG: string;
-							public onCreate(param0: androidviewViewGroup, param1: number): com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder;
-							public getItemViewType(param0: number): number;
-							public isLoadingItem(param0: number): boolean;
-							public onBind(param0: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param1: com.liveperson.infra.messaging_ui.view.adapter.ChatMessageRow, param2: number, param3: number): void;
-							public getCopyBehavior(): com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior;
-							public setCopyBehavior(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior): void;
-							public onViewRecycled(param0: androidsupportv7widgetRecyclerViewViewHolder): void;
-							public constructor(param0: androidcontentContext, param1: androiddatabaseCursor);
-							public extractFromCursor(param0: androiddatabaseCursor): com.liveperson.infra.messaging_ui.view.adapter.ChatMessageRow;
-							public setListener(param0: com.liveperson.infra.messaging_ui.view.adapter.MessagingAdapterListener): void;
-							public onAccessibilityEventAvailable(param0: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): void;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-import androidviewViewOnLongClickListener = android.view.View.OnLongClickListener;
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IActivityProvider.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IMenuCallback.d.ts" />
-/// <reference path="./com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -1976,16 +1571,27 @@ declare module com {
 				export module view {
 					export module adapter {
 						export module copybehavior {
-							export abstract class CopyBehavior {
+							export abstract class ContextualActionBehavior {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior>;
 								public mActivityProvider: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IActivityProvider;
 								public mMenuCallback: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IMenuCallback;
-								public getOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): androidviewViewOnClickListener;
-								public onViewRecycled(param0: androidsupportv7widgetRecyclerViewViewHolder): void;
-								public setMenuStateListener(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IMenuCallback): void;
-								public applyCopyCapability(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): void;
+								public mContextualItemAction: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction;
+								public mBundledViewData: java.util.ArrayList<java.lang.Integer>;
+								public mIsFileSelected: boolean;
+								public setActionMode(): void;
+								public getListOfSelectedItems(): java.util.ArrayList;
 								public setActivityProvider(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IActivityProvider): void;
 								public isSelectable(): boolean;
-								public getOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): androidviewViewOnLongClickListener;
+								public hasFilePath(param0: com.liveperson.messaging.model.FileMessage): boolean;
+								public getOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnLongClickListener;
+								public onViewRecycled(param0: globalAndroid.support.v7.widget.RecyclerView.ViewHolder): void;
+								public setMenuStateListener(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IMenuCallback): void;
+								public getOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnClickListener;
+								public onMenuItemClick(param0: globalAndroid.view.MenuItem): boolean;
+								public isFile(param0: com.liveperson.messaging.model.FileMessage): boolean;
+								public getContextualItemAction(): com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction;
+								public getIfFileSelectedBeforeOrientation(): boolean;
+								public applyContextualActionBehavior(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
 							}
 						}
 					}
@@ -1995,7 +1601,47 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.app.Activity.d.ts" />
+declare module com {
+	export module liveperson {
+		export module infra {
+			export module messaging_ui {
+				export module view {
+					export module adapter {
+						export module copybehavior {
+							export class ContextualItemAction {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction>;
+								/**
+								 * Constructs a new instance of the com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+								 */
+								public constructor(implementation: {
+									performOpenLink(param0: string): void;
+									PerformCopyTextToClipboard(param0: string): void;
+									performSaveFile(param0: string): void;
+									performFileAction(param0: string, param1: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction.Action): void;
+								});
+								public constructor();
+								public performFileAction(param0: string, param1: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction.Action): void;
+								public PerformCopyTextToClipboard(param0: string): void;
+								public performSaveFile(param0: string): void;
+								public performOpenLink(param0: string): void;
+							}
+							export module ContextualItemAction {
+								export class Action {
+									public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction.Action>;
+									public static SHARE: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction.Action;
+									public static OPEN: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction.Action;
+									public static values(): native.Array<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction.Action>;
+									public static valueOf(param0: string): com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction.Action;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2004,13 +1650,15 @@ declare module com {
 					export module adapter {
 						export module copybehavior {
 							export class IActivityProvider {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IActivityProvider>;
 								/**
-								 * Constructs a new instance of the com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IActivityProvider interface with the provided implementation.
+								 * Constructs a new instance of the com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IActivityProvider interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 								 */
 								public constructor(implementation: {
-									getActivity(): androidappActivity;
+									getActivity(): globalAndroid.app.Activity;
 								});
-								public getActivity(): androidappActivity;
+								public constructor();
+								public getActivity(): globalAndroid.app.Activity;
 							}
 						}
 					}
@@ -2028,13 +1676,15 @@ declare module com {
 					export module adapter {
 						export module copybehavior {
 							export class IMenuCallback {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IMenuCallback>;
 								/**
-								 * Constructs a new instance of the com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IMenuCallback interface with the provided implementation.
+								 * Constructs a new instance of the com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IMenuCallback interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 								 */
 								public constructor(implementation: {
 									onMenuOpen(): void;
 									onMenuClose(): void;
 								});
+								public constructor();
 								public onMenuOpen(): void;
 								public onMenuClose(): void;
 							}
@@ -2046,7 +1696,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2054,17 +1703,26 @@ declare module com {
 				export module view {
 					export module adapter {
 						export module copybehavior {
-							export class MessagingActionModeCopyBehavior extends com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior {
-								public setSelected(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): void;
-								public getOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): androidviewViewOnClickListener;
-								public setOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): void;
-								public onViewRecycled(param0: androidsupportv7widgetRecyclerViewViewHolder): void;
-								public applyCopyCapability(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): void;
-								public constructor();
+							export class MessagingContextualActionModeBehavior extends com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.MessagingContextualActionModeBehavior>;
+								public onDestroyActionMode(param0: globalAndroid.view.ActionMode): void;
+								public onCreateActionMode(param0: globalAndroid.view.ActionMode, param1: globalAndroid.view.Menu): boolean;
+								public setActionMode(): void;
+								public constructor(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction, param1: java.util.ArrayList<java.lang.Integer>, param2: boolean);
+								public onActionItemClicked(param0: globalAndroid.view.ActionMode, param1: globalAndroid.view.MenuItem): boolean;
+								public getListOfSelectedItems(): java.util.ArrayList;
+								public onPrepareActionMode(param0: globalAndroid.view.ActionMode, param1: globalAndroid.view.Menu): boolean;
 								public isSelectable(): boolean;
-								public getOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): androidviewViewOnLongClickListener;
+								public setOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
+								public getOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnLongClickListener;
+								public setSelected(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
+								public onViewRecycled(param0: globalAndroid.support.v7.widget.RecyclerView.ViewHolder): void;
+								public setOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
+								public getOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnClickListener;
+								public onMenuItemClick(param0: globalAndroid.view.MenuItem): boolean;
 								public getSelectionTextToCopy(): string;
-								public setOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): void;
+								public getIfFileSelectedBeforeOrientation(): boolean;
+								public applyContextualActionBehavior(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
 							}
 						}
 					}
@@ -2074,8 +1732,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.view.MenuItem.d.ts" />
-/// <reference path="./com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2083,17 +1739,22 @@ declare module com {
 				export module view {
 					export module adapter {
 						export module copybehavior {
-							export class MessagingSimpleMenuCopyBehavior extends com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior {
-								public getOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): androidviewViewOnClickListener;
-								public onViewRecycled(param0: androidsupportv7widgetRecyclerViewViewHolder): void;
-								public applyCopyCapability(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): void;
-								public constructor();
+							export class MessagingContextualSimpleMenuBehavior extends com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.MessagingContextualSimpleMenuBehavior>;
+								public constructor(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction, param1: java.util.ArrayList, param2: boolean);
+								public onViewRecycled(param0: globalAndroid.support.v7.widget.RecyclerView.ViewHolder): void;
+								public setActionMode(): void;
+								public getListOfSelectedItems(): java.util.ArrayList;
+								public getOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnClickListener;
 								public isSelectable(): boolean;
-								public getOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder): androidviewViewOnLongClickListener;
+								public getIfFileSelectedBeforeOrientation(): boolean;
+								public applyContextualActionBehavior(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
+								public getOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnLongClickListener;
 							}
-							export module MessagingSimpleMenuCopyBehavior {
+							export module MessagingContextualSimpleMenuBehavior {
 								export class MyOnMenuItemClickListener {
-									public onMenuItemClick(param0: androidviewMenuItem): boolean;
+									public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.MessagingContextualSimpleMenuBehavior.MyOnMenuItemClickListener>;
+									public onMenuItemClick(param0: globalAndroid.view.MenuItem): boolean;
 								}
 							}
 						}
@@ -2104,11 +1765,39 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior.d.ts" />
-/// <reference path="./com.liveperson.infra.model.Message.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
+declare module com {
+	export module liveperson {
+		export module infra {
+			export module messaging_ui {
+				export module view {
+					export module adapter {
+						export module viewholder {
+							export class AmsAgentFileViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentFileViewHolder>;
+								public static TAG: string;
+								public mMessageImageView: globalAndroid.widget.ImageView;
+								public mFileStatusView: globalAndroid.widget.ImageView;
+								public mDownloadableFileViewProcessor: com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsDownloadableFileViewProcessor;
+								public mMessageType: com.liveperson.messaging.model.MessagingChatMessage.MessageType;
+								public setMessageImage(param0: string, param1: string, param2: com.liveperson.infra.database.tables.FilesTable.LoadStatus, param3: com.liveperson.messaging.background.filesharing.FileSharingType): void;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
+								public getAmsDownloadableFileViewProcessor(): com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsDownloadableFileViewProcessor;
+								public applyChanges(param0: globalAndroid.os.Bundle, param1: com.liveperson.infra.model.Message): void;
+								public setMessageText(param0: string, param1: boolean): void;
+								public updateContentDescription(): void;
+								public setImageLongClickListener(param0: globalAndroid.view.View.OnLongClickListener): void;
+								public recycle(): void;
+								public setImageClickListener(param0: globalAndroid.view.View.OnClickListener): void;
+								public constructor(param0: globalAndroid.view.View);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2117,15 +1806,17 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsAgentFormInvitationViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentFormInvitationViewHolder>;
 								public static EXTRA_MESSAGE_STATE: string;
 								public getTextToCopy(): string;
-								public applyChanges(param0: androidosBundle, param1: com.liveperson.infra.model.Message): void;
 								public applyColors(): void;
-								public constructor(param0: androidviewView);
-								public constructor(param0: androidviewView, param1: string, param2: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior);
-								public setMessageText(param0: string, param1: boolean): void;
+								public constructor(param0: globalAndroid.view.View, param1: string);
 								public updateContentDescription(): void;
+								public setMessageText(param0: string, param1: boolean): void;
+								public applyChanges(param0: globalAndroid.os.Bundle, param1: com.liveperson.infra.model.Message): void;
 								public setViewAppearanceByState(param0: com.liveperson.messaging.model.MessagingChatMessage.MessageState): void;
+								public setMessageState(param0: com.liveperson.messaging.model.MessagingChatMessage.MessageState): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2135,13 +1826,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener.d.ts" />
-/// <reference path="./com.liveperson.infra.model.Message.d.ts" />
-/// <reference path="./com.liveperson.messaging.structuredcontent.model.elements.SimpleElement.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2149,23 +1833,21 @@ declare module com {
 				export module view {
 					export module adapter {
 						export module viewholder {
-							export class AmsAgentStructuredContentViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentViewHolder implements com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsViewHolder, com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations {
-								public applyChanges(param0: androidosBundle, param1: com.liveperson.infra.model.Message): void;
+							export class AmsAgentStructuredContentViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentViewHolder implements com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.visitor.ViewBuilderVisitor.StructuredContentContainerOperations {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentStructuredContentViewHolder>;
+								public constructor(param0: globalAndroid.view.View, param1: string);
 								public updateContentDescription(): void;
 								public getLeftPadding(): number;
-								public setAgentAvatar(param0: string): void;
 								public onChangeContainerSize(param0: number): void;
 								public showAvatar(param0: boolean): void;
 								public recycle(): void;
+								public constructor(param0: globalAndroid.view.View);
 								public setRootElement(param0: com.liveperson.messaging.structuredcontent.model.elements.SimpleElement, param1: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener, param2: com.liveperson.infra.messaging_ui.uicomponents.structuredcontent.QRActionClickListener): void;
 								public applyColors(): void;
-								public constructor(param0: androidviewView);
+								public setVisibility(param0: boolean): void;
 								public setMessageText(param0: string, param1: boolean): void;
 								public showTimestamp(param0: boolean): void;
-								public constructor(param0: androidviewView, param1: string);
-								public setAgentNickName(param0: string): void;
 								public setRootElement(param0: com.liveperson.messaging.structuredcontent.model.elements.SimpleElement, param1: com.liveperson.infra.messaging_ui.uicomponents.list.OnSCActionClickListener): void;
-								public setOnAgentAvatarClicked(param0: androidviewViewOnClickListener): void;
 							}
 						}
 					}
@@ -2175,10 +1857,6 @@ declare module com {
 	}
 }
 
-import androidwidgetImageView = android.widget.ImageView;
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.widget.ImageView.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2187,13 +1865,12 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsAgentTypingViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentViewHolder {
-								public mAgentIsTypingAnimatedIndicator: androidwidgetImageView;
-								public applyColors(): void;
-								public constructor(param0: androidviewView);
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentTypingViewHolder>;
+								public mAgentIsTypingAnimatedIndicator: globalAndroid.widget.ImageView;
 								public setMessageText(param0: string, param1: boolean): void;
-								public updateContentDescription(): void;
 								public showTypingAnimation(): void;
 								public recycle(): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2203,10 +1880,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior.d.ts" />
-/// <reference path="./com.liveperson.infra.utils.SourceContent.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2215,17 +1888,18 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsAgentURLViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentURLViewHolder>;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior);
 								public getTextToCopy(): string;
 								public applyColors(): void;
 								public setTimestamp(param0: number): void;
-								public constructor(param0: androidviewView);
 								public setMessageText(param0: string, param1: boolean): void;
-								public updateContentDescription(): void;
-								public constructor(param0: androidviewView, param1: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior);
 								public recycle(): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 							export module AmsAgentURLViewHolder {
 								export class MyLinkPreviewCallback {
+									public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentURLViewHolder.MyLinkPreviewCallback>;
 									public clean(): void;
 									public getText(): string;
 									public onPre(): void;
@@ -2241,11 +1915,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.widget.ImageView.d.ts" />
-/// <reference path="./com.liveperson.infra.model.Message.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2254,18 +1923,18 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsAgentViewHolder {
-								public mAgentAvatar: androidwidgetImageView;
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsAgentViewHolder>;
+								public mAgentAvatar: globalAndroid.widget.ImageView;
 								public mAgentNickName: string;
-								public applyChanges(param0: androidosBundle, param1: com.liveperson.infra.model.Message): void;
 								public applyColors(): void;
-								public constructor(param0: androidviewView);
 								public onBind(): void;
+								public applyChanges(param0: globalAndroid.os.Bundle, param1: com.liveperson.infra.model.Message): void;
 								public updateContentDescription(): void;
 								public setMessageText(param0: string, param1: boolean): void;
+								public setOnAgentAvatarClicked(param0: globalAndroid.view.View.OnClickListener): void;
 								public setAgentAvatar(param0: string): void;
 								public setAgentNickName(param0: string): void;
-								public setOnAgentAvatarClicked(param0: androidviewViewOnClickListener): void;
-								public setSecuredFormTitle(): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2275,8 +1944,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2285,10 +1952,11 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsBrandMsgViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsBrandMsgViewHolder>;
 								public applyColors(): void;
-								public constructor(param0: androidviewView);
 								public updateContentDescription(): void;
 								public setMessageText(param0: string, param1: boolean): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2298,8 +1966,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2308,11 +1974,11 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsConsumerFormSubmissionViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder {
-								public constructor(param0: androidviewView, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerFormSubmissionViewHolder>;
 								public getTextToCopy(): string;
 								public applyColors(): void;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
 								public setMessageText(param0: string, param1: boolean): void;
-								public updateContentDescription(): void;
 							}
 						}
 					}
@@ -2322,11 +1988,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.widget.ImageView.d.ts" />
-/// <reference path="./com.liveperson.infra.model.Message.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2334,20 +1995,22 @@ declare module com {
 				export module view {
 					export module adapter {
 						export module viewholder {
-							export class AmsConsumerImageViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsDownloadableFileViewHolder {
+							export class AmsConsumerImageViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerImageViewHolder>;
 								public static TAG: string;
-								public mMessageImageView: androidwidgetImageView;
-								public constructor(param0: androidviewView, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
-								public applyChanges(param0: androidosBundle, param1: com.liveperson.infra.model.Message): void;
-								public onNotStartedAction(): void;
-								public applyColors(): void;
+								public mMessageImageView: globalAndroid.widget.ImageView;
+								public mFileStatusView: globalAndroid.widget.ImageView;
+								public mDownloadableFileViewProcessor: com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsDownloadableFileViewProcessor;
 								public setMessageImage(param0: string, param1: string, param2: com.liveperson.infra.database.tables.FilesTable.LoadStatus): void;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
+								public getAmsDownloadableFileViewProcessor(): com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsDownloadableFileViewProcessor;
+								public applyChanges(param0: globalAndroid.os.Bundle, param1: com.liveperson.infra.model.Message): void;
 								public setMessageText(param0: string, param1: boolean): void;
-								public onRequestingUrlAction(): void;
 								public updateContentDescription(): void;
-								public setImageClickListener(param0: androidviewViewOnClickListener): void;
-								public onCompletedAction(): void;
+								public setImageLongClickListener(param0: globalAndroid.view.View.OnLongClickListener): void;
 								public recycle(): void;
+								public setImageClickListener(param0: globalAndroid.view.View.OnClickListener): void;
+								public resend(param0: com.liveperson.infra.model.Message, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType): number;
 							}
 						}
 					}
@@ -2357,10 +2020,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior.d.ts" />
-/// <reference path="./com.liveperson.infra.utils.SourceContent.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2369,17 +2028,18 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsConsumerURLViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder {
-								public constructor(param0: androidviewView, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
-								public constructor(param0: androidviewView, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType, param2: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.CopyBehavior);
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerURLViewHolder>;
 								public getTextToCopy(): string;
 								public applyColors(): void;
 								public setTimestamp(param0: number): void;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
 								public setMessageText(param0: string, param1: boolean): void;
-								public updateContentDescription(): void;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType, param2: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior);
 								public recycle(): void;
 							}
 							export module AmsConsumerURLViewHolder {
 								export class MyLinkPreviewCallback {
+									public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerURLViewHolder.MyLinkPreviewCallback>;
 									public clean(): void;
 									public getText(): string;
 									public onPre(): void;
@@ -2395,12 +2055,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.widget.ImageView.d.ts" />
-/// <reference path="./android.widget.TextView.d.ts" />
-/// <reference path="./com.liveperson.infra.model.Message.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2409,19 +2063,20 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsConsumerViewHolder {
-								public mMessageStateText: androidwidgetTextView;
-								public mMessageStateIcon: androidwidgetImageView;
-								public mMessageErrorView: androidwidgetImageView;
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder>;
+								public mMessageStateText: globalAndroid.widget.TextView;
+								public mMessageStateIcon: globalAndroid.widget.ImageView;
+								public mMessageErrorView: globalAndroid.widget.ImageView;
 								public static mSdkMessageState: number;
 								public static mMessageStateTextArray: native.Array<string>;
 								public mViewHolderType: com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder.ViewHolderType;
 								public mMessageType: com.liveperson.messaging.model.MessagingChatMessage.MessageType;
-								public constructor(param0: androidviewView, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
-								public applyChanges(param0: androidosBundle, param1: com.liveperson.infra.model.Message): void;
+								public getErrorView(): globalAndroid.widget.ImageView;
 								public applyColors(): void;
-								public getErrorView(): androidwidgetImageView;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
 								public onBind(): void;
 								public setStateVisibility(param0: number): void;
+								public applyChanges(param0: globalAndroid.os.Bundle, param1: com.liveperson.infra.model.Message): void;
 								public updateContentDescription(): void;
 								public setMessageText(param0: string, param1: boolean): void;
 								public setViewAppearanceByState(param0: com.liveperson.messaging.model.MessagingChatMessage.MessageState, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType, param2: com.liveperson.infra.model.Message): void;
@@ -2429,6 +2084,7 @@ declare module com {
 							}
 							export module AmsConsumerViewHolder {
 								export class ViewHolderType {
+									public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder.ViewHolderType>;
 									public static ICON: com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder.ViewHolderType;
 									public static TEXT: com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder.ViewHolderType;
 									public static values(): native.Array<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder.ViewHolderType>;
@@ -2443,10 +2099,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.infra.model.Message.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2454,25 +2106,19 @@ declare module com {
 				export module view {
 					export module adapter {
 						export module viewholder {
-							export class AmsConsumerVoiceViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsDownloadableFileViewHolder {
+							export class AmsConsumerVoiceViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerVoiceViewHolder>;
 								public static TAG: string;
-								public constructor(param0: androidviewView, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
-								public applyChanges(param0: androidosBundle, param1: com.liveperson.infra.model.Message): void;
 								public stopPlaying(): void;
-								public additionalFailAction(): void;
-								public constructor(param0: androidviewView, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType, param2: string);
-								public setFileRowId(param0: number): void;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
+								public applyChanges(param0: globalAndroid.os.Bundle, param1: com.liveperson.infra.model.Message): void;
 								public updateContentDescription(): void;
-								public onCompletedAction(): void;
-								public recycle(): void;
-								public setCurrentPlaying(param0: string, param1: number, param2: number): void;
-								public onNotStartedAction(): void;
-								public getFailedDownloadDrawableResourceId(): number;
-								public applyColors(): void;
-								public onRequestingUrlAction(): void;
-								public stopAnimation(): void;
+								public setFileRowId(param0: number): void;
 								public playVoiceMessage(param0: string): void;
+								public recycle(): void;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType, param2: string);
 								public setVoiceProperties(param0: string, param1: string, param2: number, param3: number, param4: com.liveperson.infra.database.tables.FilesTable.LoadStatus, param5: string): void;
+								public setCurrentPlaying(param0: string, param1: number, param2: number): void;
 								public resend(param0: com.liveperson.infra.model.Message, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType): number;
 							}
 						}
@@ -2483,7 +2129,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.view.View.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2492,12 +2137,13 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsControllerSystemViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsControllerSystemViewHolder>;
 								public mMessageSequence: number;
 								public getMessageSequence(): number;
 								public setMessageSequence(param0: number): void;
 								public applyColors(): void;
-								public constructor(param0: androidviewView);
 								public updateContentDescription(): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2507,10 +2153,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.widget.ImageView.d.ts" />
-/// <reference path="./com.liveperson.infra.model.Message.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2518,28 +2160,27 @@ declare module com {
 				export module view {
 					export module adapter {
 						export module viewholder {
-							export abstract class AmsDownloadableFileViewHolder extends com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsConsumerViewHolder {
+							export abstract class AmsDownloadableFileViewProcessor {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsDownloadableFileViewProcessor>;
 								public static TAG: string;
-								public mFileStatusView: androidwidgetImageView;
+								public mFileStatusView: globalAndroid.widget.ImageView;
 								public mFileRowId: number;
 								public mFullFile: string;
+								public mFileTpe: string;
 								public mPreviewImage: string;
-								public constructor(param0: androidviewView, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
-								public applyChanges(param0: androidosBundle, param1: com.liveperson.infra.model.Message): void;
+								public applyChanges(param0: globalAndroid.os.Bundle): void;
+								public constructor(param0: globalAndroid.view.View, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType);
 								public additionalFailAction(): void;
 								public setFileRowId(param0: number): void;
-								public updateContentDescription(): void;
 								public applyLoadStatusForDownloadFlow(param0: com.liveperson.infra.database.tables.FilesTable.LoadStatus): void;
 								public onCompletedAction(): void;
 								public onNotStartedAction(): void;
 								public startFailedAnimation(): void;
 								public getFailedDownloadDrawableResourceId(): number;
-								public applyColors(): void;
 								public onRequestingUrlAction(): void;
 								public startProgressBar(): void;
 								public stopAnimation(): void;
 								public applyLoadStatusForUploadFlow(param0: com.liveperson.infra.database.tables.FilesTable.LoadStatus): void;
-								public resend(param0: com.liveperson.infra.model.Message, param1: com.liveperson.messaging.model.MessagingChatMessage.MessageType): number;
 							}
 						}
 					}
@@ -2549,7 +2190,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.view.View.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2558,9 +2198,10 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsLoadMoreViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsLoadMoreViewHolder>;
 								public applyColors(): void;
-								public constructor(param0: androidviewView);
 								public updateContentDescription(): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2570,7 +2211,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.view.View.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2579,13 +2219,14 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsSystemDialogResolvedViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsSystemDialogResolvedViewHolder>;
 								public mMessageSequence: number;
 								public getMessageSequence(): number;
 								public setMessageSequence(param0: number): void;
 								public applyColors(): void;
 								public hideSystemMessageView(param0: boolean): void;
-								public constructor(param0: androidviewView);
 								public updateContentDescription(): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2595,9 +2236,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.infra.model.Message.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2606,13 +2244,14 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsSystemMaskedViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsSystemMaskedViewHolder>;
 								public mMessageSequence: number;
-								public applyChanges(param0: androidosBundle, param1: com.liveperson.infra.model.Message): void;
 								public getMessageSequence(): number;
 								public setMessageSequence(param0: number): void;
 								public applyColors(): void;
-								public constructor(param0: androidviewView);
+								public applyChanges(param0: globalAndroid.os.Bundle, param1: com.liveperson.infra.model.Message): void;
 								public updateContentDescription(): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2622,7 +2261,6 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.view.View.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2631,13 +2269,14 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class AmsSystemResolvedViewHolder {
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsSystemResolvedViewHolder>;
 								public mMessageSequence: number;
 								public getMessageSequence(): number;
 								public setMessageSequence(param0: number): void;
 								public applyColors(): void;
-								public constructor(param0: androidviewView);
 								public hideSystemMessageView(param0: boolean, param1: boolean): void;
 								public updateContentDescription(): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2647,35 +2286,6 @@ declare module com {
 	}
 }
 
-declare module com {
-	export module liveperson {
-		export module infra {
-			export module messaging_ui {
-				export module view {
-					export module adapter {
-						export module viewholder {
-							export class AmsViewHolder {
-								/**
-								 * Constructs a new instance of the com.liveperson.infra.messaging_ui.view.adapter.viewholder.AmsViewHolder interface with the provided implementation.
-								 */
-								public constructor(implementation: {
-									applyColors(): void;
-									updateContentDescription(): void;
-								});
-								public applyColors(): void;
-								public updateContentDescription(): void;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./android.os.Bundle.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./com.liveperson.infra.model.Message.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2684,10 +2294,11 @@ declare module com {
 					export module adapter {
 						export module viewholder {
 							export class UiUnreadIndicatorViewHolder {
-								public applyChanges(param0: androidosBundle, param1: com.liveperson.infra.model.Message): void;
+								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.viewholder.UiUnreadIndicatorViewHolder>;
 								public applyColors(): void;
-								public constructor(param0: androidviewView);
+								public applyChanges(param0: globalAndroid.os.Bundle, param1: com.liveperson.infra.model.Message): void;
 								public updateContentDescription(): void;
+								public constructor(param0: globalAndroid.view.View);
 							}
 						}
 					}
@@ -2697,16 +2308,6 @@ declare module com {
 	}
 }
 
-import androidgraphicsCanvas = android.graphics.Canvas;
-import androidsupportv7widgetRecyclerView = android.support.v7.widget.RecyclerView;
-import androidsupportv7widgetRecyclerViewState = android.support.v7.widget.RecyclerView.State;
-import androidgraphicsRect = android.graphics.Rect;
-/// <reference path="./android.graphics.Canvas.d.ts" />
-/// <reference path="./android.graphics.Rect.d.ts" />
-/// <reference path="./android.support.v7.widget.RecyclerView.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-/// <reference path="./android.view.ViewGroup.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module liveperson {
 		export module infra {
@@ -2714,12 +2315,13 @@ declare module com {
 				export module view {
 					export module decorators {
 						export class AgentIsTypingDecorator {
+							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.decorators.AgentIsTypingDecorator>;
 							public static TAG: string;
 							public constructor();
-							public getItemOffsets(param0: androidgraphicsRect, param1: androidviewView, param2: androidsupportv7widgetRecyclerView, param3: androidsupportv7widgetRecyclerViewState): void;
-							public onDraw(param0: androidgraphicsCanvas, param1: androidsupportv7widgetRecyclerView, param2: androidsupportv7widgetRecyclerViewState): void;
+							public onDraw(param0: globalAndroid.graphics.Canvas, param1: globalAndroid.support.v7.widget.RecyclerView, param2: globalAndroid.support.v7.widget.RecyclerView.State): void;
+							public fixLayoutSize(param0: globalAndroid.view.View, param1: globalAndroid.view.ViewGroup): void;
 							public setAgentIsTyping(param0: boolean, param1: string): void;
-							public fixLayoutSize(param0: androidviewView, param1: androidviewViewGroup): void;
+							public getItemOffsets(param0: globalAndroid.graphics.Rect, param1: globalAndroid.view.View, param2: globalAndroid.support.v7.widget.RecyclerView, param3: globalAndroid.support.v7.widget.RecyclerView.State): void;
 						}
 					}
 				}
@@ -2728,26 +2330,5 @@ declare module com {
 	}
 }
 
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./android.graphics.Canvas.d.ts" />
-/// <reference path="./android.graphics.Rect.d.ts" />
-/// <reference path="./android.support.v7.widget.RecyclerView.d.ts" />
-/// <reference path="./android.view.View.d.ts" />
-declare module com {
-	export module liveperson {
-		export module infra {
-			export module messaging_ui {
-				export module view {
-					export module separator {
-						export class ConversationSeparationDecorator {
-							public getItemOffsets(param0: androidgraphicsRect, param1: androidviewView, param2: androidsupportv7widgetRecyclerView, param3: androidsupportv7widgetRecyclerViewState): void;
-							public constructor(param0: androidcontentContext);
-							public onDraw(param0: androidgraphicsCanvas, param1: androidsupportv7widgetRecyclerView, param2: androidsupportv7widgetRecyclerViewState): void;
-						}
-					}
-				}
-			}
-		}
-	}
-}
+//Generics information:
 

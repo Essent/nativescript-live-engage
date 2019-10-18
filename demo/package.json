@@ -2,10 +2,10 @@
   "nativescript": {
     "id": "org.nativescript.demo",
     "tns-android": {
-      "version": "6.0.0"
+      "version": "6.1.2"
     },
     "tns-ios": {
-      "version": "6.0.1"
+      "version": "6.1.1"
     }
   },
   "description": "A NativeScript demo app for Live Engage",
@@ -28,7 +28,7 @@
     "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "0.7.0",
     "rxjs": "^6.3.3",
-    "tns-core-modules": "6.0.1",
+    "tns-core-modules": "^6.1.2",
     "zone.js": "0.9.1"
   },
   "devDependencies": {
@@ -44,15 +44,15 @@
     "karma": "4.1.0",
     "karma-jasmine": "2.0.1",
     "karma-nativescript-launcher": "^0.4.0",
+    "karma-webpack": "3.0.5",
     "lazy": "1.0.11",
     "nativescript-css-loader": "~0.26.0",
     "nativescript-dev-webpack": "1.0.1",
     "raw-loader": "~1.0.0",
     "resolve-url-loader": "3.0.0",
-    "tns-platform-declarations": "6.0.1",
+    "tns-platform-declarations": "^6.1.2",
     "tslint": "~5.4.3",
-    "typescript": "3.4.5",
-    "karma-webpack": "3.0.5"
+    "typescript": "3.4.5"
   },
   "scripts": {
     "build.plugin": "cd ../src && npm run build",

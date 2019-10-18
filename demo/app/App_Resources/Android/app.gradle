@@ -27,18 +27,12 @@ android {
 
 dependencies {
 
-    def suppotVer = "24.2.1";
-
-    if(project.hasProperty("supportVersion")) {
-        suppotVer = supportVersion
-    }
-
-    compile "com.android.support:appcompat-v7:$suppotVer"
-    compile "com.android.support:design:$suppotVer"
-    compile "com.android.support:recyclerview-v7:$suppotVer"
-    compile "com.android.support:percent:$suppotVer"
+    compile "androidx.appcompat:appcompat:1.1.0"
+    compile "com.google.android.material:material:1.0.0"
+    compile "androidx.recyclerview:recyclerview:1.0.0"
+    compile "androidx.percentlayout:percent:percentlayout"
     compile 'com.google.android.gms:play-services-maps:16.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.neovisionaries:nv-websocket-client:1.31'
