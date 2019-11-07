@@ -69,7 +69,7 @@ declare module com {
 						isInitialized(): boolean;
 						shutDown(param0: com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener): void;
 						logout(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
-						getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): globalAndroid.support.v4.app.Fragment;
+						getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): androidx.fragment.app.Fragment;
 						showConversation(param0: globalAndroid.app.Activity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
 						hideConversation(param0: globalAndroid.app.Activity): void;
 						onAgentAvatarTapped(param0: string): void;
@@ -79,9 +79,9 @@ declare module com {
 					public logout(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
 					public onAgentAvatarTapped(param0: string): void;
 					public hideConversation(param0: globalAndroid.app.Activity): void;
-					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): globalAndroid.support.v4.app.Fragment;
 					public init(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData): void;
 					public isInitialized(): boolean;
+					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): androidx.fragment.app.Fragment;
 					public shutDown(param0: com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener): void;
 				}
 			}
@@ -99,10 +99,10 @@ declare module com {
 					public mMessagingUi: com.liveperson.infra.messaging_ui.MessagingUi;
 					public showConversation(param0: globalAndroid.app.Activity, param1: string, param2: com.liveperson.infra.LPAuthenticationParams, param3: com.liveperson.infra.ConversationViewParams): boolean;
 					public logout(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData, param2: com.liveperson.infra.callbacks.LogoutLivePersonCallBack): void;
-					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): globalAndroid.support.v4.app.Fragment;
 					public init(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData): void;
 					public isInitialized(): boolean;
 					public restart(): void;
+					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): androidx.fragment.app.Fragment;
 					public getMessagingUi(): com.liveperson.infra.messaging_ui.MessagingUi;
 					public onAgentAvatarTapped(param0: string): void;
 					public constructor();
@@ -130,11 +130,11 @@ declare module com {
 					public constructor();
 					public hideConversation(param0: globalAndroid.app.Activity): void;
 					public clear(): void;
-					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): globalAndroid.support.v4.app.Fragment;
 					public init(param0: globalAndroid.content.Context, param1: com.liveperson.infra.messaging_ui.MessagingUiInitData): void;
 					public restart(): void;
 					public isInitialized(): boolean;
 					public getInitBrandId(): string;
+					public getConversationFragment(param0: string, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): androidx.fragment.app.Fragment;
 					public shutDown(param0: com.liveperson.infra.sdkstatemachine.shutdown.ShutDownCompletionListener): void;
 				}
 			}
@@ -296,7 +296,6 @@ declare module com {
 						public unregisterReceivers(): void;
 						public slideOutSecureFormFragment(): void;
 						public verifyCameraPermissions(param0: globalAndroid.app.Activity): boolean;
-						public attachActivity(param0: globalAndroid.support.v4.app.FragmentActivity): void;
 						public verifyStoragePermissions(param0: globalAndroid.app.Activity): boolean;
 						public onBackPressed(): boolean;
 						public verifyStorageAndRecordPermissions(param0: globalAndroid.app.Activity): boolean;
@@ -311,6 +310,7 @@ declare module com {
 						public unregisterForegroundService(): void;
 						public onActivityResult(param0: number, param1: number, param2: globalAndroid.content.Intent): void;
 						public handleConversationClosed(param0: string, param1: string): void;
+						public attachActivity(param0: androidx.fragment.app.FragmentActivity): void;
 					}
 				}
 			}
@@ -854,12 +854,12 @@ declare module com {
 		export module infra {
 			export module messaging_ui {
 				export module uicomponents {
-					export class ListBehavior extends globalAndroid.support.design.widget.CoordinatorLayout.Behavior<globalAndroid.view.View> {
+					export class ListBehavior extends androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior<globalAndroid.view.View> {
 						public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.ListBehavior>;
-						public layoutDependsOn(param0: globalAndroid.support.design.widget.CoordinatorLayout, param1: globalAndroid.view.View, param2: globalAndroid.view.View): boolean;
-						public onDependentViewChanged(param0: globalAndroid.support.design.widget.CoordinatorLayout, param1: globalAndroid.view.View, param2: globalAndroid.view.View): boolean;
+						public layoutDependsOn(param0: androidx.coordinatorlayout.widget.CoordinatorLayout, param1: globalAndroid.view.View, param2: globalAndroid.view.View): boolean;
+						public onDependentViewChanged(param0: androidx.coordinatorlayout.widget.CoordinatorLayout, param1: globalAndroid.view.View, param2: globalAndroid.view.View): boolean;
+						public onDependentViewRemoved(param0: androidx.coordinatorlayout.widget.CoordinatorLayout, param1: globalAndroid.view.View, param2: globalAndroid.view.View): void;
 						public constructor(param0: globalAndroid.content.Context, param1: globalAndroid.util.AttributeSet);
-						public onDependentViewRemoved(param0: globalAndroid.support.design.widget.CoordinatorLayout, param1: globalAndroid.view.View, param2: globalAndroid.view.View): void;
 					}
 				}
 			}
@@ -1094,7 +1094,7 @@ declare module com {
 			export module messaging_ui {
 				export module uicomponents {
 					export module list {
-						export class MessagesAsListAdapter extends globalAndroid.support.v7.widget.RecyclerView.Adapter<com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder> {
+						export class MessagesAsListAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder> {
 							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.uicomponents.list.MessagesAsListAdapter>;
 							public constructor(param0: com.liveperson.infra.messaging_ui.uicomponents.list.ChatMessageListRecyclerView, param1: globalAndroid.view.View, param2: com.liveperson.infra.messaging_ui.uicomponents.IScrollDownIndicator, param3: com.liveperson.messaging.model.AmsMessagesLoaderProvider, param4: string, param5: globalAndroid.os.Parcelable);
 							public setCopyBehavior(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior): void;
@@ -1584,13 +1584,13 @@ declare module com {
 								public isSelectable(): boolean;
 								public hasFilePath(param0: com.liveperson.messaging.model.FileMessage): boolean;
 								public getOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnLongClickListener;
-								public onViewRecycled(param0: globalAndroid.support.v7.widget.RecyclerView.ViewHolder): void;
 								public setMenuStateListener(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.IMenuCallback): void;
 								public getOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnClickListener;
 								public onMenuItemClick(param0: globalAndroid.view.MenuItem): boolean;
 								public isFile(param0: com.liveperson.messaging.model.FileMessage): boolean;
 								public getContextualItemAction(): com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction;
 								public getIfFileSelectedBeforeOrientation(): boolean;
+								public onViewRecycled(param0: androidx.recyclerview.widget.RecyclerView.ViewHolder): void;
 								public applyContextualActionBehavior(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
 							}
 						}
@@ -1716,12 +1716,12 @@ declare module com {
 								public setOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
 								public getOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnLongClickListener;
 								public setSelected(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
-								public onViewRecycled(param0: globalAndroid.support.v7.widget.RecyclerView.ViewHolder): void;
 								public setOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
 								public getOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnClickListener;
 								public onMenuItemClick(param0: globalAndroid.view.MenuItem): boolean;
 								public getSelectionTextToCopy(): string;
 								public getIfFileSelectedBeforeOrientation(): boolean;
+								public onViewRecycled(param0: androidx.recyclerview.widget.RecyclerView.ViewHolder): void;
 								public applyContextualActionBehavior(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
 							}
 						}
@@ -1742,11 +1742,11 @@ declare module com {
 							export class MessagingContextualSimpleMenuBehavior extends com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualActionBehavior {
 								public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.adapter.copybehavior.MessagingContextualSimpleMenuBehavior>;
 								public constructor(param0: com.liveperson.infra.messaging_ui.view.adapter.copybehavior.ContextualItemAction, param1: java.util.ArrayList, param2: boolean);
-								public onViewRecycled(param0: globalAndroid.support.v7.widget.RecyclerView.ViewHolder): void;
 								public setActionMode(): void;
 								public getListOfSelectedItems(): java.util.ArrayList;
 								public getOnClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnClickListener;
 								public isSelectable(): boolean;
+								public onViewRecycled(param0: androidx.recyclerview.widget.RecyclerView.ViewHolder): void;
 								public getIfFileSelectedBeforeOrientation(): boolean;
 								public applyContextualActionBehavior(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): void;
 								public getOnLongClickListener(param0: number, param1: com.liveperson.infra.ui.view.adapter.viewholder.BaseViewHolder, param2: com.liveperson.messaging.model.FileMessage): globalAndroid.view.View.OnLongClickListener;
@@ -2318,10 +2318,10 @@ declare module com {
 							public static class: java.lang.Class<com.liveperson.infra.messaging_ui.view.decorators.AgentIsTypingDecorator>;
 							public static TAG: string;
 							public constructor();
-							public onDraw(param0: globalAndroid.graphics.Canvas, param1: globalAndroid.support.v7.widget.RecyclerView, param2: globalAndroid.support.v7.widget.RecyclerView.State): void;
 							public fixLayoutSize(param0: globalAndroid.view.View, param1: globalAndroid.view.ViewGroup): void;
 							public setAgentIsTyping(param0: boolean, param1: string): void;
-							public getItemOffsets(param0: globalAndroid.graphics.Rect, param1: globalAndroid.view.View, param2: globalAndroid.support.v7.widget.RecyclerView, param3: globalAndroid.support.v7.widget.RecyclerView.State): void;
+							public onDraw(param0: globalAndroid.graphics.Canvas, param1: androidx.recyclerview.widget.RecyclerView, param2: androidx.recyclerview.widget.RecyclerView.State): void;
+							public getItemOffsets(param0: globalAndroid.graphics.Rect, param1: globalAndroid.view.View, param2: androidx.recyclerview.widget.RecyclerView, param3: androidx.recyclerview.widget.RecyclerView.State): void;
 						}
 					}
 				}

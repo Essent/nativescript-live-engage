@@ -32,25 +32,11 @@ declare module com {
 						public static reconnect(param0: com.liveperson.infra.LPAuthenticationParams): void;
 						public static initialize(param0: globalAndroid.content.Context, param1: com.liveperson.infra.InitLivePersonProperties): void;
 						public static getSDKVersion(): string;
-						/** @deprecated */
-						public static showConversation(param0: globalAndroid.app.Activity, param1: string): boolean;
-						/** @deprecated */
-						public static initialize(param0: globalAndroid.content.Context, param1: string, param2: com.liveperson.infra.callbacks.InitLivePersonCallBack): void;
-						/** @deprecated */
-						public static reconnect(param0: string): void;
 						public static checkAgentID(param0: com.liveperson.infra.ICallback<com.liveperson.messaging.model.AgentData,java.lang.Exception>): void;
 						public static removeCallBack(): void;
 						/** @deprecated */
-						public static setUserProfile(param0: string, param1: string, param2: string, param3: string): void;
-						/** @deprecated */
 						public static registerLPPusher(param0: string, param1: string, param2: string): void;
-						/** @deprecated */
-						public static shutDown(): void;
 						public static getNumUnreadMessages(param0: string, param1: com.liveperson.infra.ICallback<java.lang.Integer,java.lang.Exception>): void;
-						/** @deprecated */
-						public static showConversation(param0: globalAndroid.app.Activity): boolean;
-						/** @deprecated */
-						public static handlePush(param0: globalAndroid.content.Context, param1: globalAndroid.os.Bundle, param2: string, param3: boolean): void;
 						public static setIsDebuggable(param0: boolean): void;
 						/** @deprecated */
 						public static unregisterLPPusher(param0: string, param1: string): void;
@@ -58,7 +44,6 @@ declare module com {
 						public static setUserProfile(param0: com.liveperson.messaging.sdk.api.model.ConsumerProfile): void;
 						public static resolveConversation(): void;
 						public static updateTokenInBackground(param0: string, param1: com.liveperson.infra.LPAuthenticationParams): void;
-						public static getConversationFragment(param0: com.liveperson.infra.LPAuthenticationParams, param1: com.liveperson.infra.ConversationViewParams): globalAndroid.support.v4.app.Fragment;
 						public static setCallback(param0: com.liveperson.api.LivePersonCallback): void;
 						public static showConversation(param0: globalAndroid.app.Activity, param1: com.liveperson.infra.LPAuthenticationParams, param2: com.liveperson.infra.ConversationViewParams): boolean;
 						public static setImageServiceDownloadNotificationBuilder(param0: globalAndroid.app.Notification.Builder): void;
@@ -67,15 +52,12 @@ declare module com {
 						public static getNumUnreadMessages(param0: string): number;
 						public static handlePushMessage(param0: globalAndroid.content.Context, param1: java.util.Map<string,string>, param2: string, param3: boolean): com.liveperson.infra.model.PushMessage;
 						public static unregisterLPPusher(param0: string, param1: string, param2: com.liveperson.infra.ICallback<java.lang.Void,java.lang.Exception>): void;
-						/** @deprecated */
-						public static getConversationFragment(param0: string): globalAndroid.support.v4.app.Fragment;
 						public static getUnreadMessagesCount(param0: string, param1: com.liveperson.infra.ICallback<java.lang.Integer,java.lang.Exception>): void;
 						public static clearHistory(): boolean;
 						public static setImageServiceUploadNotificationBuilder(param0: globalAndroid.app.Notification.Builder): void;
 						public static markConversationAsNormal(): void;
 						public static shutDown(param0: com.liveperson.messaging.sdk.api.callbacks.ShutDownLivePersonCallback): void;
-						/** @deprecated */
-						public static getConversationFragment(): globalAndroid.support.v4.app.Fragment;
+						public static getConversationFragment(param0: com.liveperson.infra.LPAuthenticationParams, param1: com.liveperson.infra.ConversationViewParams): androidx.fragment.app.Fragment;
 						public static logOut(param0: globalAndroid.content.Context, param1: string, param2: string, param3: com.liveperson.messaging.sdk.api.callbacks.LogoutLivePersonCallback): void;
 						public static markConversationAsUrgent(): void;
 						public static checkActiveConversation(param0: com.liveperson.infra.ICallback<java.lang.Boolean,java.lang.Exception>): void;

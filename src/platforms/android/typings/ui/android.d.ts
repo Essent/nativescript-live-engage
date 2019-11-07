@@ -168,10 +168,10 @@ declare module com {
 					export module header {
 						export class HeaderPositionCalculator {
 							public static class: java.lang.Class<com.liveperson.infra.ui.view.header.HeaderPositionCalculator>;
-							public initHeaderBounds(param0: globalAndroid.graphics.Rect, param1: globalAndroid.support.v7.widget.RecyclerView, param2: globalAndroid.view.View, param3: globalAndroid.view.View, param4: boolean): void;
 							public hasStickyHeader(param0: globalAndroid.view.View, param1: number, param2: number): boolean;
 							public constructor(param0: com.liveperson.infra.ui.view.header.StickyRecyclerHeadersAdapter<any>, param1: com.liveperson.infra.ui.view.header.caching.HeaderProvider, param2: com.liveperson.infra.ui.view.header.util.OrientationProvider, param3: com.liveperson.infra.ui.view.header.calculation.DimensionCalculator);
 							public hasNewHeader(param0: number, param1: boolean): boolean;
+							public initHeaderBounds(param0: globalAndroid.graphics.Rect, param1: androidx.recyclerview.widget.RecyclerView, param2: globalAndroid.view.View, param3: globalAndroid.view.View, param4: boolean): void;
 						}
 					}
 				}
@@ -219,11 +219,11 @@ declare module com {
 						export class StickyRecyclerHeadersDecoration {
 							public static class: java.lang.Class<com.liveperson.infra.ui.view.header.StickyRecyclerHeadersDecoration>;
 							public invalidateHeaders(): void;
+							public getHeaderView(param0: androidx.recyclerview.widget.RecyclerView, param1: number): globalAndroid.view.View;
 							public findHeaderPositionUnder(param0: number, param1: number): number;
-							public onDrawOver(param0: globalAndroid.graphics.Canvas, param1: globalAndroid.support.v7.widget.RecyclerView, param2: globalAndroid.support.v7.widget.RecyclerView.State): void;
-							public getItemOffsets(param0: globalAndroid.graphics.Rect, param1: globalAndroid.view.View, param2: globalAndroid.support.v7.widget.RecyclerView, param3: globalAndroid.support.v7.widget.RecyclerView.State): void;
 							public constructor(param0: com.liveperson.infra.ui.view.header.StickyRecyclerHeadersAdapter<any>);
-							public getHeaderView(param0: globalAndroid.support.v7.widget.RecyclerView, param1: number): globalAndroid.view.View;
+							public getItemOffsets(param0: globalAndroid.graphics.Rect, param1: globalAndroid.view.View, param2: androidx.recyclerview.widget.RecyclerView, param3: androidx.recyclerview.widget.RecyclerView.State): void;
+							public onDrawOver(param0: globalAndroid.graphics.Canvas, param1: androidx.recyclerview.widget.RecyclerView, param2: androidx.recyclerview.widget.RecyclerView.State): void;
 						}
 					}
 				}
@@ -245,12 +245,12 @@ declare module com {
 								 * Constructs a new instance of the com.liveperson.infra.ui.view.header.caching.HeaderProvider interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 								 */
 								public constructor(implementation: {
-									getHeader(param0: globalAndroid.support.v7.widget.RecyclerView, param1: number): globalAndroid.view.View;
+									getHeader(param0: androidx.recyclerview.widget.RecyclerView, param1: number): globalAndroid.view.View;
 									invalidate(): void;
 								});
 								public constructor();
-								public getHeader(param0: globalAndroid.support.v7.widget.RecyclerView, param1: number): globalAndroid.view.View;
 								public invalidate(): void;
+								public getHeader(param0: androidx.recyclerview.widget.RecyclerView, param1: number): globalAndroid.view.View;
 							}
 						}
 					}
@@ -269,8 +269,8 @@ declare module com {
 						export module caching {
 							export class HeaderViewCache extends com.liveperson.infra.ui.view.header.caching.HeaderProvider {
 								public static class: java.lang.Class<com.liveperson.infra.ui.view.header.caching.HeaderViewCache>;
-								public getHeader(param0: globalAndroid.support.v7.widget.RecyclerView, param1: number): globalAndroid.view.View;
 								public invalidate(): void;
+								public getHeader(param0: androidx.recyclerview.widget.RecyclerView, param1: number): globalAndroid.view.View;
 								public constructor(param0: com.liveperson.infra.ui.view.header.StickyRecyclerHeadersAdapter<any>, param1: com.liveperson.infra.ui.view.header.util.OrientationProvider);
 							}
 						}
@@ -311,7 +311,7 @@ declare module com {
 							export class HeaderRenderer {
 								public static class: java.lang.Class<com.liveperson.infra.ui.view.header.rendering.HeaderRenderer>;
 								public constructor(param0: com.liveperson.infra.ui.view.header.util.OrientationProvider);
-								public drawHeader(param0: globalAndroid.support.v7.widget.RecyclerView, param1: globalAndroid.graphics.Canvas, param2: globalAndroid.view.View, param3: globalAndroid.graphics.Rect): void;
+								public drawHeader(param0: androidx.recyclerview.widget.RecyclerView, param1: globalAndroid.graphics.Canvas, param2: globalAndroid.view.View, param3: globalAndroid.graphics.Rect): void;
 							}
 						}
 					}
@@ -330,9 +330,9 @@ declare module com {
 						export module util {
 							export class LinearLayoutOrientationProvider extends com.liveperson.infra.ui.view.header.util.OrientationProvider {
 								public static class: java.lang.Class<com.liveperson.infra.ui.view.header.util.LinearLayoutOrientationProvider>;
-								public getOrientation(param0: globalAndroid.support.v7.widget.RecyclerView): number;
+								public isReverseLayout(param0: androidx.recyclerview.widget.RecyclerView): boolean;
 								public constructor();
-								public isReverseLayout(param0: globalAndroid.support.v7.widget.RecyclerView): boolean;
+								public getOrientation(param0: androidx.recyclerview.widget.RecyclerView): number;
 							}
 						}
 					}
@@ -355,12 +355,12 @@ declare module com {
 								 * Constructs a new instance of the com.liveperson.infra.ui.view.header.util.OrientationProvider interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 								 */
 								public constructor(implementation: {
-									getOrientation(param0: globalAndroid.support.v7.widget.RecyclerView): number;
-									isReverseLayout(param0: globalAndroid.support.v7.widget.RecyclerView): boolean;
+									getOrientation(param0: androidx.recyclerview.widget.RecyclerView): number;
+									isReverseLayout(param0: androidx.recyclerview.widget.RecyclerView): boolean;
 								});
 								public constructor();
-								public getOrientation(param0: globalAndroid.support.v7.widget.RecyclerView): number;
-								public isReverseLayout(param0: globalAndroid.support.v7.widget.RecyclerView): boolean;
+								public isReverseLayout(param0: androidx.recyclerview.widget.RecyclerView): boolean;
+								public getOrientation(param0: androidx.recyclerview.widget.RecyclerView): number;
 							}
 						}
 					}

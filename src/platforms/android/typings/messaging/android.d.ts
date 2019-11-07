@@ -9,56 +9,57 @@ declare module com {
 				 * Constructs a new instance of the com.liveperson.api.LivePersonCallback interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
 				 */
 				public constructor(implementation: {
-					onError(param0: com.liveperson.messaging.TaskType, param1: string): void;
-					onTokenExpired(): void;
-					onUnauthenticatedUserExpired(): void;
 					onConversationStarted(param0: com.liveperson.api.sdk.LPConversationData): void;
 					onConversationStarted(): void;
 					onConversationResolved(param0: com.liveperson.api.sdk.LPConversationData): void;
 					onConversationResolved(): void;
 					onConversationResolved(param0: com.liveperson.api.response.types.CloseReason): void;
 					onConversationFragmentClosed(): void;
-					onConnectionChanged(param0: boolean): void;
+					onConversationMarkedAsUrgent(): void;
+					onConversationMarkedAsNormal(): void;
 					onAgentTyping(param0: boolean): void;
 					onAgentDetailsChanged(param0: com.liveperson.messaging.model.AgentData): void;
+					onOfflineHoursChanges(param0: boolean): void;
+					onUserDeniedPermission(param0: com.liveperson.api.sdk.PermissionType, param1: boolean): void;
+					onUserActionOnPreventedPermission(param0: com.liveperson.api.sdk.PermissionType): void;
+					onAgentAvatarTapped(param0: com.liveperson.messaging.model.AgentData): void;
+					onStructuredContentLinkClicked(param0: string): void;
 					onCsatLaunched(): void;
 					onCsatDismissed(): void;
 					onCsatSubmitted(param0: string): void;
 					onCsatSubmitted(param0: string, param1: number): void;
 					onCsatSkipped(): void;
-					onConversationMarkedAsUrgent(): void;
-					onConversationMarkedAsNormal(): void;
-					onOfflineHoursChanges(param0: boolean): void;
-					onAgentAvatarTapped(param0: com.liveperson.messaging.model.AgentData): void;
-					onUserDeniedPermission(param0: com.liveperson.api.sdk.PermissionType, param1: boolean): void;
-					onUserActionOnPreventedPermission(param0: com.liveperson.api.sdk.PermissionType): void;
-					onStructuredContentLinkClicked(param0: string): void;
+					onTokenExpired(): void;
+					onUnauthenticatedUserExpired(): void;
+					onConnectionChanged(param0: boolean): void;
+					onError(param0: com.liveperson.messaging.TaskType, param1: string): void;
 				});
 				public constructor();
-				public onConnectionChanged(param0: boolean): void;
 				public onUserActionOnPreventedPermission(param0: com.liveperson.api.sdk.PermissionType): void;
-				public onCsatSubmitted(param0: string, param1: number): void;
+				public onConnectionChanged(param0: boolean): void;
 				public onConversationMarkedAsNormal(): void;
 				public onOfflineHoursChanges(param0: boolean): void;
 				/** @deprecated */
 				public onConversationStarted(): void;
 				public onAgentTyping(param0: boolean): void;
 				public onCsatLaunched(): void;
-				public onCsatDismissed(): void;
 				public onAgentAvatarTapped(param0: com.liveperson.messaging.model.AgentData): void;
+				public onCsatDismissed(): void;
 				/** @deprecated */
 				public onConversationResolved(param0: com.liveperson.api.response.types.CloseReason): void;
-				public onCsatSkipped(): void;
 				public onConversationMarkedAsUrgent(): void;
+				/** @deprecated */
+				public onCsatSubmitted(param0: string, param1: number): void;
+				public onCsatSkipped(): void;
 				public onStructuredContentLinkClicked(param0: string): void;
-				public onUnauthenticatedUserExpired(): void;
 				public onConversationStarted(param0: com.liveperson.api.sdk.LPConversationData): void;
+				public onUnauthenticatedUserExpired(): void;
 				public onConversationFragmentClosed(): void;
-				public onTokenExpired(): void;
 				/** @deprecated */
 				public onConversationResolved(): void;
 				public onAgentDetailsChanged(param0: com.liveperson.messaging.model.AgentData): void;
 				public onUserDeniedPermission(param0: com.liveperson.api.sdk.PermissionType, param1: boolean): void;
+				public onTokenExpired(): void;
 				public onConversationResolved(param0: com.liveperson.api.sdk.LPConversationData): void;
 				/** @deprecated */
 				public onCsatSubmitted(param0: string): void;
@@ -70,31 +71,29 @@ declare module com {
 					public onConversationMarkedAsUrgent(): void;
 					public onCsatLaunched(): void;
 					public onUserActionOnPreventedPermission(param0: com.liveperson.api.sdk.PermissionType): void;
-					public onCsatSubmitted(param0: string): void;
 					public onConversationResolved(param0: com.liveperson.api.sdk.LPConversationData): void;
-					public onConversationResolved(param0: com.liveperson.api.response.types.CloseReason): void;
 					public constructor();
-					public onAgentDetailsChanged(param0: com.liveperson.messaging.model.AgentData): void;
-					public onConversationMarkedAsNormal(): void;
 					/** @deprecated */
 					public onConversationResolved(): void;
+					public onConversationMarkedAsNormal(): void;
+					public onAgentDetailsChanged(param0: com.liveperson.messaging.model.AgentData): void;
 					public onCsatSkipped(): void;
+					/** @deprecated */
+					public onConversationStarted(): void;
 					public onUnauthenticatedUserExpired(): void;
 					/** @deprecated */
-					public onConversationStarted(): void;
-					public onConnectionChanged(param0: boolean): void;
 					public onCsatSubmitted(param0: string, param1: number): void;
+					public onCsatSubmitted(param0: string, param1: number): void;
+					public onConnectionChanged(param0: boolean): void;
 					public onAgentAvatarTapped(param0: com.liveperson.messaging.model.AgentData): void;
-					public onError(param0: com.liveperson.messaging.TaskType, param1: string): void;
 					public onTokenExpired(): void;
+					public onError(param0: com.liveperson.messaging.TaskType, param1: string): void;
 					public onAgentTyping(param0: boolean): void;
-					public onStructuredContentLinkClicked(param0: string): void;
 					/** @deprecated */
 					public onConversationResolved(param0: com.liveperson.api.response.types.CloseReason): void;
+					public onStructuredContentLinkClicked(param0: string): void;
 					public onOfflineHoursChanges(param0: boolean): void;
 					public onUserDeniedPermission(param0: com.liveperson.api.sdk.PermissionType, param1: boolean): void;
-					public onConversationStarted(): void;
-					public onConversationResolved(): void;
 					public onCsatDismissed(): void;
 					/** @deprecated */
 					public onCsatSubmitted(param0: string): void;
@@ -123,6 +122,8 @@ declare module com {
 				public onConversationResolved(param0: com.liveperson.api.response.types.CloseReason): void;
 				public constructor();
 				public onCsatSkipped(): void;
+				/** @deprecated */
+				public onCsatSubmitted(param0: string, param1: number): void;
 				public onStructuredContentLinkClicked(param0: string): void;
 				public onConversationFragmentClosed(): void;
 				public onAgentDetailsChanged(param0: com.liveperson.messaging.model.AgentData): void;
@@ -159,8 +160,8 @@ declare module com {
 				public static sendOnAgentAvatarTapped(param0: globalAndroid.content.Context, param1: com.liveperson.messaging.model.AgentData): void;
 				public static sendOnCsatSkipped(param0: globalAndroid.content.Context): void;
 				public static sendOnConnectionChanged(param0: globalAndroid.content.Context, param1: boolean): void;
-				public static getOnErrorTaskType(param0: globalAndroid.content.Intent): com.liveperson.messaging.TaskType;
 				public static getLPConversationData(param0: globalAndroid.content.Intent): com.liveperson.api.sdk.LPConversationData;
+				public static getOnErrorTaskType(param0: globalAndroid.content.Intent): com.liveperson.messaging.TaskType;
 				public static sendOnTokenExpired(param0: globalAndroid.content.Context): void;
 				public static getOnErrorMessage(param0: globalAndroid.content.Intent): string;
 				public static getPermissionDoNotShowAgainMarked(param0: globalAndroid.content.Intent): boolean;
@@ -177,8 +178,8 @@ declare module com {
 				public static getAgentData(param0: globalAndroid.content.Intent): com.liveperson.messaging.model.AgentData;
 				public static sendOnCsatLaunched(param0: globalAndroid.content.Context): void;
 				public static getPermissionType(param0: globalAndroid.content.Intent): com.liveperson.api.sdk.PermissionType;
-				public static sendOnUserExpired(param0: globalAndroid.content.Context): void;
 				public static sendOnConversationMarkedAsUrgent(param0: globalAndroid.content.Context): void;
+				public static sendOnUserExpired(param0: globalAndroid.content.Context): void;
 				public static getConnectedValue(param0: globalAndroid.content.Intent): boolean;
 				public static sendOnConversationStarted(param0: globalAndroid.content.Context, param1: com.liveperson.api.sdk.LPConversationData): void;
 				public static sendOnAgentDetailsChanged(param0: globalAndroid.content.Context, param1: com.liveperson.messaging.model.AgentData): void;
@@ -206,10 +207,10 @@ declare module com {
 					public static LP_ON_CSAT_SUBMITTED_INTENT_ACTION: string;
 					public static LP_ON_CSAT_LAUNCHED_INTENT_ACTION: string;
 					public static LP_ON_AGENT_DETAILS_CHANGED_INTENT_ACTION: string;
-					public static LP_ON_TOKEN_EXPIRED_INTENT_ACTION: string;
 					public static LP_ON_CSAT_SKIPPED_INTENT_ACTION: string;
-					public static LP_ON_ERROR_INTENT_ACTION: string;
+					public static LP_ON_TOKEN_EXPIRED_INTENT_ACTION: string;
 					public static LP_ON_AGENT_AVATAR_TAPPED_INTENT_ACTION: string;
+					public static LP_ON_ERROR_INTENT_ACTION: string;
 					public static LP_ON_CONVERSATION_MARKED_AS_URGENT_INTENT_ACTION: string;
 					public static LP_ON_UNAUTHENTICATED_USER_EXPIRED_INTENT_ACTION: string;
 					public static LP_ON_CSAT_DISMISSED_INTENT_ACTION: string;
@@ -225,15 +226,15 @@ declare module com {
 					public constructor();
 					public static LP_AGENT_DATA_INTENT_PARCELABLE_EXTRA: string;
 					public static LP_IS_OFFLINE_HOURS_ON_INTENT_BOOLEAN_EXTRA: string;
-					public static LP_CSAT_STAR_RATING_INTENT_INT_EXTRA: string;
 					public static LP_PERMISSION_TYPE_EXTRA: string;
+					public static LP_CSAT_STAR_RATING_INTENT_INT_EXTRA: string;
 					public static LP_CONVERSATION_ID_INTENT_STRING_EXTRA: string;
 					public static LP_ON_ERROR_MESSAGE_INTENT_STRING_EXTRA: string;
 					public static LP_ON_ERROR_TASK_TYPE_INTENT_INT_EXTRA: string;
 					public static LP_LINK_URI_EXTRA: string;
 					public static LP_AGENT_IS_TYPING_INTENT_BOOLEAN_EXTRA: string;
-					public static LP_IS_CONNECTED_INTENT_BOOLEAN_EXTRA: string;
 					public static LP_PERMISSION_DO_NOT_SHOW_AGAIN_EXTRA: string;
+					public static LP_IS_CONNECTED_INTENT_BOOLEAN_EXTRA: string;
 					public static LP_CONVERSATION_DATA_INTENT_PARCELABLE_EXTRA: string;
 				}
 			}
@@ -2002,6 +2003,8 @@ declare module com {
 				/** @deprecated */
 				public onConversationResolved(param0: com.liveperson.api.response.types.CloseReason): void;
 				public onCsatSkipped(): void;
+				/** @deprecated */
+				public onCsatSubmitted(param0: string, param1: number): void;
 				public onStructuredContentLinkClicked(param0: string): void;
 				public onConversationFragmentClosed(): void;
 				public onAgentDetailsChanged(param0: com.liveperson.messaging.model.AgentData): void;
@@ -3034,6 +3037,7 @@ declare module com {
 				export class ResendMessageCommand extends com.liveperson.messaging.commands.SendMessageCommand {
 					public static class: java.lang.Class<com.liveperson.messaging.commands.ResendMessageCommand>;
 					public constructor(param0: com.liveperson.messaging.Messaging, param1: string, param2: string, param3: com.liveperson.infra.utils.MaskedMessage, param4: com.liveperson.api.response.model.DeliveryStatusUpdateInfo);
+					public constructor(param0: com.liveperson.messaging.Messaging, param1: string, param2: string, param3: string, param4: com.liveperson.infra.utils.MaskedMessage, param5: com.liveperson.api.response.model.DeliveryStatusUpdateInfo);
 					public constructor(param0: com.liveperson.messaging.Messaging, param1: string, param2: string, param3: string, param4: com.liveperson.infra.utils.MaskedMessage);
 					public constructor(param0: com.liveperson.messaging.Messaging, param1: string, param2: string, param3: com.liveperson.infra.utils.MaskedMessage);
 					public addMessageToDBAndSend(param0: string, param1: com.liveperson.infra.utils.MaskedMessage): void;
@@ -3050,6 +3054,7 @@ declare module com {
 				export class ResendURLMessageCommand extends com.liveperson.messaging.commands.ResendMessageCommand {
 					public static class: java.lang.Class<com.liveperson.messaging.commands.ResendURLMessageCommand>;
 					public constructor(param0: com.liveperson.messaging.Messaging, param1: string, param2: string, param3: com.liveperson.infra.utils.MaskedMessage, param4: com.liveperson.api.response.model.DeliveryStatusUpdateInfo);
+					public constructor(param0: com.liveperson.messaging.Messaging, param1: string, param2: string, param3: string, param4: com.liveperson.infra.utils.MaskedMessage, param5: com.liveperson.api.response.model.DeliveryStatusUpdateInfo);
 					public constructor(param0: com.liveperson.messaging.Messaging, param1: string, param2: string, param3: string, param4: com.liveperson.infra.utils.MaskedMessage);
 					public createMessageRequest(param0: com.liveperson.messaging.Messaging, param1: string, param2: string, param3: string, param4: string, param5: string): com.liveperson.messaging.network.socket.requests.SendMessageRequest;
 					public constructor(param0: com.liveperson.messaging.Messaging, param1: string, param2: string, param3: com.liveperson.infra.utils.MaskedMessage);

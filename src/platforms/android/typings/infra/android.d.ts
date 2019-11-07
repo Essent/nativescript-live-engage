@@ -1028,6 +1028,7 @@ declare module com {
 						public static MESSAGES_TABLE: string;
 						public static KEY_SERVER_SEQUENCE: string;
 						public static KEY_TEXT: string;
+						public static KEY_METADATA: string;
 						public static KEY_CONTENT_TYPE: string;
 						public static KEY_STATUS: string;
 						public static KEY_DIALOG_ID: string;
@@ -1040,7 +1041,6 @@ declare module com {
 						public onTableUpgrade(param0: globalAndroid.database.sqlite.SQLiteDatabase, param1: number, param2: number): void;
 						public constructor();
 						public getCreateCommand(): string;
-						public static getProjection(): native.Array<string>;
 						public getName(): string;
 					}
 				}
@@ -1536,15 +1536,16 @@ declare module com {
 					public static EXTRA_MESSAGE_TEXT: string;
 					public setServerSequence(param0: number): void;
 					public getLocalId(): number;
+					public getMetadata(): string;
 					public setDialogId(param0: string): void;
 					public getServerSequence(): number;
 					public getContentType(): string;
 					public setMessage(param0: string): void;
 					public getEventId(): string;
+					public setMetadata(param0: string): void;
 					public setMessageId(param0: number): void;
 					public getTimeStamp(): number;
 					public toString(): string;
-					public getFullTimeString(): string;
 					public constructor(param0: string, param1: string, param2: number, param3: string, param4: string, param5: com.liveperson.infra.utils.EncryptionVersion);
 					public getDialogId(): string;
 					public getMessage(): string;
