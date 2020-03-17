@@ -579,6 +579,8 @@ declare class LPConfig extends NSObject {
 
 	static printAllConfigurations(): void;
 
+	static setDefaultConfiguration(value: LPConfig): void;
+
 	accountEnvironment: LPAccountEnviroment;
 
 	allowURLProtocolSniffing: boolean;
@@ -647,6 +649,8 @@ declare class LPConfig extends NSObject {
 
 	conversationNavigationTitleColor: UIColor;
 
+	conversationScrollConfiguration: LPConversationScrollConfiguration;
+
 	conversationSeparatorBottomPadding: number;
 
 	conversationSeparatorFontName: string;
@@ -694,6 +698,8 @@ declare class LPConfig extends NSObject {
 	csatSurveyExpirationInMinutes: number;
 
 	csatThankYouScreenHidden: boolean;
+
+	csatUIStatusBarStyle: UIStatusBarStyle;
 
 	csatUIStatusBarStyleLightContent: boolean;
 
@@ -747,13 +753,19 @@ declare class LPConfig extends NSObject {
 
 	enableEnlargeEmojies: boolean;
 
+	enableFileSharing: boolean;
+
 	enableLinkPreview: boolean;
+
+	enableLpPusherService: boolean;
 
 	enablePhotoSharing: boolean;
 
 	enableRealTimeLinkPreview: boolean;
 
 	enableRealTimeMasking: boolean;
+
+	enableStructuredContent: boolean;
 
 	enableStrucutredContent: boolean;
 
@@ -764,6 +776,22 @@ declare class LPConfig extends NSObject {
 	fileCellLoaderRingBackgroundColor: UIColor;
 
 	fileCellLoaderRingProgressColor: UIColor;
+
+	fileSharingDOCXFileThumbnailimage: UIImage;
+
+	fileSharingFromAgent: boolean;
+
+	fileSharingFromConsumer: boolean;
+
+	fileSharingMenuFileImage: UIImage;
+
+	fileSharingPDFFileThumbnailimage: UIImage;
+
+	fileSharingPPTXFileThumbnailimage: UIImage;
+
+	fileSharingUniversalFileThumbnailimage: UIImage;
+
+	fileSharingXLSXFileThumbnailimage: UIImage;
 
 	inputTextViewContainerBackgroundColor: UIColor;
 
@@ -791,9 +819,23 @@ declare class LPConfig extends NSObject {
 
 	linkPreviewTitleTextColor: UIColor;
 
+	loadingViewBackgroundColor: UIColor;
+
+	loadingViewBlurEffect: UIBlurEffect;
+
+	loadingViewProgressBackgroundColor: UIColor;
+
+	loadingViewProgressTintColor: UIColor;
+
+	loadingViewTextColor: UIColor;
+
 	lpDateFormat: string;
 
 	lpDateTimeFormat: string;
+
+	lpNavigationBarLeftItemImageButton: UIImage;
+
+	lpNavigationBarRightItemImageButton: UIImage;
 
 	lpTagDomain: string;
 
@@ -801,11 +843,15 @@ declare class LPConfig extends NSObject {
 
 	maxNumberOfSavedAudioFilesOnDisk: number;
 
+	maxNumberOfSavedDocumentsOnDisk: number;
+
 	maxNumberOfSavedFilesOnDisk: number;
 
 	maxPreviousConversationToPresent: number;
 
 	messageStatusNumericTimestampOnly: boolean;
+
+	modalPresentationStyle: UIModalPresentationStyle;
 
 	notificationShowDurationInSeconds: number;
 
@@ -846,6 +892,8 @@ declare class LPConfig extends NSObject {
 	realTimeMaskingRegex: string;
 
 	recordingDurationLimit: number;
+
+	remoteFileStateTint: UIColor;
 
 	remoteUserAvatarBackgroundColor: UIColor;
 
@@ -935,15 +983,13 @@ declare class LPConfig extends NSObject {
 
 	secureFormNavigationTitleColor: UIColor;
 
+	secureFormUIStatusBarStyle: UIStatusBarStyle;
+
 	secureFormUIStatusBarStyleLightContent: boolean;
 
 	sendButtonDisabledColor: UIColor;
 
-	sendButtonDisabledTextColor: UIColor;
-
 	sendButtonEnabledColor: UIColor;
-
-	sendButtonEnabledTextColor: UIColor;
 
 	sendButtonImage: UIImage;
 
@@ -1043,7 +1089,11 @@ declare class LPConfig extends NSObject {
 
 	userBubbleTopRightCornerRadius: number;
 
-	static readonly defaultConfiguration: LPConfig;
+	userFileStateTint: UIColor;
+
+	userPhotoStateTint: UIColor;
+
+	static defaultConfiguration: LPConfig;
 
 	resetToDefaultConfiguration(): void;
 }
@@ -1059,8 +1109,6 @@ declare class LPConnection extends NSObject {
 	conversations: NSArray<LPConversationEntity>;
 
 	readonly effectiveTtr: Date;
-
-	readonly hashValue: number;
 
 	readonly lastConversation: LPConversationEntity;
 
@@ -1207,6 +1255,21 @@ declare const enum LPConversationHistoryMaxDaysDateType {
 	EndConversationDate = 1
 }
 
+declare class LPConversationScrollConfiguration extends NSObject {
+
+	static alloc(): LPConversationScrollConfiguration; // inherited from NSObject
+
+	static new(): LPConversationScrollConfiguration; // inherited from NSObject
+
+	backgroundToForeground: ScrollPosition;
+
+	pushNotificationTapped: ScrollPosition;
+
+	scrollToBottomButtonPressed: ScrollPosition;
+
+	showConversation: ScrollPosition;
+}
+
 declare class LPConversationViewParams extends NSObject {
 
 	static alloc(): LPConversationViewParams; // inherited from NSObject
@@ -1215,15 +1278,21 @@ declare class LPConversationViewParams extends NSObject {
 
 	containerViewController: UIViewController;
 
-	conversationHistoryControlParam: LPConversationHistoryControlParam;
+	readonly conversationHistoryControlParam: LPConversationHistoryControlParam;
 
 	conversationQuery: ConversationParamProtocol;
 
-	isViewOnly: boolean;
+	readonly isViewOnly: boolean;
+
+	welcomeMessage: LPWelcomeMessage;
 
 	constructor(o: { conversationQuery: ConversationParamProtocol; containerViewController: UIViewController; isViewOnly: boolean; conversationHistoryControlParam: LPConversationHistoryControlParam; });
 
+	constructor(o: { conversationQuery: ConversationParamProtocol; containerViewController: UIViewController; isViewOnly: boolean; conversationHistoryControlParam: LPConversationHistoryControlParam; welcomeMessage: LPWelcomeMessage; });
+
 	initWithConversationQueryContainerViewControllerIsViewOnlyConversationHistoryControlParam(conversationQuery: ConversationParamProtocol, containerViewController: UIViewController, isViewOnly: boolean, conversationHistoryControlParam: LPConversationHistoryControlParam): this;
+
+	initWithConversationQueryContainerViewControllerIsViewOnlyConversationHistoryControlParamWelcomeMessage(conversationQuery: ConversationParamProtocol, containerViewController: UIViewController, isViewOnly: boolean, conversationHistoryControlParam: LPConversationHistoryControlParam, welcomeMessage: LPWelcomeMessage): this;
 }
 
 declare const enum LPConversationsHistoryStateToDisplay {
@@ -1379,9 +1448,9 @@ declare class LPFileMetaDataContainer extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 }
 
 declare class LPFormEntity {
@@ -1463,6 +1532,8 @@ declare class LPInfraFacade extends NSObject {
 
 	static getBase64ThumbnailStringWithFileCompletionFailure(file: LPFileEntity, completion: (p1: string) => void, failure: (p1: NSError) => void): void;
 
+	static getCacheBrandByAccountIDs(): NSArray<string>;
+
 	static getConsumerIdsRelatedToMessagesThatContainsWithText(text: string): NSArray<string>;
 
 	static getContext(): NSManagedObjectContext;
@@ -1478,6 +1549,8 @@ declare class LPInfraFacade extends NSObject {
 	static getConversationsSortedByDateConversationHistoryControlParam(query: ConversationParamProtocol, conversationHistoryControlParam: LPConversationHistoryControlParam): NSArray<LPConversationEntity>;
 
 	static getExpirationDateFromJWT(jwtToken: string): Date;
+
+	static getFilefromFileEntityWithFileEntityCompletionFailure(fileEntity: LPFileEntity, completion: (p1: LPFileEntity) => void, failure: (p1: NSError) => void): void;
 
 	static getImageByURL(url: string): UIImage;
 
@@ -1501,7 +1574,11 @@ declare class LPInfraFacade extends NSObject {
 
 	static getSocket(brandID: string): LPWebSocket;
 
+	static getThumbnailForFileTypeWithFile(file: LPFileEntity): UIImage;
+
 	static getThumbnailFromFileWithFileCompletionFailure(file: LPFileEntity, completion: (p1: UIImage) => void, failure: (p1: NSError) => void): void;
+
+	static getUnreadMessageCountWithBrandIDCompletionFailure(brandID: string, completion: (p1: number) => void, failure: (p1: NSError) => void): void;
 
 	static getUnreadMessagesCountCompletionFailure(conversationQuery: ConversationParamProtocol, completion: (p1: number) => void, failure: (p1: NSError) => void): void;
 
@@ -1516,6 +1593,8 @@ declare class LPInfraFacade extends NSObject {
 	static initializeInfra(): boolean;
 
 	static isAudioExtension(text: string): boolean;
+
+	static isFileExtension(text: string): boolean;
 
 	static isImageExtension(text: string): boolean;
 
@@ -1558,6 +1637,8 @@ declare class LPInfraFacade extends NSObject {
 	static setUserProfileWithDetailsBrandID(lpuser: LPUser, brandID: string): void;
 
 	static unregisterPusherCompletionFailure(brand: LPBrandEntity, completion: () => void, failure: (p1: NSError) => void): void;
+
+	static unregisterPusherForCompletionFailure(brandId: string, completion: () => void, failure: (p1: NSError) => void): void;
 
 	static uploadFileWithFileUploadRelativePathTempURLSigTempURLExpiryCompletionFailure(file: LPFileEntity, uploadRelativePath: string, tempURLSig: string, tempURLExpiry: string, completion: (p1: LPFileEntity) => void, failure: (p1: NSError) => void): void;
 
@@ -1778,9 +1859,11 @@ declare class LPMessageEntity {
 
 declare const enum LPMessagingSDKFeature {
 
-	PhotoSharing = 0,
+	UserFileSharing = 0,
 
-	AudioSharing = 1
+	AudioSharing = 1,
+
+	AgentFileSharing = 2
 }
 
 declare class LPOperation extends NSOperation {
@@ -1848,9 +1931,284 @@ declare class LPSDKManager extends NSObject implements GeneralManagerProtocol {
 	static readonly instance: LPSDKManager;
 
 	clearManager(): void;
-
-	isUsingCertPinning(): boolean;
 }
+
+declare function LPSRBase64EncodedStringFromData(data: NSData): string;
+
+declare function LPSRBasicAuthorizationHeaderFromURL(url: NSURL): string;
+
+declare function LPSRDefaultBufferSize(): number;
+
+declare class LPSRDelegateController extends NSObject {
+
+	static alloc(): LPSRDelegateController; // inherited from NSObject
+
+	static new(): LPSRDelegateController; // inherited from NSObject
+
+	readonly availableDelegateMethods: SRDelegateAvailableMethods;
+
+	delegate: SRWebSocketDelegate;
+
+	dispatchQueue: NSObject;
+
+	operationQueue: NSOperationQueue;
+
+	performDelegateBlock(block: (p1: SRWebSocketDelegate, p2: SRDelegateAvailableMethods) => void): void;
+
+	performDelegateQueueBlock(block: () => void): void;
+}
+
+declare function LPSRErrorWithCodeDescription(code: number, description: string): NSError;
+
+declare function LPSRErrorWithCodeDescriptionUnderlyingError(code: number, description: string, underlyingError: NSError): NSError;
+
+declare function LPSRErrorWithDomainCodeDescription(domain: string, code: number, description: string): NSError;
+
+declare function LPSRHTTPConnectMessageCreate(request: NSURLRequest, securityKey: string, webSocketProtocolVersion: number, cookies: NSArray<NSHTTPCookie>, requestedProtocols: NSArray<string>): interop.Unmanaged<any>;
+
+declare function LPSRHTTPErrorWithCodeDescription(httpCode: number, errorCode: number, description: string): NSError;
+
+declare var LPSRHTTPResponseErrorKey: string;
+
+declare class LPSRIOConsumer extends NSObject {
+
+	static alloc(): LPSRIOConsumer; // inherited from NSObject
+
+	static new(): LPSRIOConsumer; // inherited from NSObject
+
+	bytesNeeded: number;
+
+	readonly consumer: (p1: NSData) => number;
+
+	readonly handler: (p1: LPSRWebSocket, p2: NSData) => void;
+
+	readonly readToCurrentFrame: boolean;
+
+	readonly unmaskBytes: boolean;
+
+	resetWithScannerHandlerBytesNeededReadToCurrentFrameUnmaskBytes(scanner: (p1: NSData) => number, handler: (p1: LPSRWebSocket, p2: NSData) => void, bytesNeeded: number, readToCurrentFrame: boolean, unmaskBytes: boolean): void;
+}
+
+declare class LPSRIOConsumerPool extends NSObject {
+
+	static alloc(): LPSRIOConsumerPool; // inherited from NSObject
+
+	static new(): LPSRIOConsumerPool; // inherited from NSObject
+
+	constructor(o: { bufferCapacity: number; });
+
+	consumerWithScannerHandlerBytesNeededReadToCurrentFrameUnmaskBytes(scanner: (p1: NSData) => number, handler: (p1: LPSRWebSocket, p2: NSData) => void, bytesNeeded: number, readToCurrentFrame: boolean, unmaskBytes: boolean): LPSRIOConsumer;
+
+	initWithBufferCapacity(poolSize: number): this;
+
+	returnConsumer(consumer: LPSRIOConsumer): void;
+}
+
+declare function LPSRMaskBytesSIMD(bytes: string, length: number, maskKey: string): void;
+
+declare const enum LPSROpCode {
+
+	TextFrame = 1,
+
+	BinaryFrame = 2,
+
+	ConnectionClose = 8,
+
+	Ping = 9,
+
+	Pong = 10
+}
+
+declare class LPSRPinningSecurityPolicy extends LPSRSecurityPolicy {
+
+	static alloc(): LPSRPinningSecurityPolicy; // inherited from NSObject
+
+	static defaultPolicy(): LPSRPinningSecurityPolicy; // inherited from LPSRSecurityPolicy
+
+	static new(): LPSRPinningSecurityPolicy; // inherited from NSObject
+
+	static pinnningPolicyWithCertificates(pinnedCertificates: NSArray<any> | any[]): LPSRPinningSecurityPolicy; // inherited from LPSRSecurityPolicy
+
+	constructor(o: { certificates: NSArray<any> | any[]; });
+
+	initWithCertificates(pinnedCertificates: NSArray<any> | any[]): this;
+}
+
+declare class LPSRProxyConnect extends NSObject {
+
+	static alloc(): LPSRProxyConnect; // inherited from NSObject
+
+	static new(): LPSRProxyConnect; // inherited from NSObject
+
+	constructor(o: { URL: NSURL; });
+
+	initWithURL(url: NSURL): this;
+
+	openNetworkStreamWithCompletion(completion: (p1: NSError, p2: NSInputStream, p3: NSOutputStream) => void): void;
+}
+
+declare function LPSRRandomData(length: number): NSData;
+
+declare class LPSRRunLoopThread extends NSThread {
+
+	static alloc(): LPSRRunLoopThread; // inherited from NSObject
+
+	static new(): LPSRRunLoopThread; // inherited from NSObject
+
+	static sharedThread(): LPSRRunLoopThread;
+
+	readonly runLoop: NSRunLoop;
+}
+
+declare function LPSRSHA1HashFromBytes(bytes: string, length: number): NSData;
+
+declare function LPSRSHA1HashFromString(string: string): NSData;
+
+declare class LPSRSecurityPolicy extends NSObject {
+
+	static alloc(): LPSRSecurityPolicy; // inherited from NSObject
+
+	static defaultPolicy(): LPSRSecurityPolicy;
+
+	static new(): LPSRSecurityPolicy; // inherited from NSObject
+
+	static pinnningPolicyWithCertificates(pinnedCertificates: NSArray<any> | any[]): LPSRSecurityPolicy;
+
+	constructor(o: { certificateChainValidationEnabled: boolean; });
+
+	evaluateServerTrustForDomain(serverTrust: any, domain: string): boolean;
+
+	initWithCertificateChainValidationEnabled(enabled: boolean): this;
+
+	updateSecurityOptionsInStream(stream: NSStream): void;
+}
+
+declare function LPSRStreamNetworkServiceTypeFromURLRequest(request: NSURLRequest): string;
+
+declare function LPSRURLOrigin(url: NSURL): string;
+
+declare function LPSRURLRequiresSSL(url: NSURL): boolean;
+
+declare class LPSRWebSocket extends NSObject implements NSStreamDelegate {
+
+	static alloc(): LPSRWebSocket; // inherited from NSObject
+
+	static new(): LPSRWebSocket; // inherited from NSObject
+
+	readonly allowsUntrustedSSLCertificates: boolean;
+
+	closeCode: number;
+
+	delegate: SRWebSocketDelegate;
+
+	delegateDispatchQueue: NSObject;
+
+	delegateOperationQueue: NSOperationQueue;
+
+	readonly protocol: string;
+
+	readonly readyState: SRReadyState;
+
+	readonly receivedHTTPHeaders: any;
+
+	requestCookies: NSArray<NSHTTPCookie>;
+
+	readonly url: NSURL;
+
+	readonly debugDescription: string; // inherited from NSObjectProtocol
+
+	readonly description: string; // inherited from NSObjectProtocol
+
+	readonly hash: number; // inherited from NSObjectProtocol
+
+	readonly isProxy: boolean; // inherited from NSObjectProtocol
+
+	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
+
+	readonly  // inherited from NSObjectProtocol
+
+	constructor(o: { URL: NSURL; });
+
+	constructor(o: { URL: NSURL; protocols: NSArray<string> | string[]; });
+
+	constructor(o: { URL: NSURL; protocols: NSArray<string> | string[]; allowsUntrustedSSLCertificates: boolean; });
+
+	constructor(o: { URLRequest: NSURLRequest; });
+
+	constructor(o: { URLRequest: NSURLRequest; protocols: NSArray<string> | string[]; });
+
+	constructor(o: { URLRequest: NSURLRequest; protocols: NSArray<string> | string[]; allowsUntrustedSSLCertificates: boolean; });
+
+	constructor(o: { URLRequest: NSURLRequest; protocols: NSArray<string> | string[]; securityPolicy: LPSRSecurityPolicy; });
+
+	constructor(o: { URLRequest: NSURLRequest; securityPolicy: LPSRSecurityPolicy; });
+
+	constructor(o: { URL: NSURL; securityPolicy: LPSRSecurityPolicy; });
+
+	class(): typeof NSObject;
+
+	close(): void;
+
+	closeWithCodeReason(code: number, reason: string): void;
+
+	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
+
+	initWithURL(url: NSURL): this;
+
+	initWithURLProtocols(url: NSURL, protocols: NSArray<string> | string[]): this;
+
+	initWithURLProtocolsAllowsUntrustedSSLCertificates(url: NSURL, protocols: NSArray<string> | string[], allowsUntrustedSSLCertificates: boolean): this;
+
+	initWithURLRequest(request: NSURLRequest): this;
+
+	initWithURLRequestProtocols(request: NSURLRequest, protocols: NSArray<string> | string[]): this;
+
+	initWithURLRequestProtocolsAllowsUntrustedSSLCertificates(request: NSURLRequest, protocols: NSArray<string> | string[], allowsUntrustedSSLCertificates: boolean): this;
+
+	initWithURLRequestProtocolsSecurityPolicy(request: NSURLRequest, protocols: NSArray<string> | string[], securityPolicy: LPSRSecurityPolicy): this;
+
+	initWithURLRequestSecurityPolicy(request: NSURLRequest, securityPolicy: LPSRSecurityPolicy): this;
+
+	initWithURLSecurityPolicy(url: NSURL, securityPolicy: LPSRSecurityPolicy): this;
+
+	isEqual(object: any): boolean;
+
+	isKindOfClass(aClass: typeof NSObject): boolean;
+
+	isMemberOfClass(aClass: typeof NSObject): boolean;
+
+	open(): void;
+
+	performSelector(aSelector: string): any;
+
+	performSelectorWithObject(aSelector: string, object: any): any;
+
+	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
+
+	respondsToSelector(aSelector: string): boolean;
+
+	retainCount(): number;
+
+	scheduleInRunLoopForMode(runLoop: NSRunLoop, mode: string): void;
+
+	self(): this;
+
+	send(message: any): void;
+
+	sendDataError(data: NSData): boolean;
+
+	sendDataNoCopyError(data: NSData): boolean;
+
+	sendPingError(data: NSData): boolean;
+
+	sendStringError(string: string): boolean;
+
+	streamHandleEvent(aStream: NSStream, eventCode: NSStreamEvent): void;
+
+	unscheduleFromRunLoopForMode(runLoop: NSRunLoop, mode: string): void;
+}
+
+declare var LPSRWebSocketErrorDomain: string;
 
 declare class LPTimer extends NSObject {
 
@@ -1945,7 +2303,7 @@ declare class LPUserEntity {
 declare class LPUserProfileEntity extends LPUserEntity {
 }
 
-declare class LPWebSocket extends SRWebSocket {
+declare class LPWebSocket extends LPSRWebSocket {
 
 	static alloc(): LPWebSocket; // inherited from NSObject
 
@@ -1968,7 +2326,60 @@ declare class LPWebSocket extends SRWebSocket {
 	flushQueue(): void;
 }
 
-declare class LanguagesManager extends NSObject {
+declare class LPWelcomeMessage extends NSObject {
+
+	static alloc(): LPWelcomeMessage; // inherited from NSObject
+
+	static new(): LPWelcomeMessage; // inherited from NSObject
+
+	frequency: MessageFrequency;
+
+	message: string;
+
+	readonly numberOfOptionsPerRow: number;
+
+	readonly options: NSArray<LPWelcomeMessageOption>;
+
+	readonly quickReply: QuickReplyItem;
+
+	constructor(o: { message: string; frequency: MessageFrequency; });
+
+	clearOptions(): void;
+
+	initWithMessageFrequency(message: string, frequency: MessageFrequency): this;
+
+	setWithNumberOfOptionsPerRow(NumberOfOptionsPerRow: number): void;
+
+	setWithOptionsError(options: NSArray<LPWelcomeMessageOption> | LPWelcomeMessageOption[]): boolean;
+
+	shouldDisplayDefaultMessage(): boolean;
+}
+
+declare const enum LPWelcomeMessageError {
+
+	MaximumOptions = 0,
+
+	MaximumOptionTitleCharacters = 1,
+
+	MinimumOptionTitleCharacters = 2
+}
+
+declare class LPWelcomeMessageOption extends NSObject {
+
+	static alloc(): LPWelcomeMessageOption; // inherited from NSObject
+
+	static new(): LPWelcomeMessageOption; // inherited from NSObject
+
+	readonly displayName: string;
+
+	readonly value: string;
+
+	constructor(o: { value: string; displayName: string; });
+
+	initWithValueDisplayName(value: string, displayName: string): this;
+}
+
+declare class LanguagesManager extends NSObject implements GeneralManagerProtocol {
 
 	static alloc(): LanguagesManager; // inherited from NSObject
 
@@ -1984,9 +2395,13 @@ declare class LanguagesManager extends NSObject {
 
 	static sdkLanguageFromLocalePreferredLanguage(): string;
 
+	c4mLanguage: string;
+
 	static readonly instance: LanguagesManager;
 
 	static readonly supportedLanguages: NSDictionary<string, string>;
+
+	clearManager(): void;
 }
 
 declare class LogEvent extends NSObject {
@@ -2019,6 +2434,13 @@ declare const enum LogLevel {
 	Error = 4,
 
 	Off = 5
+}
+
+declare const enum MessageFrequency {
+
+	FirstTimeConversation = 0,
+
+	EveryConversation = 1
 }
 
 declare class MessagingEventNotification extends GeneralResponse {
@@ -2070,9 +2492,9 @@ declare class QuickReplyAction extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 }
 
 declare class QuickReplyButton extends UIButton {
@@ -2094,6 +2516,8 @@ declare class QuickReplyButton extends UIButton {
 	static buttonWithType(buttonType: UIButtonType): QuickReplyButton; // inherited from UIButton
 
 	static new(): QuickReplyButton; // inherited from NSObject
+
+	static systemButtonWithImageTargetAction(image: UIImage, target: any, action: string): QuickReplyButton; // inherited from UIButton
 
 	details: QuickReplyButtonDetails;
 
@@ -2120,9 +2544,9 @@ declare class QuickReplyButtonDetails extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 }
 
 declare class QuickReplyClick extends NSObject implements NSCoding {
@@ -2139,9 +2563,9 @@ declare class QuickReplyClick extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 }
 
 declare class QuickReplyItem extends NSObject implements NSCoding {
@@ -2160,9 +2584,9 @@ declare class QuickReplyItem extends NSObject implements NSCoding {
 
 	constructor(o: { sequence: number; });
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 
 	initWithSequence(sequence: number): this;
 }
@@ -2214,9 +2638,9 @@ declare class QuickReplyStyle extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 }
 
 declare class RequestConversation extends GeneralResponse {
@@ -2266,12 +2690,6 @@ declare class RoutingTaskNotification extends GeneralResponse {
 	static new(): RoutingTaskNotification; // inherited from NSObject
 }
 
-declare function SRBase64EncodedStringFromData(data: NSData): string;
-
-declare function SRBasicAuthorizationHeaderFromURL(url: NSURL): string;
-
-declare function SRDefaultBufferSize(): number;
-
 interface SRDelegateAvailableMethods {
 	didReceiveMessage: boolean;
 	didReceiveMessageWithString: boolean;
@@ -2285,73 +2703,6 @@ interface SRDelegateAvailableMethods {
 }
 declare var SRDelegateAvailableMethods: interop.StructType<SRDelegateAvailableMethods>;
 
-declare class SRDelegateController extends NSObject {
-
-	static alloc(): SRDelegateController; // inherited from NSObject
-
-	static new(): SRDelegateController; // inherited from NSObject
-
-	readonly availableDelegateMethods: SRDelegateAvailableMethods;
-
-	delegate: SRWebSocketDelegate;
-
-	dispatchQueue: NSObject;
-
-	operationQueue: NSOperationQueue;
-
-	performDelegateBlock(block: (p1: SRWebSocketDelegate, p2: SRDelegateAvailableMethods) => void): void;
-
-	performDelegateQueueBlock(block: () => void): void;
-}
-
-declare function SRErrorWithCodeDescription(code: number, description: string): NSError;
-
-declare function SRErrorWithCodeDescriptionUnderlyingError(code: number, description: string, underlyingError: NSError): NSError;
-
-declare function SRErrorWithDomainCodeDescription(domain: string, code: number, description: string): NSError;
-
-declare function SRHTTPConnectMessageCreate(request: NSURLRequest, securityKey: string, webSocketProtocolVersion: number, cookies: NSArray<NSHTTPCookie>, requestedProtocols: NSArray<string>): interop.Unmanaged<any>;
-
-declare function SRHTTPErrorWithCodeDescription(httpCode: number, errorCode: number, description: string): NSError;
-
-declare var SRHTTPResponseErrorKey: string;
-
-declare class SRIOConsumer extends NSObject {
-
-	static alloc(): SRIOConsumer; // inherited from NSObject
-
-	static new(): SRIOConsumer; // inherited from NSObject
-
-	bytesNeeded: number;
-
-	readonly consumer: (p1: NSData) => number;
-
-	readonly handler: (p1: SRWebSocket, p2: NSData) => void;
-
-	readonly readToCurrentFrame: boolean;
-
-	readonly unmaskBytes: boolean;
-
-	resetWithScannerHandlerBytesNeededReadToCurrentFrameUnmaskBytes(scanner: (p1: NSData) => number, handler: (p1: SRWebSocket, p2: NSData) => void, bytesNeeded: number, readToCurrentFrame: boolean, unmaskBytes: boolean): void;
-}
-
-declare class SRIOConsumerPool extends NSObject {
-
-	static alloc(): SRIOConsumerPool; // inherited from NSObject
-
-	static new(): SRIOConsumerPool; // inherited from NSObject
-
-	constructor(o: { bufferCapacity: number; });
-
-	consumerWithScannerHandlerBytesNeededReadToCurrentFrameUnmaskBytes(scanner: (p1: NSData) => number, handler: (p1: SRWebSocket, p2: NSData) => void, bytesNeeded: number, readToCurrentFrame: boolean, unmaskBytes: boolean): SRIOConsumer;
-
-	initWithBufferCapacity(poolSize: number): this;
-
-	returnConsumer(consumer: SRIOConsumer): void;
-}
-
-declare function SRMaskBytesSIMD(bytes: string, length: number, maskKey: string): void;
-
 declare function SRMutexDestroy(mutex: interop.Pointer | interop.Reference<_opaque_pthread_mutex_t>): void;
 
 declare function SRMutexInitRecursive(): interop.Pointer | interop.Reference<_opaque_pthread_mutex_t>;
@@ -2359,49 +2710,6 @@ declare function SRMutexInitRecursive(): interop.Pointer | interop.Reference<_op
 declare function SRMutexLock(mutex: interop.Pointer | interop.Reference<_opaque_pthread_mutex_t>): void;
 
 declare function SRMutexUnlock(mutex: interop.Pointer | interop.Reference<_opaque_pthread_mutex_t>): void;
-
-declare const enum SROpCode {
-
-	TextFrame = 1,
-
-	BinaryFrame = 2,
-
-	ConnectionClose = 8,
-
-	Ping = 9,
-
-	Pong = 10
-}
-
-declare class SRPinningSecurityPolicy extends SRSecurityPolicy {
-
-	static alloc(): SRPinningSecurityPolicy; // inherited from NSObject
-
-	static defaultPolicy(): SRPinningSecurityPolicy; // inherited from SRSecurityPolicy
-
-	static new(): SRPinningSecurityPolicy; // inherited from NSObject
-
-	static pinnningPolicyWithCertificates(pinnedCertificates: NSArray<any> | any[]): SRPinningSecurityPolicy; // inherited from SRSecurityPolicy
-
-	constructor(o: { certificates: NSArray<any> | any[]; });
-
-	initWithCertificates(pinnedCertificates: NSArray<any> | any[]): this;
-}
-
-declare class SRProxyConnect extends NSObject {
-
-	static alloc(): SRProxyConnect; // inherited from NSObject
-
-	static new(): SRProxyConnect; // inherited from NSObject
-
-	constructor(o: { URL: NSURL; });
-
-	initWithURL(url: NSURL): this;
-
-	openNetworkStreamWithCompletion(completion: (p1: NSError, p2: NSInputStream, p3: NSOutputStream) => void): void;
-}
-
-declare function SRRandomData(length: number): NSData;
 
 declare const enum SRReadyState {
 
@@ -2412,40 +2720,6 @@ declare const enum SRReadyState {
 	R_CLOSING = 2,
 
 	R_CLOSED = 3
-}
-
-declare class SRRunLoopThread extends NSThread {
-
-	static alloc(): SRRunLoopThread; // inherited from NSObject
-
-	static new(): SRRunLoopThread; // inherited from NSObject
-
-	static sharedThread(): SRRunLoopThread;
-
-	readonly runLoop: NSRunLoop;
-}
-
-declare function SRSHA1HashFromBytes(bytes: string, length: number): NSData;
-
-declare function SRSHA1HashFromString(string: string): NSData;
-
-declare class SRSecurityPolicy extends NSObject {
-
-	static alloc(): SRSecurityPolicy; // inherited from NSObject
-
-	static defaultPolicy(): SRSecurityPolicy;
-
-	static new(): SRSecurityPolicy; // inherited from NSObject
-
-	static pinnningPolicyWithCertificates(pinnedCertificates: NSArray<any> | any[]): SRSecurityPolicy;
-
-	constructor(o: { certificateChainValidationEnabled: boolean; });
-
-	evaluateServerTrustForDomain(serverTrust: any, domain: string): boolean;
-
-	initWithCertificateChainValidationEnabled(enabled: boolean): this;
-
-	updateSecurityOptionsInStream(stream: NSStream): void;
 }
 
 declare const enum SRStatusCode {
@@ -2479,157 +2753,39 @@ declare const enum SRStatusCode {
 	CodeTLSHandshake = 1015
 }
 
-declare function SRStreamNetworkServiceTypeFromURLRequest(request: NSURLRequest): string;
-
-declare function SRURLOrigin(url: NSURL): string;
-
-declare function SRURLRequiresSSL(url: NSURL): boolean;
-
-declare class SRWebSocket extends NSObject implements NSStreamDelegate {
-
-	static alloc(): SRWebSocket; // inherited from NSObject
-
-	static new(): SRWebSocket; // inherited from NSObject
-
-	readonly allowsUntrustedSSLCertificates: boolean;
-
-	closeCode: number;
-
-	delegate: SRWebSocketDelegate;
-
-	delegateDispatchQueue: NSObject;
-
-	delegateOperationQueue: NSOperationQueue;
-
-	readonly protocol: string;
-
-	readonly readyState: SRReadyState;
-
-	readonly receivedHTTPHeaders: any;
-
-	requestCookies: NSArray<NSHTTPCookie>;
-
-	readonly url: NSURL;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	constructor(o: { URL: NSURL; });
-
-	constructor(o: { URL: NSURL; protocols: NSArray<string> | string[]; });
-
-	constructor(o: { URL: NSURL; protocols: NSArray<string> | string[]; allowsUntrustedSSLCertificates: boolean; });
-
-	constructor(o: { URLRequest: NSURLRequest; });
-
-	constructor(o: { URLRequest: NSURLRequest; protocols: NSArray<string> | string[]; });
-
-	constructor(o: { URLRequest: NSURLRequest; protocols: NSArray<string> | string[]; allowsUntrustedSSLCertificates: boolean; });
-
-	constructor(o: { URLRequest: NSURLRequest; protocols: NSArray<string> | string[]; securityPolicy: SRSecurityPolicy; });
-
-	constructor(o: { URLRequest: NSURLRequest; securityPolicy: SRSecurityPolicy; });
-
-	constructor(o: { URL: NSURL; securityPolicy: SRSecurityPolicy; });
-
-	class(): typeof NSObject;
-
-	close(): void;
-
-	closeWithCodeReason(code: number, reason: string): void;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	initWithURL(url: NSURL): this;
-
-	initWithURLProtocols(url: NSURL, protocols: NSArray<string> | string[]): this;
-
-	initWithURLProtocolsAllowsUntrustedSSLCertificates(url: NSURL, protocols: NSArray<string> | string[], allowsUntrustedSSLCertificates: boolean): this;
-
-	initWithURLRequest(request: NSURLRequest): this;
-
-	initWithURLRequestProtocols(request: NSURLRequest, protocols: NSArray<string> | string[]): this;
-
-	initWithURLRequestProtocolsAllowsUntrustedSSLCertificates(request: NSURLRequest, protocols: NSArray<string> | string[], allowsUntrustedSSLCertificates: boolean): this;
-
-	initWithURLRequestProtocolsSecurityPolicy(request: NSURLRequest, protocols: NSArray<string> | string[], securityPolicy: SRSecurityPolicy): this;
-
-	initWithURLRequestSecurityPolicy(request: NSURLRequest, securityPolicy: SRSecurityPolicy): this;
-
-	initWithURLSecurityPolicy(url: NSURL, securityPolicy: SRSecurityPolicy): this;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	open(): void;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	scheduleInRunLoopForMode(runLoop: NSRunLoop, mode: string): void;
-
-	self(): this;
-
-	send(message: any): void;
-
-	sendDataError(data: NSData): boolean;
-
-	sendDataNoCopyError(data: NSData): boolean;
-
-	sendPingError(data: NSData): boolean;
-
-	sendStringError(string: string): boolean;
-
-	streamHandleEvent(aStream: NSStream, eventCode: NSStreamEvent): void;
-
-	unscheduleFromRunLoopForMode(runLoop: NSRunLoop, mode: string): void;
-}
-
 interface SRWebSocketDelegate extends NSObjectProtocol {
 
-	webSocketDidCloseWithCodeReasonWasClean?(webSocket: SRWebSocket, code: number, reason: string, wasClean: boolean): void;
+	webSocketDidCloseWithCodeReasonWasClean?(webSocket: LPSRWebSocket, code: number, reason: string, wasClean: boolean): void;
 
-	webSocketDidFailWithError?(webSocket: SRWebSocket, error: NSError): void;
+	webSocketDidFailWithError?(webSocket: LPSRWebSocket, error: NSError): void;
 
-	webSocketDidOpen?(webSocket: SRWebSocket): void;
+	webSocketDidOpen?(webSocket: LPSRWebSocket): void;
 
-	webSocketDidReceiveMessage?(webSocket: SRWebSocket, message: any): void;
+	webSocketDidReceiveMessage?(webSocket: LPSRWebSocket, message: any): void;
 
-	webSocketDidReceiveMessageWithData?(webSocket: SRWebSocket, data: NSData): void;
+	webSocketDidReceiveMessageWithData?(webSocket: LPSRWebSocket, data: NSData): void;
 
-	webSocketDidReceiveMessageWithString?(webSocket: SRWebSocket, string: string): void;
+	webSocketDidReceiveMessageWithString?(webSocket: LPSRWebSocket, string: string): void;
 
-	webSocketDidReceivePingWithData?(webSocket: SRWebSocket, data: NSData): void;
+	webSocketDidReceivePingWithData?(webSocket: LPSRWebSocket, data: NSData): void;
 
-	webSocketDidReceivePong?(webSocket: SRWebSocket, pongData: NSData): void;
+	webSocketDidReceivePong?(webSocket: LPSRWebSocket, pongData: NSData): void;
 
-	webSocketShouldConvertTextFrameToString?(webSocket: SRWebSocket): boolean;
+	webSocketShouldConvertTextFrameToString?(webSocket: LPSRWebSocket): boolean;
 }
 declare var SRWebSocketDelegate: {
 
 	prototype: SRWebSocketDelegate;
 };
 
-declare var SRWebSocketErrorDomain: string;
+declare const enum ScrollPosition {
+
+	Bottom = 0,
+
+	LastPosition = 1,
+
+	FirstUnreadMessage = 2
+}
 
 declare class SecureFormReadOTKResponse extends GeneralResponse {
 
@@ -2650,9 +2806,9 @@ declare class StructuredContentAction extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 }
 
 declare class StructuredContentButtonItem extends StructuredContentItem {
@@ -2678,9 +2834,9 @@ declare class StructuredContentClick extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 }
 
 declare class StructuredContentImageItem extends StructuredContentItem {
@@ -2726,9 +2882,9 @@ declare class StructuredContentItem extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 
 	iterateThroughWithIterationStep(iterationStep: (p1: StructuredContentItem) => void): void;
 }
@@ -2743,15 +2899,13 @@ declare class StructuredContentItemContainer extends NSObject implements NSCodin
 
 	item: StructuredContentItem;
 
-	shouldScrollToBottomOnLoad: boolean;
-
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
 	constructor(o: { structuredContentItem: StructuredContentItem; });
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 
 	initWithStructuredContentItem(structuredContentItem: StructuredContentItem): this;
 }
@@ -2834,9 +2988,9 @@ declare class StructuredContentStyle extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 }
 
 declare class StructuredContentTextItem extends StructuredContentItem {
@@ -2891,81 +3045,11 @@ declare class TTRModel extends NSObject implements NSCoding {
 
 	compareWithOther(other: TTRModel): boolean;
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 
 	initWithEffectiveTTRManualETTRTtrValueDelay(effectiveTTR: Date, manualETTR: Date, ttrValue: number, delay: Date): this;
-}
-
-declare class Toast extends UIView {
-
-	static alloc(): Toast; // inherited from NSObject
-
-	static appearance(): Toast; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): Toast; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): Toast; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): Toast; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): Toast; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): Toast; // inherited from UIAppearance
-
-	static new(): Toast; // inherited from NSObject
-
-	didDismiss: () => void;
-
-	didShow: () => void;
-
-	didTap: () => void;
-
-	name: string;
-
-	showAboveStatusBar: boolean;
-
-	changeTextWithText(text: string): void;
-}
-
-declare class Toaster extends UIView {
-
-	static alloc(): Toaster; // inherited from NSObject
-
-	static appearance(): Toaster; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): Toaster; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): Toaster; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): Toaster; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): Toaster; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): Toaster; // inherited from UIAppearance
-
-	static new(): Toaster; // inherited from NSObject
-
-	containerViewController: UIViewController;
-
-	readonly current: Toast;
-
-	constructor(o: { containerView: UIView; });
-
-	constructor(o: { containerViewController: UIViewController; });
-
-	addWithToast(toast: Toast): void;
-
-	dismissAll(): void;
-
-	dismissToastByName(name: string): void;
-
-	dismissWithToast(toast: Toast): void;
-
-	initWithContainerView(containerView: UIView): this;
-
-	initWithContainerViewController(containerViewController: UIViewController): this;
 }
 
 declare const enum UIApplicationReleaseMode {
@@ -2994,6 +3078,8 @@ declare class UploadInfo extends NSObject {
 	fileInfo: NSDictionary<string, any>;
 
 	setAudioFileInfoFromError(url: NSURL): boolean;
+
+	setFileInfoFromCaptionError(url: NSURL, caption: string): boolean;
 }
 
 declare class Utils extends NSObject {
@@ -3043,9 +3129,9 @@ declare const ccNoPadding: number;
 
 declare const ccPKCS7Padding: number;
 
-declare function import_NSRunLoop_SRWebSocket(): void;
+declare function import_NSRunLoop_LPSRWebSocket(): void;
 
-declare function import_NSURLRequest_SRWebSocket(): void;
+declare function import_NSURLRequest_LPSRWebSocket(): void;
 
 declare const kCCAlgorithm3DES: number;
 

@@ -35,6 +35,15 @@ declare class LPGetEngagementResponse extends NSObject {
 	visitorId: string;
 }
 
+declare class LPGetLECampaignResponse extends NSObject {
+
+	static alloc(): LPGetLECampaignResponse; // inherited from NSObject
+
+	static new(): LPGetLECampaignResponse; // inherited from NSObject
+
+	language: string;
+}
+
 declare class LPMonitoringAPI extends NSObject {
 
 	static alloc(): LPMonitoringAPI; // inherited from NSObject

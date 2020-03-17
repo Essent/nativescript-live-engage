@@ -2,8 +2,6 @@
 interface ConversationViewControllerAgentDelegate {
 
 	agentDidChangeUserInputText?(text: string): void;
-
-	setUIAdapterDelegate?(delegate: UIAdapterDelegate): void;
 }
 declare var ConversationViewControllerAgentDelegate: {
 
@@ -48,6 +46,8 @@ declare class LPMessagingAPI extends NSObject {
 
 	static createWelcomeLocalMessageOverrideTime(dialog: LPDialogEntity, overrideTime: Date): LPMessageEntity;
 
+	static createWelcomeLocalMessageWelcomeMessageOverrideTime(dialog: LPDialogEntity, welcomeMessage: LPWelcomeMessage, overrideTime: Date): LPMessageEntity;
+
 	static deleteAllFilesFromDiskWithCompletionFailure(completion: () => void, failure: (p1: NSError) => void): void;
 
 	static deleteFileFromDiskWithFile(file: LPFileEntity): void;
@@ -82,6 +82,8 @@ declare class LPMessagingAPI extends NSObject {
 
 	static getConversationsSortedByDateConversationHistoryControlParam(query: ConversationParamProtocol, conversationHistoryControlParam: LPConversationHistoryControlParam): NSArray<LPConversationEntity>;
 
+	static getFileFromFileEntityWithFileEntityCompletionFailure(fileEntity: LPFileEntity, completion: (p1: LPFileEntity) => void, failure: (p1: NSError) => void): void;
+
 	static getImageByURL(url: string): UIImage;
 
 	static getInactiveUserInteractionTimeInterval(conversationQuery: ConversationParamProtocol): number;
@@ -103,6 +105,8 @@ declare class LPMessagingAPI extends NSObject {
 	static getThumbnailFromFileWithFileCompletionFailure(file: LPFileEntity, completion: (p1: UIImage) => void, failure: (p1: NSError) => void): void;
 
 	static getUnreadMessagesCountCompletionFailure(conversationQuery: ConversationParamProtocol, completion: (p1: number) => void, failure: (p1: NSError) => void): void;
+
+	static getUnreadMessagesCountWithBrandIDCompletionFailure(brandID: string, completion: (p1: number) => void, failure: (p1: NSError) => void): void;
 
 	static getUserFromDatabaseWithUserID(userID: string): LPUserEntity;
 
@@ -189,6 +193,8 @@ declare class LPMessagingAPI extends NSObject {
 	static uploadFileWithFileUploadRelativePathTempURLSigTempURLExpiryCompletionFailure(file: LPFileEntity, uploadRelativePath: string, tempURLSig: string, tempURLExpiry: string, completion: (p1: LPFileEntity) => void, failure: (p1: NSError) => void): void;
 
 	static readonly isNetworkReachable: boolean;
+
+	getThumbnailForFileTypeWithFile(file: LPFileEntity): UIImage;
 }
 
 interface LPMessagingAPIDelegate extends LPAMSFacadeDelegate {
@@ -198,13 +204,19 @@ declare var LPMessagingAPIDelegate: {
 	prototype: LPMessagingAPIDelegate;
 };
 
-declare class LPMessagingSDK extends NSObject implements UINavigationControllerDelegate {
+declare class LPMessagingSDK extends NSObject {
 
 	static alloc(): LPMessagingSDK; // inherited from NSObject
 
 	static getUnreadMessagesCountCompletionFailure(conversationQuery: ConversationParamProtocol, completion: (p1: number) => void, failure: (p1: NSError) => void): void;
 
+	static getUnreadMessagesCountWithBrandIDCompletionFailure(brandID: string, completion: (p1: number) => void, failure: (p1: NSError) => void): void;
+
 	static new(): LPMessagingSDK; // inherited from NSObject
+
+	static setPusherTokenWithTokenAlternateBundleID(token: NSData, alternateBundleID: string): void;
+
+	static setPusherVoipTokenWithTokenAlternateBundleID(token: NSData, alternateBundleID: string): void;
 
 	delegate: LPMessagingSDKdelegate;
 
@@ -212,25 +224,9 @@ declare class LPMessagingSDK extends NSObject implements UINavigationControllerD
 
 	static readonly instance: LPMessagingSDK;
 
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
 	checkActiveConversation(conversationQuery: ConversationParamProtocol): boolean;
 
-	class(): typeof NSObject;
-
 	clearHistoryError(conversationQuery: ConversationParamProtocol): boolean;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
 
 	destruct(): void;
 
@@ -256,12 +252,6 @@ declare class LPMessagingSDK extends NSObject implements UINavigationControllerD
 
 	isBrandReady(brandID: string): boolean;
 
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
 	isUrgent(conversationQuery: ConversationParamProtocol): boolean;
 
 	logout(): void;
@@ -269,24 +259,6 @@ declare class LPMessagingSDK extends NSObject implements UINavigationControllerD
 	logoutWithCompletionFailure(completion: () => void, failure: (p1: NSError) => void): void;
 
 	markAsUrgent(conversationQuery: ConversationParamProtocol): void;
-
-	navigationControllerAnimationControllerForOperationFromViewControllerToViewController(navigationController: UINavigationController, operation: UINavigationControllerOperation, fromVC: UIViewController, toVC: UIViewController): UIViewControllerAnimatedTransitioning;
-
-	navigationControllerDidShowViewControllerAnimated(navigationController: UINavigationController, viewController: UIViewController, animated: boolean): void;
-
-	navigationControllerInteractionControllerForAnimationController(navigationController: UINavigationController, animationController: UIViewControllerAnimatedTransitioning): UIViewControllerInteractiveTransitioning;
-
-	navigationControllerPreferredInterfaceOrientationForPresentation(navigationController: UINavigationController): UIInterfaceOrientation;
-
-	navigationControllerSupportedInterfaceOrientations(navigationController: UINavigationController): UIInterfaceOrientationMask;
-
-	navigationControllerWillShowViewControllerAnimated(navigationController: UINavigationController, viewController: UIViewController, animated: boolean): void;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
 
 	printAllLocalizedKeys(): void;
 
@@ -304,13 +276,9 @@ declare class LPMessagingSDK extends NSObject implements UINavigationControllerD
 
 	resolveConversation(conversationQuery: ConversationParamProtocol): void;
 
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	self(): this;
-
 	setCustomButton(image: UIImage): void;
+
+	setPushNotificationTapped(): void;
 
 	setUserProfileBrandID(lpuser: LPUser, brandID: string): void;
 
@@ -323,6 +291,8 @@ declare class LPMessagingSDK extends NSObject implements UINavigationControllerD
 	subscribeLogEventsLogEvent(logLevel: LogLevel, logEvent: (p1: LPLog) => void): void;
 
 	toggleChatActionsSender(accountID: string, sender: UIBarButtonItem): void;
+
+	unregisterPusherWithBrandIdCompletionFailure(brandId: string, completion: () => void, failure: (p1: NSError) => void): void;
 }
 
 interface LPMessagingSDKNotificationDelegate {
@@ -651,13 +621,13 @@ declare class LPTTTAttributedLabelLink extends NSObject implements NSCoding {
 
 	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
 
-	encodeWithCoder(aCoder: NSCoder): void;
+	encodeWithCoder(coder: NSCoder): void;
 
 	initWithAttributesActiveAttributesInactiveAttributesTextCheckingResult(attributes: NSDictionary<any, any>, activeAttributes: NSDictionary<any, any>, inactiveAttributes: NSDictionary<any, any>, result: NSTextCheckingResult): this;
 
 	initWithAttributesFromLabelTextCheckingResult(label: LPTTTAttributedLabel, result: NSTextCheckingResult): this;
 
-	initWithCoder(aDecoder: NSCoder): this;
+	initWithCoder(coder: NSCoder): this;
 }
 
 interface LPTTTAttributedLabelProtocol extends NSObjectProtocol {
@@ -726,9 +696,79 @@ declare class RemoteUserIsTypingView extends UIView {
 	static new(): RemoteUserIsTypingView; // inherited from NSObject
 }
 
+declare class Toast extends UIView {
+
+	static alloc(): Toast; // inherited from NSObject
+
+	static appearance(): Toast; // inherited from UIAppearance
+
+	static appearanceForTraitCollection(trait: UITraitCollection): Toast; // inherited from UIAppearance
+
+	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): Toast; // inherited from UIAppearance
+
+	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): Toast; // inherited from UIAppearance
+
+	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): Toast; // inherited from UIAppearance
+
+	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): Toast; // inherited from UIAppearance
+
+	static new(): Toast; // inherited from NSObject
+
+	didDismiss: () => void;
+
+	didShow: () => void;
+
+	didTap: () => void;
+
+	name: string;
+
+	showAboveStatusBar: boolean;
+
+	changeTextWithText(text: string): void;
+}
+
+declare class Toaster extends UIView {
+
+	static alloc(): Toaster; // inherited from NSObject
+
+	static appearance(): Toaster; // inherited from UIAppearance
+
+	static appearanceForTraitCollection(trait: UITraitCollection): Toaster; // inherited from UIAppearance
+
+	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): Toaster; // inherited from UIAppearance
+
+	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): Toaster; // inherited from UIAppearance
+
+	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): Toaster; // inherited from UIAppearance
+
+	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): Toaster; // inherited from UIAppearance
+
+	static new(): Toaster; // inherited from NSObject
+
+	containerViewController: UIViewController;
+
+	readonly current: Toast;
+
+	constructor(o: { containerView: UIView; });
+
+	constructor(o: { containerViewController: UIViewController; });
+
+	addWithToast(toast: Toast): void;
+
+	dismissAll(): void;
+
+	dismissToastByName(name: string): void;
+
+	dismissWithToast(toast: Toast): void;
+
+	initWithContainerView(containerView: UIView): this;
+
+	initWithContainerViewController(containerViewController: UIViewController): this;
+}
+
 interface UIAdapterDelegate {
 
-	executeActionAtIndexIndexConversationComplition?(viewController: UIViewController, index: number, conversation: LPConversationEntity, complition: () => void): void;
+	executeActionAtIndexIndexConversationCompletion?(viewController: UIViewController, index: number, conversation: LPConversationEntity, completion: () => void): void;
 
 	getDefaultRecepientAvatarImage?(conversationQuery: ConversationParamProtocol): UIImage;
 
