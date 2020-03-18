@@ -65,6 +65,8 @@ declare class LPAMSFacade extends NSObject {
 
 	static createWelcomeLocalMessageOverrideTime(dialog: LPDialogEntity, overrideTime: Date): LPMessageEntity;
 
+	static createWelcomeLocalMessageWelcomeMessageOverrideTime(dialog: LPDialogEntity, welcomeMessage: LPWelcomeMessage, overrideTime: Date): LPMessageEntity;
+
 	static deleteOldConversations(): void;
 
 	static didFetchHistoryMessagingEventNotifications(): boolean;
@@ -119,7 +121,11 @@ declare class LPAMSFacade extends NSObject {
 
 	static resolveConversation(conversation: LPConversationEntity): void;
 
+	static resolveConversationCompletion(conversation: LPConversationEntity, completion: () => void): void;
+
 	static resolveConversationForConversationQuery(conversationQuery: ConversationParamProtocol): void;
+
+	static resolveConversationForConversationQueryCompletion(conversationQuery: ConversationParamProtocol, completion: () => void): void;
 
 	static retrieveNewMessagesForConversationCompletionFailure(conversation: LPConversationEntity, completion: (p1: NSArray<LPMessageEntity>) => void, failure: (p1: NSError) => void): void;
 

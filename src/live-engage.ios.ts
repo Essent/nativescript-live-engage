@@ -54,12 +54,23 @@ export class LiveEngage implements CommonLiveEngage {
             return;
         }
         const conversationQuery = LPMessagingSDK.instance.getConversationBrandQueryCampaignInfo(this.brandId, null);
-        const conversationViewParams = LPConversationViewParams.alloc().initWithConversationQueryContainerViewControllerIsViewOnlyConversationHistoryControlParam(
-            conversationQuery,
-            null,
-            false,
-            null
-        );
+        const historyControlParam = LPConversationHistoryControlParam
+            .alloc()
+            .initWithHistoryConversationsStateToDisplayHistoryConversationsMaxDaysHistoryMaxDaysType(
+                null
+                , -1
+                , LPConversationHistoryMaxDaysDateType.StartConversationDate
+            );
+
+        const conversationViewParams = LPConversationViewParams
+            .alloc()
+            .initWithConversationQueryContainerViewControllerIsViewOnlyConversationHistoryControlParam(
+                conversationQuery,
+                null,
+                false,
+                historyControlParam
+            );
+
         LPMessagingSDK.instance.showConversationAuthenticationParams(conversationViewParams, this.authenticationParams);
         this.setUserProfileValues(this.chatProfile);
         this.registerPushToken(this.apnsToken, this.apnsDelegate);
