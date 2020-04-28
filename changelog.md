@@ -1,3 +1,9 @@
+## 6.0.0
+* Migrated to NativeScript 6 and to latest live-engage SDKs
+
+## 5.0.0
+* Migrated to XCode 11
+
 ## 4.1.1
 * Upgraded LiveEngage SDK for iOS and Android to 3.6.0.
 
