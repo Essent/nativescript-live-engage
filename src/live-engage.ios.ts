@@ -50,7 +50,6 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public showChat(closeCallback?: () => void): void {
-        console.log('****** Show chat IOS*******');
         if (!this.brandId) {
             return;
         }

@@ -11,7 +11,6 @@ export class AppComponent {
     }
 
     public showChat(): void {
-        console.log('****** Show chat appComponent *******');
         const chatProfile: ChatProfile = {
             firstName: 'Jane',
             lastName: 'Doe',

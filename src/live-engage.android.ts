@@ -165,7 +165,6 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public registerPushToken(token: any, delegate?: any): void {
-        console.log('***** Token ***** ' + token + ' brand ' + this.brandId + ' appId ' + this.appId);
         this.fcmToken = token;
         LivePerson.registerLPPusher(this.brandId, this.appId, token);
     }
