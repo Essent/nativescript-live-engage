@@ -50,6 +50,7 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public showChat(closeCallback?: () => void): void {
+        console.log('****** Show chat IOS*******');
         if (!this.brandId) {
             return;
         }
@@ -176,3 +177,4 @@ class LPMessagingSDKdelegateImpl extends NSObject implements LPMessagingSDKdeleg
         this.closeCallback();
     }
 }
+

@@ -5,5 +5,5 @@ android {
 }
 
 dependencies {
-    compile 'com.liveperson.android:lp_messaging_sdk:3.6.0'
+    compile 'com.liveperson.android:lp_messaging_sdk:5.1.1'
 }
