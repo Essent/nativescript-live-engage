@@ -6,7 +6,7 @@ import InitLivePersonProperties = com.liveperson.infra.InitLivePersonProperties;
 import InitLivePersonCallBack = com.liveperson.infra.callbacks.InitLivePersonCallBack;
 import MessagingUIFactory = com.liveperson.infra.messaging_ui.MessagingUIFactory;
 import LogoutLivePersonCallBack = com.liveperson.messaging.sdk.api.callbacks.LogoutLivePersonCallback;
-import LPAuthenticationParams = com.liveperson.infra.LPAuthenticationParams;
+import LPAuthenticationParams = com.liveperson.infra.auth.LPAuthenticationParams;
 import ConversationViewParams = com.liveperson.infra.ConversationViewParams;
 import ConversationActivity = com.liveperson.infra.messaging_ui.ConversationActivity;
 import ConsumerProfile = com.liveperson.messaging.sdk.api.model.ConsumerProfile;
@@ -75,7 +75,8 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     private showConversation(instance) {
-        const lpAuthenticationParams = new LPAuthenticationParams().setHostAppJWT(this.authCode);
+        const lpAuthenticationParams = new LPAuthenticationParams();
+        lpAuthenticationParams.setHostAppJWT(this.authCode);
         const conversationViewParams = new ConversationViewParams(false);
         LivePerson.showConversation(
             application.android.foregroundActivity,
@@ -213,3 +214,4 @@ export class LiveEngage implements CommonLiveEngage {
         });
     }
 }
+
