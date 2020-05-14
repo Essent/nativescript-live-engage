@@ -5,7 +5,7 @@
 This is a plugin to show the conversation from a LiveEngage chat, using the LP-Messaging SDK ([Android](https://github.com/LP-Messaging/Android-Messaging-SDK) v3.6.0, [iOS](https://github.com/LP-Messaging/iOS-Messaging-SDK) v3.6.0).
 
 ## Requirements
-* Xcode 10.x
+* Xcode 11.x
 * Android SDK 28
 * NativeScript CLI 5.x
 * [LivePerson account](https://www.liveperson.com)

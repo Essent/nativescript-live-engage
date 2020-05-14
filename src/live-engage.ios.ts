@@ -55,12 +55,12 @@ export class LiveEngage implements CommonLiveEngage {
         }
         const conversationQuery = LPMessagingSDK.instance.getConversationBrandQueryCampaignInfo(this.brandId, null);
         const historyControlParam = LPConversationHistoryControlParam
-            .alloc()
-            .initWithHistoryConversationsStateToDisplayHistoryConversationsMaxDaysHistoryMaxDaysType(
-                null
-                , -1
-                , LPConversationHistoryMaxDaysDateType.StartConversationDate
-            );
+        .alloc()
+        .initWithHistoryConversationsStateToDisplayHistoryConversationsMaxDaysHistoryMaxDaysType(
+            LPConversationsHistoryStateToDisplay.None
+            , null
+            , LPConversationHistoryMaxDaysDateType.StartConversationDate
+        );
 
         const conversationViewParams = LPConversationViewParams
             .alloc()
