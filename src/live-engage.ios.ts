@@ -7,7 +7,7 @@ declare const LPConversationViewParams: any;
 declare const LPMonitoringInitParams: any;
 
 export class LiveEngage implements CommonLiveEngage {
-
+    
     private static instance: LiveEngage = new LiveEngage();
     private authenticationParams: any;
     private brandId: string;
@@ -57,8 +57,8 @@ export class LiveEngage implements CommonLiveEngage {
         const historyControlParam = LPConversationHistoryControlParam
             .alloc()
             .initWithHistoryConversationsStateToDisplayHistoryConversationsMaxDaysHistoryMaxDaysType(
-                null
-                , -1
+                LPConversationsHistoryStateToDisplay.None
+                , null
                 , LPConversationHistoryMaxDaysDateType.StartConversationDate
             );
 

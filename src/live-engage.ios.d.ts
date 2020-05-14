@@ -7,6 +7,7 @@ export declare class LiveEngage implements CommonLiveEngage {
     private chatProfile;
     private apnsToken;
     private apnsDelegate;
+    private static HISTORY_DAYS;
     constructor();
     static getInstance(): LiveEngage;
     initializeChat(brandId: string, appId: string): void;
