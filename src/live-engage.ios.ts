@@ -57,10 +57,11 @@ export class LiveEngage implements CommonLiveEngage {
         const historyControlParam = LPConversationHistoryControlParam
             .alloc()
             .initWithHistoryConversationsStateToDisplayHistoryConversationsMaxDaysHistoryMaxDaysType(
-                null
-                , -1
-                , LPConversationHistoryMaxDaysDateType.StartConversationDate
+                LPConversationsHistoryStateToDisplay.None,
+                null,
+                LPConversationHistoryMaxDaysDateType.StartConversationDate
             );
+
 
         const conversationViewParams = LPConversationViewParams
             .alloc()
