@@ -8,6 +8,9 @@ import { LiveEngage, ChatProfile } from 'nativescript-live-engage';
 export class AppComponent {
 
     public constructor() {
+        LPConfig.defaultConfiguration.enableFileSharing = true;
+        LPConfig.defaultConfiguration.enablePhotoSharing = true;
+        LPConfig.defaultConfiguration.brandName = 'Demo Brand Name';
     }
 
     public showChat(): void {
