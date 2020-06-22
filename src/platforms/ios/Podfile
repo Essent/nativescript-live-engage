@@ -1,3 +1,3 @@
 source 'https://github.com/LivePersonInc/iOSPodSpecs.git'
 source 'https://github.com/CocoaPods/Specs.git'
-pod 'LPMessagingSDK', '5.1.2.1109'
+pod 'LPMessagingSDK', '4.1.0.0.710-Swift-5.1'
