@@ -87,6 +87,8 @@ declare class LPAMSFacade extends NSObject {
 
 	static getPreparedSecureFormWebViewWithForm(form: LPFormEntity): WKWebView;
 
+	static getUnreadMessagesCountWithBrandAuthenticationParamsCompletionFailure(brand: LPBrandEntity, authenticationParams: LPAuthenticationParams, completion: (p1: number) => void, failure: (p1: NSError) => void): void;
+
 	static hasActiveController(brandID: string): boolean;
 
 	static hasSecureFormAlreadyLoadedInWebViewWithForm(form: LPFormEntity): boolean;
@@ -96,6 +98,8 @@ declare class LPAMSFacade extends NSObject {
 	static isBrandReady(brandID: string): boolean;
 
 	static isFetchingHistoryMessages(): boolean;
+
+	static isRegisteredForPushNotificationsAuthenticationParamsCompletionFailure(conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams, completion: (p1: boolean) => void, failure: (p1: NSError) => void): void;
 
 	static isUrgent(conversationQuery: ConversationParamProtocol): boolean;
 
@@ -186,7 +190,7 @@ interface LPAMSFacadeDelegate {
 
 	didReceiveTTRUpdateTtr?(conversation: LPConversationEntity, ttr: TTRModel): void;
 
-	didSendMessagesMessages?(dialog: LPDialogEntity, messages: NSArray<LPMessageEntity> | LPMessageEntity[]): void;
+	didSendMessagesMessagesIsFromConversationHandler?(dialog: LPDialogEntity, messages: NSArray<LPMessageEntity> | LPMessageEntity[], isFromConversationHandler: boolean): void;
 
 	didUpdateUserProfileUserID?(conversation: LPConversationEntity, userID: string): void;
 

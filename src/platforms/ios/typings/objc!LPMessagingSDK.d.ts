@@ -92,7 +92,7 @@ declare class LPMessagingAPI extends NSObject {
 
 	static getLoadingStructuredContentMessages(): NSArray<LPMessageEntity>;
 
-	static getOpenConveration(): LPConversationEntity;
+	static getOpenConversation(): LPConversationEntity;
 
 	static getOrCreateBrandByAccountID(accountID: string): LPBrandEntity;
 
@@ -244,6 +244,8 @@ declare class LPMessagingSDK extends NSObject {
 
 	getSDKVersion(): string;
 
+	getUnreadMessagesCountAuthenticationParamsCompletionFailure(conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams, completion: (p1: number) => void, failure: (p1: NSError) => void): void;
+
 	handlePush(userInfo: NSDictionary<any, any>): void;
 
 	initSocketForBrandIDAgentTokenReadyCompletion(brandID: string, agentToken: string, readyCompletion: () => void): void;
@@ -251,6 +253,8 @@ declare class LPMessagingSDK extends NSObject {
 	initializeMonitoringInitParamsError(brandID: string, monitoringInitParams: LPMonitoringInitParams): boolean;
 
 	isBrandReady(brandID: string): boolean;
+
+	isRegisteredForPushNotificationsAuthenticationParamsTokenAlternateBundleIDCompletionFailure(conversationQuery: ConversationParamProtocol, authenticationParams: LPAuthenticationParams, token: NSData, alternateBundleID: string, completion: (p1: boolean) => void, failure: (p1: NSError) => void): void;
 
 	isUrgent(conversationQuery: ConversationParamProtocol): boolean;
 
@@ -287,8 +291,6 @@ declare class LPMessagingSDK extends NSObject {
 	showConversationAuthenticationCodeContainerViewController(conversationQuery: ConversationParamProtocol, authenticationCode: string, containerViewController: UIViewController): void;
 
 	showConversationAuthenticationParams(conversationViewParams: LPConversationViewParams, authenticationParams: LPAuthenticationParams): void;
-
-	subscribeLogEventsLogEvent(logLevel: LogLevel, logEvent: (p1: LPLog) => void): void;
 
 	toggleChatActionsSender(accountID: string, sender: UIBarButtonItem): void;
 
@@ -421,235 +423,6 @@ declare class LPRadialProgressBar extends UIView {
 	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): LPRadialProgressBar; // inherited from UIAppearance
 
 	static new(): LPRadialProgressBar; // inherited from NSObject
-}
-
-declare class LPTTTAttributedLabel extends UILabel implements LPTTTAttributedLabelProtocol, UIGestureRecognizerDelegate {
-
-	static alloc(): LPTTTAttributedLabel; // inherited from NSObject
-
-	static appearance(): LPTTTAttributedLabel; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): LPTTTAttributedLabel; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): LPTTTAttributedLabel; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): LPTTTAttributedLabel; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): LPTTTAttributedLabel; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject> | typeof NSObject[]): LPTTTAttributedLabel; // inherited from UIAppearance
-
-	static new(): LPTTTAttributedLabel; // inherited from NSObject
-
-	static sizeThatFitsAttributedStringWithConstraintsLimitedToNumberOfLines(attributedString: NSAttributedString, size: CGSize, numberOfLines: number): CGSize;
-
-	activeLinkAttributes: NSDictionary<any, any>;
-
-	attributedTruncationToken: NSAttributedString;
-
-	delegate: LPTTTAttributedLabelDelegate;
-
-	enabledTextCheckingTypes: number;
-
-	extendsLinkTouchArea: boolean;
-
-	firstLineIndent: number;
-
-	highlightedShadowColor: UIColor;
-
-	highlightedShadowOffset: CGSize;
-
-	highlightedShadowRadius: number;
-
-	inactiveLinkAttributes: NSDictionary<any, any>;
-
-	kern: number;
-
-	lineHeightMultiple: number;
-
-	lineSpacing: number;
-
-	linkAttributes: NSDictionary<any, any>;
-
-	linkBackgroundEdgeInset: UIEdgeInsets;
-
-	readonly links: NSArray<any>;
-
-	readonly longPressGestureRecognizer: UILongPressGestureRecognizer;
-
-	maximumLineHeight: number;
-
-	minimumLineHeight: number;
-
-	shadowRadius: number;
-
-	textInsets: UIEdgeInsets;
-
-	verticalAlignment: LPTTTAttributedLabelVerticalAlignment;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	text: any; // inherited from LPTTTAttributedLabelProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	addLink(link: LPTTTAttributedLabelLink): void;
-
-	addLinkToAddressWithRange(addressComponents: NSDictionary<any, any>, range: NSRange): LPTTTAttributedLabelLink;
-
-	addLinkToDateTimeZoneDurationWithRange(date: Date, timeZone: NSTimeZone, duration: number, range: NSRange): LPTTTAttributedLabelLink;
-
-	addLinkToDateWithRange(date: Date, range: NSRange): LPTTTAttributedLabelLink;
-
-	addLinkToPhoneNumberWithRange(phoneNumber: string, range: NSRange): LPTTTAttributedLabelLink;
-
-	addLinkToTransitInformationWithRange(components: NSDictionary<any, any>, range: NSRange): LPTTTAttributedLabelLink;
-
-	addLinkToURLWithRange(url: NSURL, range: NSRange): LPTTTAttributedLabelLink;
-
-	addLinkWithTextCheckingResult(result: NSTextCheckingResult): LPTTTAttributedLabelLink;
-
-	addLinkWithTextCheckingResultAttributes(result: NSTextCheckingResult, attributes: NSDictionary<any, any>): LPTTTAttributedLabelLink;
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	containslinkAtPoint(point: CGPoint): boolean;
-
-	gestureRecognizerShouldBeRequiredToFailByGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
-
-	gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer): boolean;
-
-	gestureRecognizerShouldReceivePress(gestureRecognizer: UIGestureRecognizer, press: UIPress): boolean;
-
-	gestureRecognizerShouldReceiveTouch(gestureRecognizer: UIGestureRecognizer, touch: UITouch): boolean;
-
-	gestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
-
-	gestureRecognizerShouldRequireFailureOfGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	linkAtPoint(point: CGPoint): LPTTTAttributedLabelLink;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	self(): this;
-
-	setText(text: any): void;
-
-	setTextAfterInheritingLabelAttributesAndConfiguringWithBlock(text: any, block: (p1: NSMutableAttributedString) => NSMutableAttributedString): void;
-}
-
-interface LPTTTAttributedLabelDelegate extends NSObjectProtocol {
-
-	attributedLabelDidLongPressLinkWithAddressAtPoint?(label: LPTTTAttributedLabel, addressComponents: NSDictionary<any, any>, point: CGPoint): void;
-
-	attributedLabelDidLongPressLinkWithDateAtPoint?(label: LPTTTAttributedLabel, date: Date, point: CGPoint): void;
-
-	attributedLabelDidLongPressLinkWithDateTimeZoneDurationAtPoint?(label: LPTTTAttributedLabel, date: Date, timeZone: NSTimeZone, duration: number, point: CGPoint): void;
-
-	attributedLabelDidLongPressLinkWithPhoneNumberAtPoint?(label: LPTTTAttributedLabel, phoneNumber: string, point: CGPoint): void;
-
-	attributedLabelDidLongPressLinkWithTextCheckingResultAtPoint?(label: LPTTTAttributedLabel, result: NSTextCheckingResult, point: CGPoint): void;
-
-	attributedLabelDidLongPressLinkWithTransitInformationAtPoint?(label: LPTTTAttributedLabel, components: NSDictionary<any, any>, point: CGPoint): void;
-
-	attributedLabelDidLongPressLinkWithURLAtPoint?(label: LPTTTAttributedLabel, url: NSURL, point: CGPoint): void;
-
-	attributedLabelDidSelectLinkWithAddress?(label: LPTTTAttributedLabel, addressComponents: NSDictionary<any, any>): void;
-
-	attributedLabelDidSelectLinkWithDate?(label: LPTTTAttributedLabel, date: Date): void;
-
-	attributedLabelDidSelectLinkWithDateTimeZoneDuration?(label: LPTTTAttributedLabel, date: Date, timeZone: NSTimeZone, duration: number): void;
-
-	attributedLabelDidSelectLinkWithPhoneNumber?(label: LPTTTAttributedLabel, phoneNumber: string): void;
-
-	attributedLabelDidSelectLinkWithTextCheckingResult?(label: LPTTTAttributedLabel, result: NSTextCheckingResult): void;
-
-	attributedLabelDidSelectLinkWithTransitInformation?(label: LPTTTAttributedLabel, components: NSDictionary<any, any>): void;
-
-	attributedLabelDidSelectLinkWithURL?(label: LPTTTAttributedLabel, url: NSURL): void;
-}
-declare var LPTTTAttributedLabelDelegate: {
-
-	prototype: LPTTTAttributedLabelDelegate;
-};
-
-declare class LPTTTAttributedLabelLink extends NSObject implements NSCoding {
-
-	static alloc(): LPTTTAttributedLabelLink; // inherited from NSObject
-
-	static new(): LPTTTAttributedLabelLink; // inherited from NSObject
-
-	readonly activeAttributes: NSDictionary<any, any>;
-
-	readonly attributes: NSDictionary<any, any>;
-
-	readonly inactiveAttributes: NSDictionary<any, any>;
-
-	linkLongPressBlock: (p1: LPTTTAttributedLabel, p2: LPTTTAttributedLabelLink) => void;
-
-	linkTapBlock: (p1: LPTTTAttributedLabel, p2: LPTTTAttributedLabelLink) => void;
-
-	readonly result: NSTextCheckingResult;
-
-	constructor(o: { attributes: NSDictionary<any, any>; activeAttributes: NSDictionary<any, any>; inactiveAttributes: NSDictionary<any, any>; textCheckingResult: NSTextCheckingResult; });
-
-	constructor(o: { attributesFromLabel: LPTTTAttributedLabel; textCheckingResult: NSTextCheckingResult; });
-
-	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
-
-	encodeWithCoder(coder: NSCoder): void;
-
-	initWithAttributesActiveAttributesInactiveAttributesTextCheckingResult(attributes: NSDictionary<any, any>, activeAttributes: NSDictionary<any, any>, inactiveAttributes: NSDictionary<any, any>, result: NSTextCheckingResult): this;
-
-	initWithAttributesFromLabelTextCheckingResult(label: LPTTTAttributedLabel, result: NSTextCheckingResult): this;
-
-	initWithCoder(coder: NSCoder): this;
-}
-
-interface LPTTTAttributedLabelProtocol extends NSObjectProtocol {
-
-	text: any;
-}
-declare var LPTTTAttributedLabelProtocol: {
-
-	prototype: LPTTTAttributedLabelProtocol;
-};
-
-declare var LPTTTAttributedLabelVersionNumber: number;
-
-declare var LPTTTAttributedLabelVersionString: interop.Reference<number>;
-
-declare const enum LPTTTAttributedLabelVerticalAlignment {
-
-	Center = 0,
-
-	Top = 1,
-
-	Bottom = 2
 }
 
 declare class NSBouncyView extends UIView {
@@ -790,15 +563,3 @@ declare var UIAdapterDelegate: {
 
 	prototype: UIAdapterDelegate;
 };
-
-declare var kTTTBackgroundCornerRadiusAttributeName: string;
-
-declare var kTTTBackgroundFillColorAttributeName: string;
-
-declare var kTTTBackgroundFillPaddingAttributeName: string;
-
-declare var kTTTBackgroundLineWidthAttributeName: string;
-
-declare var kTTTBackgroundStrokeColorAttributeName: string;
-
-declare var kTTTStrikeOutAttributeName: string;
