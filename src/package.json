@@ -1,6 +1,6 @@
 {
 	"name": "nativescript-live-engage",
-	"version": "6.0.5",
+	"version": "6.1.0",
 	"description": "A NativeScript plugin to display a LivePerson LiveEngage chat window",
 	"main": "live-engage",
 	"typings": "index.d.ts",
