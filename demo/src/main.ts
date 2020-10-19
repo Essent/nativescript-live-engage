@@ -11,7 +11,7 @@ application.on(application.launchEvent, function (args: application.ApplicationE
      For iOS applications you can also subclass AppDelegate for this
      For Android applications you can also subclass Application for this
      */
-    LiveEngage.getInstance().initializeChat('63312324', 'nl.energiedirect.selfserviceapp');
+    LiveEngage.getInstance().initializeChat('12345678', 'com.example.myapp');
 });
 
 platformNativeScriptDynamic({createFrameOnBootstrap: true}).bootstrapModule(AppModule);
