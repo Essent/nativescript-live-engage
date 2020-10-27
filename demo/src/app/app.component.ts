@@ -11,6 +11,8 @@ export class AppComponent {
         LPConfig.defaultConfiguration.enableFileSharing = true;
         LPConfig.defaultConfiguration.enablePhotoSharing = true;
         LPConfig.defaultConfiguration.brandName = 'Demo Brand Name';
+        LPConfig.defaultConfiguration.fileSharingFromConsumer = true;
+        LPConfig.defaultConfiguration.fileSharingFromAgent = true;
     }
 
     public showChat(): void {
