@@ -82,7 +82,7 @@ export class LiveEngage implements CommonLiveEngage {
     }
 
     public closeChat(): void {
-        LPMessagingSDK.instance.removeConversation(null);
+        LPMessagingSDK.instance.removeConversation(LPMessagingSDK.instance.getConversationBrandQueryCampaignInfo(this.brandId, null));
     }
 
     public setUserProfileValues(chatProfile: ChatProfile): void {
